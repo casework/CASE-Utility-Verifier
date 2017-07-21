@@ -25,8 +25,9 @@ class Document(object):
         graph.namespace_manager.bind('case', CASE)
         self.graph = graph
 
-    def _sanitize_triple(self, (s, p, o)):
+    def _sanitize_triple(self, triple):
         """Santizes the triple to contains pure rdflib terms."""
+        s, p, o = triple
 
         if isinstance(s, Node):
             s = s._node
@@ -45,19 +46,19 @@ class Document(object):
         """Wrapper for iterating over all triples in the graph"""
         return iter(self.graph)
 
-    def __contains__(self, (s, p, o)):
+    def __contains__(self, triple):
         """Wrapper for checking if triple is contained in the graph."""
-        return self._sanitize_triple((s, p, o)) in self.graph
+        return self._sanitize_triple(triple) in self.graph
 
-    def triples(self, (s, p, o)):
+    def triples(self, triple):
         """Generator over the triple store in graph."""
-        return self.graph.triples(self._sanitize_triple((s, p, o)))
+        return self.graph.triples(self._sanitize_triple(triple))
 
     def _json_ld_context(self):
         context = dict(
-            (pfx, unicode(ns))
+            (pfx, str(ns))
             for (pfx, ns) in self.graph.namespaces() if pfx and
-            unicode(ns) != u"http://www.w3.org/XML/1998/namespace")
+            str(ns) != u"http://www.w3.org/XML/1998/namespace")
         context['@vocab'] = str(CASE)
         return context
 
