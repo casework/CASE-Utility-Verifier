@@ -12,8 +12,7 @@ user to know how to properly structure CASE/UCO elements.*
 ## Install
 ```
 git clone https://github.com/casework/case-api-python.git
-cd case-api-python
-python setup.py install
+pip install case-api-python
 ```
 
 
