@@ -128,5 +128,5 @@ output.json :
 }
 ```
 
-*(For a more in-depth example, see the [case-implementation-plaso](https://github.com/casework/case-implementation-plaso)
+*(For a more in-depth example, see the [case-implementation-plaso](https://github.com/ucoProject/case-implementation-plaso)
 repo which uses this API to export events from a [plaso](https://github.com/log2timeline/plaso) storage file.)*
