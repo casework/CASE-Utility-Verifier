@@ -13,7 +13,7 @@
 """
 The Natural Language Glossary (NLG) is an alphabetical list of types of CASE classes (categories of CASE types).
 The functions in this file create CASE objects (instances of such types) while automatically checking ontology and type.
-The API (case.py) could be used directly to create non-typed objects if ontology and type checking are not requirements.
+The API (case_example.py) could be used directly to create non-typed objects if ontology and type checking are not requirements.
 However, we advise against this to maintain consistency across community usage of the ontology.
 
 Note that different versions of the NLG exist for different realizations of the Unified Cyber Ontology.
@@ -23,7 +23,7 @@ https://casework.github.io/case/case-v0.1.0-natural-language-glossary.html
 -----------------------------------------------------
 NOTES ON FUNCTION STRUCTURE
 
-    CASE objects:         Search "CREATE A CASE OBJECT" in the API (case.py) to understand the high-level CASE objects.
+    CASE objects:         Search "CREATE A CASE OBJECT" in the API (case_example.py) to understand the high-level CASE objects.
     Parameters:           All parameters use underscores coming in and are set by default to a Missing object.
     Required parameters:  The CASE Document class is passed in ('_sub' functions also require their superseding CASE class).
     Ontology parameters:  All other parameters are specified by the CASE ontology, and may be required or optional.
@@ -51,7 +51,7 @@ If you wish to contribute to improvement, follow these note-taking standards to 
 """
 
 
-import case
+import case_example
 import sys
 import unittest
 import datetime
@@ -77,7 +77,7 @@ def core_Action(uco_document, action_status=Missing(), start_time=Missing(), end
     '''
 
     if not isinstance(action_status, Missing):
-        assert (isinstance(action_status, case.CoreObject) and (action_status.type=='ControlledVocabulary')),\
+        assert (isinstance(action_status, case_example.CoreObject) and (action_status.type=='ControlledVocabulary')),\
         "[core_Action] action_status must be of type ControlledVocab."
     if not isinstance(start_time, Missing):
         assert isinstance(start_time, datetime.datetime),\
@@ -92,7 +92,7 @@ def core_Action(uco_document, action_status=Missing(), start_time=Missing(), end
     if not isinstance(subaction_refs, Missing):
         assert isinstance(subaction_refs, list),\
         "[core_Action] subaction_refs must be of type List of Action."
-        assert all( (isinstance(i, case.CoreObject) and i.type=='Action') for i in subaction_refs),\
+        assert all( (isinstance(i, case_example.CoreObject) and i.type=='Action') for i in subaction_refs),\
         "[core_Action] subaction_refs must be of type List of Action."
 
     return uco_document.create_CoreObject('Action', ActionStatus=action_status, StartTime=start_time, EndTime=end_time, Errors=errors, ActionCount=action_count, SubactionRefs=subaction_refs)
@@ -146,7 +146,7 @@ def core_MarkingDefinition(uco_document, definition_type=Missing(), definition=M
     if not isinstance(definition, Missing):
         assert isinstance(definition, list),\
         "[core_MarkingDefinition] definition must be of type List of MarkingModel."
-        assert all( (isinstance(i, case.DuckObject) and i.type=='MarkingModel') for i in definition),\
+        assert all( (isinstance(i, case_example.DuckObject) and i.type=='MarkingModel') for i in definition),\
         "[core_MarkingDefinition] definition must be of type List of MarkingModel."
 
     return uco_document.create_CoreObject('MarkingDefinition', DefinitionType=definition_type, Definition=definition)
@@ -192,7 +192,7 @@ def core_sub_ForensicAction(uco_document, uco_object):
     :return: A SubObject object.
     '''
 
-    assert (isinstance(uco_object, case.CoreObject) and (uco_object.type=='Action')),\
+    assert (isinstance(uco_object, case_example.CoreObject) and (uco_object.type=='Action')),\
     "[core_sub_ForensicAction] uco_object must be of type Action."
 
     #TODO:NothingElseToCheck
@@ -254,10 +254,10 @@ def propbundle_Account(uco_object, account_id=Missing(), expiration_time=Missing
         assert isinstance(created_time, datetime.datetime),\
         "[propbundle_Account] created_time must be of type TimeStamp."
     if not isinstance(account_type, Missing):
-        assert (isinstance(account_type, case.CoreObject) and (account_type.type=='ControlledVocabulary')),\
+        assert (isinstance(account_type, case_example.CoreObject) and (account_type.type=='ControlledVocabulary')),\
         "[propbundle_Account] account_type must be of type ControlledVocabulary."
     if not isinstance(account_issuer_ref, Missing):
-        assert isinstance(account_issuer_ref, case.CoreObject),\
+        assert isinstance(account_issuer_ref, case_example.CoreObject),\
         "[propbundle_Account] account_issuer_ref must be of type CoreObject."
     if not isinstance(is_active, Missing):
         assert isinstance(is_active, bool),\
@@ -266,7 +266,7 @@ def propbundle_Account(uco_object, account_id=Missing(), expiration_time=Missing
         assert isinstance(modified_time, datetime.datetime),\
         "[propbundle_Account] modified_time must be of type Timestamp."
     if not isinstance(owner_ref, Missing):
-        assert isinstance(owner_ref, case.CoreObject),\
+        assert isinstance(owner_ref, case_example.CoreObject),\
         "[propbundle_Account] owner_ref must be of type CoreObject."
 
     return uco_object.create_PropertyBundle('Account', AccoundID=account_id, ExpirationTime=expiration_time, CreatedTime=created_time,  AccountType=account_type, AccountIssuerRef=account_issuer_ref, IsActive=is_active, ModifiedTime=modified_time, OwnerRef=owner_ref)
@@ -294,7 +294,7 @@ def propbundle_sub_SimpleName(uco_document, uco_object_propbundle, family_name=M
     :return: A SubObject object.
     '''
 
-    assert (isinstance(uco_object_propbundle, case.PropertyBundle) and (uco_object_propbundle.type=='Identity')),\
+    assert (isinstance(uco_object_propbundle, case_example.PropertyBundle) and (uco_object_propbundle.type=='Identity')),\
     "[propbundle_sub_SimpleName] uco_object_propbundle must be of type Identity."
 
     #TODO:NothingElseToCheck

@@ -12,7 +12,7 @@ from NLG_example import *
 import case_example
 import datetime
 
-doc = case.Document()
+doc = case_example.Document()
 
 print '~~~~~~~~~~ START'
 
