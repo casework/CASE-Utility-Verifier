@@ -1,0 +1,105 @@
+# NOTICE
+# 
+# This software was produced for the U.S. Government under
+# contract SB-1341-14-CQ-0010, and is subject to the Rights
+# in Data-General Clause 52.227-14, Alt. IV (DEC 2007)
+#
+# (c) 2018 The MITRE Corporation. All Rights Reserved.
+
+
+#====================================================
+# THIS FILE IS A GUIDE OF ALL STATEMENTS FOUND IN THE NATRUAL LANGUAGE GLOSSARY.
+
+# IF DEVELOPING, FOR THE BODY COPY-PASTE/FIND-&-REPLACE CAN HELP AVOID MISTAKES.
+# REPLACE: t_function, t_param, t_type, t_case (Case object), t_nlg (NLG type).
+
+
+#====================================================
+# DECLARATION, PARAMETERS, AND RETURN
+
+core_<NlgType>            (CaseDoc,                   ...)
+core_sub_<NlgType>        (CaseDoc, CaseCore,         ...)
+propbundle_<NlgType>      (CaseCore,                  ...)
+propbundle_sub_<NlgType>  (CaseDoc, CasePropbundle,   ...)
+duck_<NlgType>            (CaseDoc,                   ...)
+
+incoming_parameter=Missing()
+OutgoingParameter=incoming_parameter
+
+return uco_document.create_<CaseObject>
+
+
+#====================================================
+# DOCSTRINGS
+
+:param <Property>: Exactly one value           (of type t_type) OR (of any type)   // REQUIRED_PARAMETER
+:param <Property>: Exactly one occurrence      (of type t_type)                    // REQUIRED_PARAMETER
+:param <Property>: At least one value          (of type t_type) OR (of any type)   // REQUIRED_PARAMETER (List)
+:param <Property>: At least one occurrence     (of type t_type)                    // REQUIRED_PARAMETER (List)
+:param <Property>: At most one value           (of type t_type) OR (of any type)   // OPTIONAL_PARAMETER
+:param <Property>: At most one occurrence      (of type t_type)                    // OPTIONAL_PARAMETER
+:param <Property>: Any number of values        (of type t_type) OR (of any type)   // OPTIONAL_PARAMETER (List)
+:param <Property>: Any number of occurrences   (of type t_type)                    // OPTIONAL_PARAMETER (List)
+:param <Property>: Any number of any type      # NO CHECK: <t_param>.              // OPTIONAL_PARAMETER (List)
+
+:return: A <CaseObject> object.
+
+
+#====================================================
+# BODY: SUB_ OBJECT CHECK
+
+assert (isinstance(t_object_parent, case.t_case) and (object_parent.type=='t_nlg')),\
+"[t_function] t_param must be of type t_nlg."
+
+
+#====================================================
+# BODY: CHECK CONDITION 
+
+assert not isinstance(t_param, Missing),\           // REQUIRED_PARAMETERS ONLY
+"[t_function] t_param is required."
+if not isinstance(t_param, Missing):                // REQUIRED_PARAMETERS AND OPTIONAL_PARAMETERS
+    // <A BODY CHECK GOES HERE (WITH INDENTATION)>
+
+
+#====================================================
+# BODY: SINGLE CHECKS
+
+// SIMPLE TYPE CHECK
+
+    assert isinstance(t_param, t_type),\
+    "[t_function] t_param must be of type t_type."
+    
+// CASE OBJECT CHECk
+
+    assert isinstance(t_param, case.t_case),\
+    "[t_function] t_param must be of type t_case."
+
+// NLG TYPE CHECK
+
+    assert (isinstance(t_param, case.t_case) and (t_param.type=='t_nlg')),\
+    "[t_function] t_param must be of type t_nlg."
+
+
+#====================================================
+# BODY: LIST CHECKS
+
+// LIST[SIMPLE TYPE] CHECK
+
+    assert isinstance(t_param, list),\
+    "[t_function] t_param must be of type List of t_type."
+    assert all(isinstance(i, t_type) for i in t_param),\
+    "[t_function] t_param must be of type List of t_type."
+
+// LIST[CASE OBJECT] CHECK
+
+    assert isinstance(t_param, list),\
+    "[t_function] t_param must be of type List of t_case."
+    assert all(isinstance(i, case.t_case) for i in t_param),\
+    "[t_function] t_param must be of type List of t_case."
+
+// LIST[NLG TYPE] CHECK
+
+    assert isinstance(t_param, list),\
+    "[t_function] t_param must be of type List of t_nlg."
+    assert all( (isinstance(i, case.t_case) and i.type=='t_nlg') for i in t_param),\
+    "[t_function] t_param must be of type List of t_nlg."

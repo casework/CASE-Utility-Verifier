@@ -131,14 +131,6 @@ class Document(object):
         """
         return ContextObject(self.graph, rdf_type=_type, **kwargs)
 
-    def create_DuckObject(self, _type=None, **kwargs):
-        """
-        Creates and returns a Duck.
-        These lonely Ducks have no CASE class parents and are fully duck-typed.
-        This class may not have PropertyBundles.
-        """
-        return DuckObject(self.graph, rdf_type=_type, **kwargs)
-
     def create_SubObject(self, _type=None, **kwargs):
         """
         Creates and returns a Sub.
@@ -146,6 +138,15 @@ class Document(object):
         This class may not have PropertyBundles.
         """
         return SubObject(self.graph, rdf_type=_type, **kwargs)
+
+    def create_DuckObject(self, _type=None, **kwargs):
+        """
+        Creates and returns a Duck.
+        These lonely Ducks have no parents and are fully duck-typed.
+        This class may not have PropertyBundles.
+        """
+        return DuckObject(self.graph, rdf_type=_type, **kwargs)
+
 
 #====================================================
 #-- CASE OBJECT CLASSES
@@ -310,28 +311,6 @@ class ContextObject(Node):
         self.add('ContextObjectCreationTime', datetime.datetime.utcnow())
 
 
-class DuckObject(Node):
-
-    RDF_TYPE = CASE.DuckObject
-
-    def __init__(self, graph, rdf_type=None, **kwargs):
-        """Initializes and adds a node to the graph.
-        NOTE: At least the type must be supplied for the Node
-        to exist in the graph.
-
-        Args:
-            graph: The graph to add this node to. (instance of rdflib.Graph)
-            rdf_type: The RDF type to set this node to.
-            properties: Extra properties to add to this node.
-            (More properties can be set after initialization by using the add() function.)
-        """
-
-        self.type = rdf_type
-
-        super(DuckObject, self).__init__(graph, rdf_type=rdf_type, **kwargs)
-        self.add('DuckObjectCreationTime', datetime.datetime.utcnow())
-
-
 class SubObject(Node):
 
     RDF_TYPE = CASE.SubObject
@@ -352,3 +331,25 @@ class SubObject(Node):
 
         super(SubObject, self).__init__(graph, rdf_type=rdf_type, **kwargs)
         self.add('SubObjectCreationTime', datetime.datetime.utcnow())
+
+
+class DuckObject(Node):
+
+    RDF_TYPE = CASE.DuckObject
+
+    def __init__(self, graph, rdf_type=None, **kwargs):
+        """Initializes and adds a node to the graph.
+        NOTE: At least the type must be supplied for the Node
+        to exist in the graph.
+
+        Args:
+            graph: The graph to add this node to. (instance of rdflib.Graph)
+            rdf_type: The RDF type to set this node to.
+            properties: Extra properties to add to this node.
+            (More properties can be set after initialization by using the add() function.)
+        """
+
+        self.type = rdf_type
+
+        super(DuckObject, self).__init__(graph, rdf_type=rdf_type, **kwargs)
+        self.add('DuckObjectCreationTime', datetime.datetime.utcnow())
