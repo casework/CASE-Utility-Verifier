@@ -1,13 +1,7 @@
 ## Quickstart
 
-1.``` python setup.py install```
-
+1. ``` python setup.py install```
 2. Import `case.py` and `NLG.py` into the file you plan to implement CASE.
-
-
-## Examples
-
-The `example` folder contains a slimmed down Natural Language Glossary (NLG) for an understanding of some of the basic function variations that exist.
 
 
 ## NLG.py & CASE.py
@@ -25,3 +19,8 @@ https://casework.github.io/case/case-v0.1.0-natural-language-glossary.html
 
 The API wraps [RDFLib](https://rdflib.readthedocs.io/en/stable/) for a JSON-LD
 schematic. This verison is only directly adoptable via Python but JSON-LD is also supported in Javascript, PHP, Ruby, Java, C#, and Go.
+
+
+## Examples
+
+The `example` folder contains a slimmed down NLG, for an understanding of some of the basic function variations that exist, as well as a template for all types of conditions checked by the NLG functions.
