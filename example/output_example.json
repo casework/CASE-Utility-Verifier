@@ -1,0 +1,142 @@
+{
+  "@context": {
+    "@vocab": "http://case.example.org/core#",
+    "case": "http://case.example.org/core#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "_:607f14cf-8671-4b28-b4db-357703439fbc",
+      "@type": "Identity"
+    },
+    {
+      "@id": "a6056b0c-a2e0-48b2-a68d-9d0d6243c598",
+      "@type": "Identity",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.027675"
+      }
+    },
+    {
+      "@id": "c902fedb-0a91-4f62-a5a5-f4ce8eb8be17",
+      "@type": "ForensicAction",
+      "SubObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.030269"
+      }
+    },
+    {
+      "@id": "262c74fa-c286-419d-a852-87b41dbac44f",
+      "@type": "Grouping",
+      "ContextObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.029614"
+      },
+      "ContextStrings": [
+        "het",
+        "eht",
+        "the",
+        "eth",
+        "teh",
+        "hte"
+      ]
+    },
+    {
+      "@id": "a39c51ba-8709-4cce-ad52-2e416e8572ce",
+      "@type": "ForensicAction",
+      "FamilyName": "<NLG_example.Missing object at 0x7fd1f18c7cd0>",
+      "GivenName": "Bond",
+      "HonorificPrefix": "Mr.",
+      "HonorificSuffix": "<NLG_example.Missing object at 0x7fd1f18c7d90>",
+      "SubObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.030781"
+      }
+    },
+    {
+      "@id": "bb6d4dca-7174-45cd-84fd-8b5d71966053",
+      "@type": "Tool",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.028233"
+      },
+      "Creator": "Carl Poppa",
+      "Name": "Super Frag-ilistic",
+      "References": "<NLG_example.Missing object at 0x7fd1f18c7a10>",
+      "ServicePack": "<NLG_example.Missing object at 0x7fd1f18c7990>",
+      "ToolType": "Fragmentation",
+      "Version": "0.12.3",
+      "propertyBundle": {
+        "@id": "_:9e64d63d-49f5-439c-89c9-446f3b53114c"
+      }
+    },
+    {
+      "@id": "80ab4d10-baa0-465c-8391-005fca22eb3e",
+      "@type": "MarkingModel",
+      "DuckObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.030948"
+      }
+    },
+    {
+      "@id": "b837794e-1176-4a19-8e2f-c1edd2242ff9",
+      "@type": "Action",
+      "ActionCount": "<NLG_example.Missing object at 0x7fd1f18c7710>",
+      "ActionStatus": "<NLG_example.Missing object at 0x7fd1f18b6e10>",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.030107"
+      },
+      "EndTime": "<NLG_example.Missing object at 0x7fd1f18c7690>",
+      "Errors": "<NLG_example.Missing object at 0x7fd1f18c76d0>",
+      "StartTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.029684"
+      },
+      "SubactionRefs": "<NLG_example.Missing object at 0x7fd1f18c7750>",
+      "propertyBundle": {
+        "@id": "_:607f14cf-8671-4b28-b4db-357703439fbc"
+      }
+    },
+    {
+      "@id": "199feb17-1997-4c09-a68c-2499bc59a06e",
+      "@type": "ControlledVocabulary",
+      "ConstrainingVocabularyName": "temporary",
+      "ConstrainingVocabularyRef": "<NLG_example.Missing object at 0x7fd1f18c7810>",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.028612"
+      },
+      "Value": "temp"
+    },
+    {
+      "@id": "_:9e64d63d-49f5-439c-89c9-446f3b53114c",
+      "@type": "Account",
+      "AccoundID": "Accnt324",
+      "AccountIssuerRef": {
+        "@id": "a6056b0c-a2e0-48b2-a68d-9d0d6243c598"
+      },
+      "AccountType": {
+        "@id": "199feb17-1997-4c09-a68c-2499bc59a06e"
+      },
+      "CreatedTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.028313"
+      },
+      "ExpirationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.028311"
+      },
+      "IsActive": false,
+      "ModifiedTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2018-04-09T20:37:53.028671"
+      },
+      "OwnerRef": {
+        "@id": "a6056b0c-a2e0-48b2-a68d-9d0d6243c598"
+      }
+    }
+  ]
+}
