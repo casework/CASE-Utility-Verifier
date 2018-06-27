@@ -15,7 +15,7 @@ from setuptools import setup
 
 setup(
     name='case',
-    version='0.0.1',
+    version='0.1.0',
     description='Defines an API for CASE.',
     long_description=(
         'This is a low-level API for the CASE/UCO ontology used to *generate* RDF graphs.'),
