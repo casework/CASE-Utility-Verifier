@@ -14,14 +14,15 @@
 from setuptools import setup
 
 setup(
-    name='case',
+    name='case-python-api',
     version='0.1.0',
-    description='Defines an API for CASE.',
+    description='CASE/UCO API for creating RDF graphs and verifying ontological compliance.',
     long_description=(
-        'This is a low-level API for the CASE/UCO ontology used to *generate* RDF graphs.'),
+        'The Natural Language Glossary (NLG.py) has the necessary checks for ensuring proper inheritance, vocabulary, required parameters, and types; calling its functions (which return RDF nodes via case.py) is the typical way to use the API. However, in rare circumstances where CASE compliance is not desired case.py functions can be explicitly called to create RDF nodes.'),
     install_requires=[
         'rdflib',
         'rdflib-jsonld'
     ],
-    py_modules=['case'],
+    py_modules=['case',
+                'NLG'],
 )
