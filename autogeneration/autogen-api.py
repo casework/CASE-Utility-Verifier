@@ -43,6 +43,7 @@ input_file = sys.argv[1]        #Convert this to ArgParse if we decide to have f
 debugging   = False
 debug_out   = False
 debug_txt   = open('outputs/debug.txt','w')
+debug_txt.truncate()
 
 def debug_print(text):
     if debugging==True:
