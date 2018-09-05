@@ -42,4 +42,4 @@ When CASE's base specification (Turtle files) changes this script can be used to
 
 To run Ontospy must be installed, and the Turtle files combined into one.
 Then run ```python autogen-api.py <path-to-turtle-file>```.
-(Note there is a ToDo list in the `autogen-api.py` file so that it can align with changes that may occur in the API, as well as other add new features such as better CLI flags, a CSV export of all object names and properties for the Ontologists and Mapperse teams to use for quick reference, etc.)
+(Note there is a ToDo list in the `autogen-api.py` file so that it can align with changes that may occur in the API, as well as other add new features such as better CLI flags, a CSV export of all object names and properties for the Ontologists and Mappers teams to use for quick reference, etc.)
