@@ -36,6 +36,8 @@ The `example` folder contains a slimmed down NLG, for an understanding of some o
 
 *Note that currently the script will not function properly because v0.1.0 of CASE does not have a cardinality field for each object and property. When this is added the script will be stable.*
 
+Dependency: [Ontospy](https://github.com/ucoProject/Ontospy)
+
 When CASE's base specification (Turtle files) changes this script can be used to automatically regenerate the NLG.py functions for the next release. Therefore, this should only be run by the CASE team - eventually it will move to a new (possibly backend) repo where a CI/CD framework is placed.
 
 To run Ontospy must be installed, and the Turtle files combined into one.
