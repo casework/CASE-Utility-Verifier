@@ -34,7 +34,7 @@ The `example` folder contains a slimmed down NLG, for an understanding of some o
 
 # NLG Autogeneration (only for CASE team to manage API)
 
-*Note that currently the script will not function properly because v0.1.0 of CASE does not have a cardinality field for each object and property. When this is added the script will be stable.*
+*Note that currently the script will not function properly because v0.1.0 of CASE does not have a cardinality field for each object and property. When this is added the script will be stable and new_NLG.py in the outputs folder will not have missing body checks.*
 
 Dependency: [Ontospy](https://github.com/ucoProject/Ontospy)
 
