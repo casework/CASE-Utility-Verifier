@@ -1,4 +1,4 @@
-## NLG.py Regeneration
+## NLG.py Autogeneration
 
 *Note that currently the script will not function properly because v0.1.0 of CASE does not have a cardinality field for each object and property. When this is added the script will be stable.*
 
