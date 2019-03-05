@@ -8,7 +8,8 @@ _For learning about the Unified Cyber Ontology, CASE's parent, see [UCO](https:/
 ### Quickstart
 
 1. ``` python setup.py install```
-2. Import `case.py` and `NLG.py` into the file you plan to implement CASE.
+2. ```pip install rdflib-jsonld```
+3. Import `case.py` and `NLG.py` into the file you plan to implement CASE.
 
 
 ### NLG.py & CASE.py
