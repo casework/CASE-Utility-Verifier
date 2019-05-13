@@ -1,6 +1,6 @@
 # Cyber-investigation Analysis Standard Expression (CASE)
 
-_Read the [CASE Wiki tab](https://github.com/ucoProject/CASE/wiki) to learn **everything** you need to know about the Cyber-investigation Analysis Standard Expression (CASE) ontology._
+_Read the [CASE Wiki tab](https://github.com/casework/CASE/wiki) to learn **everything** you need to know about the Cyber-investigation Analysis Standard Expression (CASE) ontology._
 _For learning about the Unified Cyber Ontology, CASE's parent, see [UCO](https://github.com/ucoProject/UCO)._
 
 # CASE Python API
@@ -36,7 +36,7 @@ The `example` folder contains a slimmed down NLG, for an understanding of some o
 
 *Note that currently the script will not function properly because v0.1.0 of CASE does not have a cardinality field for each object and property. When this is added the script will be stable and new_NLG.py in the outputs folder will not have missing body checks.*
 
-Dependency: [Ontospy](https://github.com/ucoProject/Ontospy)
+Dependency: [Ontospy](https://github.com/casework/Ontospy)
 
 When CASE's base specification (Turtle files) changes this script can be used to automatically regenerate the NLG.py functions for the next release. Therefore, this should only be run by the CASE team - eventually it will move to a new (possibly backend) repo where a CI/CD framework is placed.
 
