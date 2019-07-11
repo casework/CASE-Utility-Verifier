@@ -8,134 +8,135 @@
   },
   "@graph": [
     {
-      "@id": "ed7a0eef-a834-4b96-bf36-22b961dcde75",
-      "@type": "ForensicAction",
-      "FamilyName": "<NLG_example.Missing object at 0x7f1082ef6090>",
-      "GivenName": "Bond",
-      "HonorificPrefix": "Mr.",
-      "HonorificSuffix": "<NLG_example.Missing object at 0x7f1082ef6150>",
-      "SubObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.311619"
-      }
-    },
-    {
-      "@id": "2483f203-be55-4532-87aa-535f6cee90fa",
-      "@type": "Grouping",
-      "ContextObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.309311"
-      },
-      "ContextStrings": [
-        "the",
-        "hte",
-        "eth",
-        "het",
-        "teh",
-        "eht"
-      ]
-    },
-    {
-      "@id": "_:05fcec73-a2c6-43bc-b86a-beabe7a02e82",
-      "@type": "Account",
-      "AccoundID": "Accnt324",
-      "AccountIssuerRef": {
-        "@id": "46517afd-a4cc-4bb5-a69d-745967f27517"
-      },
-      "AccountType": {
-        "@id": "5968c4d6-9dc8-4f6a-a626-4b50e79462ed"
-      },
-      "CreatedTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.307124"
-      },
-      "ExpirationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.307119"
-      },
-      "IsActive": false,
-      "ModifiedTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.307679"
-      },
-      "OwnerRef": {
-        "@id": "46517afd-a4cc-4bb5-a69d-745967f27517"
-      }
-    },
-    {
-      "@id": "5968c4d6-9dc8-4f6a-a626-4b50e79462ed",
-      "@type": "ControlledVocabulary",
-      "ConstrainingVocabularyName": "temporary",
-      "ConstrainingVocabularyRef": "<NLG_example.Missing object at 0x7f1082f67b90>",
+      "@id": "6886905f-3c1d-4127-a032-12ac76b01628",
+      "@type": "Tool",
       "CoreObjectCreationTime": {
         "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.307578"
+        "@value": "2019-07-11T23:07:37.770923"
+      },
+      "Creator": "Carl Poppa",
+      "Name": "Super Frag-ilistic",
+      "References": "<NLG_example.Missing object at 0x7fb689da4d90>",
+      "ServicePack": "<NLG_example.Missing object at 0x7fb689da4d10>",
+      "ToolType": "Fragmentation",
+      "Version": "0.12.3",
+      "custm_prop": "everything in its right place",
+      "propertyBundle": {
+        "@id": "_:cc676777-cc81-4c23-ad35-f41fbc8c13ae"
+      }
+    },
+    {
+      "@id": "425d3de6-5e59-4af1-9e38-97c8610b6416",
+      "@type": "ControlledVocabulary",
+      "ConstrainingVocabularyName": "temporary",
+      "ConstrainingVocabularyRef": "<NLG_example.Missing object at 0x7fb689da4b90>",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.771247"
       },
       "Value": "temp"
     },
     {
-      "@id": "1e52e91e-6bf6-44b0-9837-e4f77fb62b3f",
-      "@type": "ForensicAction",
-      "SubObjectCreationTime": {
+      "@id": "f6702b82-55f1-47f8-8d88-00dd13cadcff",
+      "@type": "Grouping",
+      "ContextObjectCreationTime": {
         "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.310686"
-      }
-    },
-    {
-      "@id": "1f11144e-8cc1-4fdc-9339-2d0e45a7adad",
-      "@type": "Tool",
-      "CoreObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.306987"
+        "@value": "2019-07-11T23:07:37.772160"
       },
-      "Creator": "Carl Poppa",
-      "Name": "Super Frag-ilistic",
-      "References": "<NLG_example.Missing object at 0x7f1082f67d90>",
-      "ServicePack": "<NLG_example.Missing object at 0x7f1082f67d10>",
-      "ToolType": "Fragmentation",
-      "Version": "0.12.3",
-      "propertyBundle": {
-        "@id": "_:05fcec73-a2c6-43bc-b86a-beabe7a02e82"
-      }
+      "ContextStrings": [
+        "hte",
+        "het",
+        "eht",
+        "the",
+        "eth",
+        "teh"
+      ]
     },
     {
-      "@id": "46517afd-a4cc-4bb5-a69d-745967f27517",
-      "@type": "Identity",
-      "CoreObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.306025"
-      }
-    },
-    {
-      "@id": "_:e5ab15b3-f3c6-414a-b593-9901c095ec91",
-      "@type": "Identity"
-    },
-    {
-      "@id": "68b20e4e-d8ac-461c-9679-bfa54084a5d4",
-      "@type": "Action",
-      "ActionCount": "<NLG_example.Missing object at 0x7f1082f67a90>",
-      "ActionStatus": "<NLG_example.Missing object at 0x7f1082f671d0>",
-      "CoreObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.310396"
-      },
-      "EndTime": "<NLG_example.Missing object at 0x7f1082f67a10>",
-      "Errors": "<NLG_example.Missing object at 0x7f1082f67a50>",
-      "StartTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.309436"
-      },
-      "SubactionRefs": "<NLG_example.Missing object at 0x7f1082f67ad0>",
-      "propertyBundle": {
-        "@id": "_:e5ab15b3-f3c6-414a-b593-9901c095ec91"
-      }
-    },
-    {
-      "@id": "4c1a977d-5a46-4d62-bccd-b58898c4ee42",
+      "@id": "2fb7037d-8039-4c48-8ca3-732f5ad4a8b5",
       "@type": "MarkingModel",
       "DuckObjectCreationTime": {
         "@type": "xsd:dateTime",
-        "@value": "2019-07-11T14:50:53.311904"
+        "@value": "2019-07-11T23:07:37.773602"
+      }
+    },
+    {
+      "@id": "42042448-d922-4834-9b15-0abb2f3c6eca",
+      "@type": "Action",
+      "ActionCount": "<NLG_example.Missing object at 0x7fb689da4a90>",
+      "ActionStatus": "<NLG_example.Missing object at 0x7fb689da41d0>",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.772737"
+      },
+      "EndTime": "<NLG_example.Missing object at 0x7fb689da4a10>",
+      "Errors": "<NLG_example.Missing object at 0x7fb689da4a50>",
+      "StartTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.772223"
+      },
+      "SubactionRefs": "<NLG_example.Missing object at 0x7fb689da4ad0>",
+      "propertyBundle": {
+        "@id": "_:30651b20-163f-4ce1-9a7c-327e65a90855"
+      }
+    },
+    {
+      "@id": "b2f69cdf-22ec-468a-9d81-3b669c2d5452",
+      "@type": "Identity",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.770347"
+      }
+    },
+    {
+      "@id": "cade4d7a-2dfd-4b46-84b4-45a328939e8f",
+      "@type": "ForensicAction",
+      "FamilyName": "<NLG_example.Missing object at 0x7fb689d33090>",
+      "GivenName": "Bond",
+      "HonorificPrefix": "Mr.",
+      "HonorificSuffix": "<NLG_example.Missing object at 0x7fb689d33150>",
+      "SubObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.773435"
+      }
+    },
+    {
+      "@id": "_:30651b20-163f-4ce1-9a7c-327e65a90855",
+      "@type": "Identity"
+    },
+    {
+      "@id": "_:cc676777-cc81-4c23-ad35-f41fbc8c13ae",
+      "@type": "Account",
+      "AccoundID": "Accnt324",
+      "AccountIssuerRef": {
+        "@id": "b2f69cdf-22ec-468a-9d81-3b669c2d5452"
+      },
+      "AccountType": {
+        "@id": "425d3de6-5e59-4af1-9e38-97c8610b6416"
+      },
+      "CreatedTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.770991"
+      },
+      "ExpirationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.770990"
+      },
+      "IsActive": false,
+      "ModifiedTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.771299"
+      },
+      "OwnerRef": {
+        "@id": "b2f69cdf-22ec-468a-9d81-3b669c2d5452"
+      }
+    },
+    {
+      "@id": "80fc1861-726f-4faf-a730-a044aaa8310c",
+      "@type": "ForensicAction",
+      "SubObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T23:07:37.772906"
       }
     }
   ]

@@ -26,6 +26,9 @@ print "Obj1: ", core_example_1
 core_example_2          = core_Tool(doc,
     name                = 'Super Frag-ilistic',
     version             = '0.12.3',
+    # Custom properties can be injected into CASE objects.
+    # Misspelled property names skip validation so be careful!
+    custm_prop          = 'everything in its right place',
     tool_type           = 'Fragmentation',
     # Parameters may be optional.
     #service_pack        = 'MysteryBox',
