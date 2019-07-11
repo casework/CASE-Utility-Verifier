@@ -8,134 +8,134 @@
   },
   "@graph": [
     {
-      "@id": "_:607f14cf-8671-4b28-b4db-357703439fbc",
-      "@type": "Identity"
-    },
-    {
-      "@id": "a6056b0c-a2e0-48b2-a68d-9d0d6243c598",
-      "@type": "Identity",
-      "CoreObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.027675"
-      }
-    },
-    {
-      "@id": "c902fedb-0a91-4f62-a5a5-f4ce8eb8be17",
+      "@id": "ed7a0eef-a834-4b96-bf36-22b961dcde75",
       "@type": "ForensicAction",
+      "FamilyName": "<NLG_example.Missing object at 0x7f1082ef6090>",
+      "GivenName": "Bond",
+      "HonorificPrefix": "Mr.",
+      "HonorificSuffix": "<NLG_example.Missing object at 0x7f1082ef6150>",
       "SubObjectCreationTime": {
         "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.030269"
+        "@value": "2019-07-11T14:50:53.311619"
       }
     },
     {
-      "@id": "262c74fa-c286-419d-a852-87b41dbac44f",
+      "@id": "2483f203-be55-4532-87aa-535f6cee90fa",
       "@type": "Grouping",
       "ContextObjectCreationTime": {
         "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.029614"
+        "@value": "2019-07-11T14:50:53.309311"
       },
       "ContextStrings": [
-        "het",
-        "eht",
         "the",
+        "hte",
         "eth",
+        "het",
         "teh",
-        "hte"
+        "eht"
       ]
     },
     {
-      "@id": "a39c51ba-8709-4cce-ad52-2e416e8572ce",
-      "@type": "ForensicAction",
-      "FamilyName": "<NLG_example.Missing object at 0x7fd1f18c7cd0>",
-      "GivenName": "Bond",
-      "HonorificPrefix": "Mr.",
-      "HonorificSuffix": "<NLG_example.Missing object at 0x7fd1f18c7d90>",
-      "SubObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.030781"
-      }
-    },
-    {
-      "@id": "bb6d4dca-7174-45cd-84fd-8b5d71966053",
-      "@type": "Tool",
-      "CoreObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.028233"
-      },
-      "Creator": "Carl Poppa",
-      "Name": "Super Frag-ilistic",
-      "References": "<NLG_example.Missing object at 0x7fd1f18c7a10>",
-      "ServicePack": "<NLG_example.Missing object at 0x7fd1f18c7990>",
-      "ToolType": "Fragmentation",
-      "Version": "0.12.3",
-      "propertyBundle": {
-        "@id": "_:9e64d63d-49f5-439c-89c9-446f3b53114c"
-      }
-    },
-    {
-      "@id": "80ab4d10-baa0-465c-8391-005fca22eb3e",
-      "@type": "MarkingModel",
-      "DuckObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.030948"
-      }
-    },
-    {
-      "@id": "b837794e-1176-4a19-8e2f-c1edd2242ff9",
-      "@type": "Action",
-      "ActionCount": "<NLG_example.Missing object at 0x7fd1f18c7710>",
-      "ActionStatus": "<NLG_example.Missing object at 0x7fd1f18b6e10>",
-      "CoreObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.030107"
-      },
-      "EndTime": "<NLG_example.Missing object at 0x7fd1f18c7690>",
-      "Errors": "<NLG_example.Missing object at 0x7fd1f18c76d0>",
-      "StartTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.029684"
-      },
-      "SubactionRefs": "<NLG_example.Missing object at 0x7fd1f18c7750>",
-      "propertyBundle": {
-        "@id": "_:607f14cf-8671-4b28-b4db-357703439fbc"
-      }
-    },
-    {
-      "@id": "199feb17-1997-4c09-a68c-2499bc59a06e",
-      "@type": "ControlledVocabulary",
-      "ConstrainingVocabularyName": "temporary",
-      "ConstrainingVocabularyRef": "<NLG_example.Missing object at 0x7fd1f18c7810>",
-      "CoreObjectCreationTime": {
-        "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.028612"
-      },
-      "Value": "temp"
-    },
-    {
-      "@id": "_:9e64d63d-49f5-439c-89c9-446f3b53114c",
+      "@id": "_:05fcec73-a2c6-43bc-b86a-beabe7a02e82",
       "@type": "Account",
       "AccoundID": "Accnt324",
       "AccountIssuerRef": {
-        "@id": "a6056b0c-a2e0-48b2-a68d-9d0d6243c598"
+        "@id": "46517afd-a4cc-4bb5-a69d-745967f27517"
       },
       "AccountType": {
-        "@id": "199feb17-1997-4c09-a68c-2499bc59a06e"
+        "@id": "5968c4d6-9dc8-4f6a-a626-4b50e79462ed"
       },
       "CreatedTime": {
         "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.028313"
+        "@value": "2019-07-11T14:50:53.307124"
       },
       "ExpirationTime": {
         "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.028311"
+        "@value": "2019-07-11T14:50:53.307119"
       },
       "IsActive": false,
       "ModifiedTime": {
         "@type": "xsd:dateTime",
-        "@value": "2018-04-09T20:37:53.028671"
+        "@value": "2019-07-11T14:50:53.307679"
       },
       "OwnerRef": {
-        "@id": "a6056b0c-a2e0-48b2-a68d-9d0d6243c598"
+        "@id": "46517afd-a4cc-4bb5-a69d-745967f27517"
+      }
+    },
+    {
+      "@id": "5968c4d6-9dc8-4f6a-a626-4b50e79462ed",
+      "@type": "ControlledVocabulary",
+      "ConstrainingVocabularyName": "temporary",
+      "ConstrainingVocabularyRef": "<NLG_example.Missing object at 0x7f1082f67b90>",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T14:50:53.307578"
+      },
+      "Value": "temp"
+    },
+    {
+      "@id": "1e52e91e-6bf6-44b0-9837-e4f77fb62b3f",
+      "@type": "ForensicAction",
+      "SubObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T14:50:53.310686"
+      }
+    },
+    {
+      "@id": "1f11144e-8cc1-4fdc-9339-2d0e45a7adad",
+      "@type": "Tool",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T14:50:53.306987"
+      },
+      "Creator": "Carl Poppa",
+      "Name": "Super Frag-ilistic",
+      "References": "<NLG_example.Missing object at 0x7f1082f67d90>",
+      "ServicePack": "<NLG_example.Missing object at 0x7f1082f67d10>",
+      "ToolType": "Fragmentation",
+      "Version": "0.12.3",
+      "propertyBundle": {
+        "@id": "_:05fcec73-a2c6-43bc-b86a-beabe7a02e82"
+      }
+    },
+    {
+      "@id": "46517afd-a4cc-4bb5-a69d-745967f27517",
+      "@type": "Identity",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T14:50:53.306025"
+      }
+    },
+    {
+      "@id": "_:e5ab15b3-f3c6-414a-b593-9901c095ec91",
+      "@type": "Identity"
+    },
+    {
+      "@id": "68b20e4e-d8ac-461c-9679-bfa54084a5d4",
+      "@type": "Action",
+      "ActionCount": "<NLG_example.Missing object at 0x7f1082f67a90>",
+      "ActionStatus": "<NLG_example.Missing object at 0x7f1082f671d0>",
+      "CoreObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T14:50:53.310396"
+      },
+      "EndTime": "<NLG_example.Missing object at 0x7f1082f67a10>",
+      "Errors": "<NLG_example.Missing object at 0x7f1082f67a50>",
+      "StartTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T14:50:53.309436"
+      },
+      "SubactionRefs": "<NLG_example.Missing object at 0x7f1082f67ad0>",
+      "propertyBundle": {
+        "@id": "_:e5ab15b3-f3c6-414a-b593-9901c095ec91"
+      }
+    },
+    {
+      "@id": "4c1a977d-5a46-4d62-bccd-b58898c4ee42",
+      "@type": "MarkingModel",
+      "DuckObjectCreationTime": {
+        "@type": "xsd:dateTime",
+        "@value": "2019-07-11T14:50:53.311904"
       }
     }
   ]
