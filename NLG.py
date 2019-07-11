@@ -65,7 +65,7 @@ class Missing(object):
 #-- CORE IN ALPHABETICAL ORDER
 
 def core_Action(uco_document, action_status=Missing(), start_time=Missing(), end_time=Missing(), errors=Missing(),
-                action_count=Missing(), subaction_refs=Missing()):
+                action_count=Missing(), subaction_refs=Missing(), **kwargs):
     '''
     :param ActionStatus: At most one occurrence of type ControlledVocabulary.
     :param StartTime: At most one value of type Datetime.
@@ -96,31 +96,31 @@ def core_Action(uco_document, action_status=Missing(), start_time=Missing(), end
         "[core_Action] subaction_refs must be of type List of Action."
 
     return uco_document.create_CoreObject('Action', ActionStatus=action_status, StartTime=start_time, EndTime=end_time,
-                                          Errors=errors, ActionCount=action_count, SubactionRefs=subaction_refs)
+                                          Errors=errors, ActionCount=action_count, SubactionRefs=subaction_refs, **kwargs)
 
 
-def core_Assertion(uco_document):
+def core_Assertion(uco_document, **kwargs):
     '''
     :return: A CoreObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_CoreObject('Assertion')
+    return uco_document.create_CoreObject('Assertion', **kwargs)
 
 
-def core_Bundle(uco_document):
+def core_Bundle(uco_document, **kwargs):
     '''
     :return: A CoreObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_CoreObject('Bundle')
+    return uco_document.create_CoreObject('Bundle', **kwargs)
 
 
 def core_ControlledVocabulary(uco_document, value=Missing(), constraining_vocabulary_name=Missing(),
-                              constraining_vocabulary_ref=Missing()):
+                              constraining_vocabulary_ref=Missing(), **kwargs):
     '''
     :param Value: Exactly one value of type String.
     :param ConstrainingVocabularyName: At most one value of type String.
@@ -141,30 +141,30 @@ def core_ControlledVocabulary(uco_document, value=Missing(), constraining_vocabu
 
     return uco_document.create_CoreObject('ControlledVocabulary', Value=value,
                                           ConstrainingVocabularyName=constraining_vocabulary_name,
-                                          ConstrainingVocabularyRef=constraining_vocabulary_ref)
+                                          ConstrainingVocabularyRef=constraining_vocabulary_ref, **kwargs)
 
 
-def core_Identity(uco_document):
+def core_Identity(uco_document, **kwargs):
     '''
     :return: A CoreObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_CoreObject('Identity')
+    return uco_document.create_CoreObject('Identity', **kwargs)
 
 
-def core_Location(uco_document):
+def core_Location(uco_document, **kwargs):
     '''
     :return: A CoreObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_CoreObject('Location')
+    return uco_document.create_CoreObject('Location', **kwargs)
 
 
-def core_MarkingDefinition(uco_document, definition_type=Missing(), definition=Missing()):
+def core_MarkingDefinition(uco_document, definition_type=Missing(), definition=Missing(), **kwargs):
     '''
     :param DefinitionType: Exactly one value of type String.
     :param Definition: Any number of occurrences of type MarkingModel.
@@ -183,11 +183,11 @@ def core_MarkingDefinition(uco_document, definition_type=Missing(), definition=M
         assert all( (isinstance(i, case.DuckObject) and i.type=='MarkingModel') for i in definition),\
         "[core_MarkingDefinition] definition must be of type List of MarkingModel."
 
-    return uco_document.create_CoreObject('MarkingDefinition', DefinitionType=definition_type, Definition=definition)
+    return uco_document.create_CoreObject('MarkingDefinition', DefinitionType=definition_type, Definition=definition, **kwargs)
 
 
 def core_Relationship(uco_document, is_directional=Missing(), target_ref=Missing(), source_ref=Missing(),
-                      start_time=Missing(), end_time=Missing(), kind_of_relationship=Missing()):
+                      start_time=Missing(), end_time=Missing(), kind_of_relationship=Missing(), **kwargs):
     '''
     :param IsDirectional: Exactly one value of type Bool.
     :param TargetRef: Exactly one ocurrence of type CoreObject.
@@ -232,21 +232,21 @@ def core_Relationship(uco_document, is_directional=Missing(), target_ref=Missing
 
     return uco_document.create_CoreObject('Relationship', IsDirectional=is_directional, TargetRef=target_ref,
                                           SourceRef=source_ref, StartTime=start_time, EndTime=end_time,
-                                          KindOfRelationship=kind_of_relationship)
+                                          KindOfRelationship=kind_of_relationship, **kwargs)
 
 
-def core_Role(uco_document):
+def core_Role(uco_document, **kwargs):
     '''
     :return: A CoreObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_CoreObject('Role')
+    return uco_document.create_CoreObject('Role', **kwargs)
 
 
 def core_Tool(uco_document, name=Missing(), version=Missing(), tool_type=Missing(), service_pack=Missing(),
-              creator=Missing(), references=Missing()):
+              creator=Missing(), references=Missing(), **kwargs):
     '''
     :param Name: At most one value of type String.
     :param Version: At most one value of type String.
@@ -276,10 +276,10 @@ def core_Tool(uco_document, name=Missing(), version=Missing(), tool_type=Missing
     #check for list and then URI type
 
     return uco_document.create_CoreObject('Tool', Name=name, Version=version, ToolType=tool_type,
-                                          ServicePack=service_pack, Creator=creator, References=references)
+                                          ServicePack=service_pack, Creator=creator, References=references, **kwargs)
 
 
-def core_Trace(uco_document, has_changed=Missing(), state=Missing()):
+def core_Trace(uco_document, has_changed=Missing(), state=Missing(), **kwargs):
     '''
     :param HasChanged: Exactly one value of type Bool.
     :param State: At most one occurrence of type ControlledVocabulary.
@@ -296,13 +296,13 @@ def core_Trace(uco_document, has_changed=Missing(), state=Missing()):
         assert (isinstance(state, case.CoreObject) and (state.type=='ControlledVocabulary')),\
         "[core_Trace] state must be of type ControlledVocabulary."
 
-    return uco_document.create_CoreObject('Trace', HasChanged=has_changed, State=state)
+    return uco_document.create_CoreObject('Trace', HasChanged=has_changed, State=state, **kwargs)
 
 
 #====================================================
 #-- CORE CHILDREN IN ALPHABETICAL ORDER
 
-def core_sub_ActionLifecycle(uco_document, uco_object):
+def core_sub_ActionLifecycle(uco_document, uco_object, **kwargs):
     '''
     :param PhraseRefs: Exactly one occurrence of type ArrayOfAction.
     :param ActionStatus: Exactly zero occurrences of type ControlledVocabulary.
@@ -319,10 +319,10 @@ def core_sub_ActionLifecycle(uco_document, uco_object):
     # TODO:This class checks if the fields for core_Action are not present.
     # If they are this object cannot be used and an error should be thrown. Is this a correct interpretation?
 
-    return uco_document.create_SubObject('ActionLifecycle')
+    return uco_document.create_SubObject('ActionLifecycle', **kwargs)
 
 
-def core_sub_ForensicAction(uco_document, uco_object):
+def core_sub_ForensicAction(uco_document, uco_object, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -332,13 +332,13 @@ def core_sub_ForensicAction(uco_document, uco_object):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('ForensicAction')
+    return uco_document.create_SubObject('ForensicAction', **kwargs)
 
 
 #====================================================
 #-- CONTEXT IN ALPHABETICAL ORDER
 
-def context_Grouping(uco_document, context_strings=Missing()):
+def context_Grouping(uco_document, context_strings=Missing(), **kwargs):
     '''
     :param Context: At least one value of type String.
     :return: A ContextObject object.
@@ -352,11 +352,11 @@ def context_Grouping(uco_document, context_strings=Missing()):
         assert all(isinstance(i, str) for i in context_strings),\
         "[context_Grouping] context_strings must be of type List of String."
 
-    return uco_document.create_ContextObject('Grouping', ContextStrings=context_strings)
+    return uco_document.create_ContextObject('Grouping', ContextStrings=context_strings, **kwargs)
 
 
 def context_Investigation(uco_document, investigation_form=Missing(), investigation_status=Missing(),
-                          start_time=Missing(), end_time=Missing, focus=Missing(), object_refs=Missing()):
+                          start_time=Missing(), end_time=Missing, focus=Missing(), object_refs=Missing(), **kwargs):
     '''
     :param InvestigationForm: Exactly one occurrence of type ControlledVocabulary.
     :param InvestigationStatus: At most one occurrence of type ControlledVocabulary.
@@ -395,10 +395,10 @@ def context_Investigation(uco_document, investigation_form=Missing(), investigat
 
     return uco_document.create_ContextObject('Investigation', InvestigationForm=investigation_form,
                                              InvestigationStatus=investigation_status, StartTime=start_time,
-                                             EndTime=end_time, Focus=focus, ObjectRefs=object_refs)
+                                             EndTime=end_time, Focus=focus, ObjectRefs=object_refs, **kwargs)
 
 
-def context_ProvenanceRecord(uco_document, exhibit_number=Missing(), object_refs=Missing()):
+def context_ProvenanceRecord(uco_document, exhibit_number=Missing(), object_refs=Missing(), **kwargs):
     '''
     :param ExhibitNumber: At most one value of type String.
     :param ObjectRefs: Any number of occurrences of type CoreObject.
@@ -414,7 +414,7 @@ def context_ProvenanceRecord(uco_document, exhibit_number=Missing(), object_refs
         assert all(isinstance(i, case.CoreObject) for i in object_refs),\
         "[context_ProvenanceRecord] object_refs must be of type List of CoreObject."
 
-    return uco_document.create_ContextObject('ProvenanceRecord', ExhibitNumber=exhibit_number, ObjectRefs=object_refs)
+    return uco_document.create_ContextObject('ProvenanceRecord', ExhibitNumber=exhibit_number, ObjectRefs=object_refs, **kwargs)
 
 
 #====================================================
@@ -428,7 +428,7 @@ def context_ProvenanceRecord(uco_document, exhibit_number=Missing(), object_refs
 
 def propbundle_Account(uco_object, account_id=Missing(), expiration_time=Missing(), created_time=Missing(),
                        account_type=Missing(), account_issuer_ref=Missing(), is_active=Missing(),
-                       modified_time=Missing(), owner_ref=Missing()):
+                       modified_time=Missing(), owner_ref=Missing(), **kwargs):
     '''
     :param AccoundID: Exactly one value of type String.
     :param ExprationTime: At most one value of type Datetime.
@@ -472,11 +472,11 @@ def propbundle_Account(uco_object, account_id=Missing(), expiration_time=Missing
     return uco_object.create_PropertyBundle('Account', AccoundID=account_id, ExpirationTime=expiration_time,
                                             CreatedTime=created_time,  AccountType=account_type,
                                             AccountIssuerRef=account_issuer_ref, IsActive=is_active,
-                                            ModifiedTime=modified_time, OwnerRef=owner_ref)
+                                            ModifiedTime=modified_time, OwnerRef=owner_ref, **kwargs)
 
 
 def propbundle_AccountAuthentication(uco_object, password=Missing(), password_type=Missing(),
-                                     password_last_changed=Missing()):
+                                     password_last_changed=Missing(), **kwargs):
     '''
     :param Password: At most one value of type String.
     :param PasswordType: At most one value of type String.
@@ -496,12 +496,12 @@ def propbundle_AccountAuthentication(uco_object, password=Missing(), password_ty
 
     return uco_object.create_PropertyBundle('AccountAuthentication', Password=password,
                                             PasswordType=password_type,
-                                            PasswordLastChanged = password_last_changed)
+                                            PasswordLastChanged = password_last_changed, **kwargs)
 
 
 def propbundle_ActionReferences(uco_object, environment_ref=Missing(), result_refs=Missing(),
                                 performer_refs=Missing(), participant_refs=Missing(),
-                                object_refs=Missing(), location_refs=Missing(), instrument_refs=Missing()):
+                                object_refs=Missing(), location_refs=Missing(), instrument_refs=Missing(), **kwargs):
     '''
     :param EnvironmentRef: At most one occurrence of type CoreObject.
     :param ResultRefs: Any number of occurrences of type CoreObject.
@@ -548,11 +548,11 @@ def propbundle_ActionReferences(uco_object, environment_ref=Missing(), result_re
     return uco_object.create_PropertyBundle('ActionReferences', EnvironmentRef=environment_ref,
                                             ResultRefs=result_refs, PerformerRefs=performer_refs,
                                             ParticipantRefs=participant_refs, ObjectRefs=object_refs,
-                                            LocationRefs=location_refs, InstrumentRefs=instrument_refs)
+                                            LocationRefs=location_refs, InstrumentRefs=instrument_refs, **kwargs)
 
 
 def propbundle_Application(uco_object, application_identifier=Missing(), version=Missing(),
-                           operating_system_ref=Missing(), number_of_launches=Missing()):
+                           operating_system_ref=Missing(), number_of_launches=Missing(), **kwargs):
     '''
     :param ApplicationIdentifier: At most one value of type String.
     :param Version: At most one value of type String.
@@ -576,10 +576,10 @@ def propbundle_Application(uco_object, application_identifier=Missing(), version
 
     return uco_object.create_PropertyBundle('Application', ApplicationIdentifier=application_identifier,
                                             Version=version, OperatingSystemRef=operating_system_ref,
-                                            NumberOfLaunches=number_of_launches)
+                                            NumberOfLaunches=number_of_launches, **kwargs)
 
 
-def propbundle_ApplicationAccount(uco_object, application_ref=Missing()):
+def propbundle_ApplicationAccount(uco_object, application_ref=Missing(), **kwargs):
     '''
     :param ApplicationRef: Exactly one occurrence of type Trace.
     :return: A PropertyBundle object.
@@ -591,10 +591,10 @@ def propbundle_ApplicationAccount(uco_object, application_ref=Missing()):
         assert (isinstance(application_ref, case.CoreObject) and (application_ref.type=='Trace')),\
         "[propbundle_ApplicationAccount] application_ref must be of type Trace."
 
-    return uco_object.create_PropertyBundle('ApplicationAccount', ApplicationRef=application_ref)
+    return uco_object.create_PropertyBundle('ApplicationAccount', ApplicationRef=application_ref, **kwargs)
 
 
-def propbundle_ArchiveFile(uco_object, version=Missing(), comment=Missing(), archive_type=Missing()):
+def propbundle_ArchiveFile(uco_object, version=Missing(), comment=Missing(), archive_type=Missing(), **kwargs):
     '''
     :param Version: At most one value of type String.
     :param Comment: At most one value of type String.
@@ -612,10 +612,10 @@ def propbundle_ArchiveFile(uco_object, version=Missing(), comment=Missing(), arc
         assert isinstance(archive_type, str),\
         "[propbundle_ArchiveFile] archive_type must be of type String."
 
-    return uco_object.create_PropertyBundle('ArchiveFile', Version=version, Comment=comment, ArchiveType=archive_type)
+    return uco_object.create_PropertyBundle('ArchiveFile', Version=version, Comment=comment, ArchiveType=archive_type, **kwargs)
 
 
-def propbundle_Attachment(uco_object, url):
+def propbundle_Attachment(uco_object, url, **kwargs):
     '''
     :param URL: Exactly one value of type URI.
     :return: A PropertyBundle object.
@@ -623,10 +623,10 @@ def propbundle_Attachment(uco_object, url):
 
     #TODO:URL
 
-    return uco_object.create_PropertyBundle('Attachment', URL=url)
+    return uco_object.create_PropertyBundle('Attachment', URL=url, **kwargs)
 
 
-def propbundle_Audio(uco_object, audio_format=Missing(), audio_type=Missing(), bit_rate=Missing(), duration=Missing()):
+def propbundle_Audio(uco_object, audio_format=Missing(), audio_type=Missing(), bit_rate=Missing(), duration=Missing(), **kwargs):
     '''
     :param AudioFormat: At most one value of type String.
     :param AudioType: At most one value of type String.
@@ -649,10 +649,10 @@ def propbundle_Audio(uco_object, audio_format=Missing(), audio_type=Missing(), b
         "[propbundle_Audio] duration must be of type Long."
 
     return uco_object.create_PropertyBundle('Audio', AudioFormat=audio_format, AudioType=audio_type,
-                                            BitRate=bit_rate, Duration=duration)
+                                            BitRate=bit_rate, Duration=duration, **kwargs)
 
 
-def propbundle_Authorization(uco_object, authorization_type=Missing(), authorization_identifier=Missing()):
+def propbundle_Authorization(uco_object, authorization_type=Missing(), authorization_identifier=Missing(), **kwargs):
     '''
     :param AuthorizationType: Exactly one occurrence of type ControlledVocabulary.
     :param AuthorizationIdentifier: At least one value of type String.
@@ -670,11 +670,11 @@ def propbundle_Authorization(uco_object, authorization_type=Missing(), authoriza
         "[propbundle_Authorization] authorization_identifier must be of type String."
 
     return uco_object.create_PropertyBundle('Authorization', AuthorizationType=authorization_type,
-                                            AuthorizationIdentifier=authorization_identifier)
+                                            AuthorizationIdentifier=authorization_identifier, **kwargs)
 
 
 def propbundle_AutonomousSystem(uco_object, number=Missing(), as_handle=Missing(),
-                                regional_internet_registry=Missing()):
+                                regional_internet_registry=Missing(), **kwargs):
     '''
     :param Number: Exactly one value of type Integer.
     :param AsHandle: At most one value of type String.
@@ -697,12 +697,12 @@ def propbundle_AutonomousSystem(uco_object, number=Missing(), as_handle=Missing(
         "[propbundle_AutonomousSystem] regional_internet_registry must be of type ControlledVocabulary."
 
     return uco_object.create_PropertyBundle('AutonomousSystem', Number=number, AsHandle=as_handle,
-                                            RegionalInternetRegistry=regional_internet_registry)
+                                            RegionalInternetRegistry=regional_internet_registry, **kwargs)
 
 
 def propbundle_BrowserBookmark(uco_object, accessed_time=Missing(), application_ref=Missing(),
                                created_time=Missing(), modified_time=Missing(), bookmark_path=Missing(),
-                               url_targeted=Missing(), visit_count=Missing()):
+                               url_targeted=Missing(), visit_count=Missing(), **kwargs):
     '''
     :param AccessedTime: At most one value of type Datetime.
     :param ApplicationRef: At most one occurrence of type Trace.
@@ -737,12 +737,12 @@ def propbundle_BrowserBookmark(uco_object, accessed_time=Missing(), application_
     return uco_object.create_PropertyBundle('BrowserBookmark', AccessedTime=accessed_time,
                                             ApplicationRef=application_ref, CreatedTime=created_time,
                                             ModifiedTime=modified_time, BookmarkPath=bookmark_path,
-                                            URLTargeted=url_targeted, VisitCount=visit_count)
+                                            URLTargeted=url_targeted, VisitCount=visit_count, **kwargs)
 
 
 def propbundle_BrowserCookie(uco_object, accessed_time=Missing(), application_ref=Missing(),
                              created_time=Missing(), expiration_time=Missing(), domain_ref=Missing(),
-                             cookie_name=Missing(), cookie_path=Missing(), is_secure=Missing()):
+                             cookie_name=Missing(), cookie_path=Missing(), is_secure=Missing(), **kwargs):
     '''
     :param AccessedTime: At most one value of type Datetime.
     :param ApplicationRef: At most one occurrence of type Trace.
@@ -783,10 +783,10 @@ def propbundle_BrowserCookie(uco_object, accessed_time=Missing(), application_re
     return uco_object.create_PropertyBundle('BrowserCookie', AccessedTime=accessed_time,
                                             ApplicationRef=application_ref, CreatedTime=created_time,
                                             ExpirationTime=expiration_time, DomainRef=domain_ref,
-                                            CookieName=cookie_name, CookiePath=cookie_path, IsSecure=is_secure)
+                                            CookieName=cookie_name, CookiePath=cookie_path, IsSecure=is_secure, **kwargs)
 
 
-def propbundle_Build(uco_object, build_information=Missing()):
+def propbundle_Build(uco_object, build_information=Missing(), **kwargs):
     '''
     :param BuildInformation: Exactly one occurrence of type BuildInformationType.
     :return: A PropertyBundle object.
@@ -798,10 +798,10 @@ def propbundle_Build(uco_object, build_information=Missing()):
         assert (isinstance(build_information, case.DuckObject) and (build_information.type=='BuildInformationType')),\
         "[propbundle_Build] build_information must be of type BuildInformationType."
 
-    return uco_object.create_PropertyBundle('Build', BuildInformation=build_information)
+    return uco_object.create_PropertyBundle('Build', BuildInformation=build_information, **kwargs)
 
 
-def propbundle_Calendar(uco_object, application_ref=Missing(), owner=Missing()):
+def propbundle_Calendar(uco_object, application_ref=Missing(), owner=Missing(), **kwargs):
     '''
     :param ApplicationRef: At most one occurrence of type Trace.
     :param Owner: At most one occurrence of type Trace.
@@ -815,14 +815,14 @@ def propbundle_Calendar(uco_object, application_ref=Missing(), owner=Missing()):
         assert (isinstance(owner, case.CoreObject) and (owner.type=='Trace')),\
         "[propbundle_Calendar] owner must be of type Trace."
 
-    return uco_object.create_PropertyBundle('Calendar', ApplicationRef=application_ref, Owner=owner)
+    return uco_object.create_PropertyBundle('Calendar', ApplicationRef=application_ref, Owner=owner, **kwargs)
 
 
 def propbundle_CalendarEntry(uco_object, application_ref=Missing(), attendant_refs=Missing(),
                              categories=Missing(), created_time=Missing(), modified_time=Missing(), duration=Missing(),
                              end_time=Missing(), start_time=Missing(), labels=Missing(), location_ref=Missing(),
                              owner_ref=Missing(), is_private=Missing(), recurrence=Missing(), remind_time=Missing(),
-                             event_status=Missing(), subject=Missing(), event_type=Missing()):
+                             event_status=Missing(), subject=Missing(), event_type=Missing(), **kwargs):
     '''
     :param ApplicationRef: At most one occurrence of type Trace.
     :param AttendantRefs: Any number of occurrences of type CoreObject.
@@ -908,10 +908,10 @@ def propbundle_CalendarEntry(uco_object, application_ref=Missing(), attendant_re
                                             Duration=duration, EndTime=end_time, StartTime=start_time,
                                             Labels=labels, LocationRef=location_ref, OwnerRef=owner_ref,
                                             IsPrivate=is_private, Recurrence=recurrence, RemindTime=remind_time,
-                                            EventStatus=event_status, Subject=subject, EventType=event_type )
+                                            EventStatus=event_status, Subject=subject, EventType=event_type , **kwargs)
 
 
-def propbundle_CompressedStream(uco_object, compression_method=Missing(), compression_ratio=Missing()):
+def propbundle_CompressedStream(uco_object, compression_method=Missing(), compression_ratio=Missing(), **kwargs):
     '''
     :param CompressionMethod: At most one value of type String.
     :param CompressionRatio: At most one value of type Float.
@@ -926,7 +926,7 @@ def propbundle_CompressedStream(uco_object, compression_method=Missing(), compre
         "[propbundle_CompressedStream] compression_ratio must be of type Float."
 
     return uco_object.create_PropertyBundle('CompressedStream', CompressionMethod=compression_method,
-                                            CompressionRatio=compression_ratio)
+                                            CompressionRatio=compression_ratio, **kwargs)
 
 
 def propbundle_ComputerSpecification(uco_object, available_ram=Missing(), bios_date=Missing(),
@@ -937,7 +937,7 @@ def propbundle_ComputerSpecification(uco_object, available_ram=Missing(), bios_d
                                      processor_architecture=Missing(), cpu_family=Missing(),
                                      cpu=Missing(), gpu_family=Missing(), gpu=Missing(), system_time=Missing(),
                                      timezone_dst=Missing(), timezone_standard=Missing(), total_ram=Missing(),
-                                     uptime=Missing()):
+                                     uptime=Missing(), **kwargs):
     '''
     :param AvailableRAM: At most one value of type Long.
     :param BIOSDate: At most one value of type Datetime.
@@ -1026,10 +1026,10 @@ def propbundle_ComputerSpecification(uco_object, available_ram=Missing(), bios_d
                                             ProcessorArchitecture=processor_architecture, CPUFamily=cpu_family,
                                             CPU=cpu, GPUFamily=gpu_family, SystemTime=system_time,
                                             TimezoneDST=timezone_dst, TimezoneStandard=timezone_standard,
-                                            TotalRAM=total_ram, Uptime=uptime)
+                                            TotalRAM=total_ram, Uptime=uptime, **kwargs)
 
 
-def propbundle_Confidence(uco_object, value=Missing()):
+def propbundle_Confidence(uco_object, value=Missing(), **kwargs):
     '''
     :param Value: Exactly one occurrence of type ControlledVocabulary.
     :return: A PropertyBundle object.
@@ -1041,12 +1041,12 @@ def propbundle_Confidence(uco_object, value=Missing()):
         assert (isinstance(value, case.CoreObject) and (value.type=='ControlledVocabulary')),\
         "[propbundle_Confidence] value must be of type ControlledVocabulary."
 
-    return uco_object.create_PropertyBundle('Confidence', Value=value)
+    return uco_object.create_PropertyBundle('Confidence', Value=value, **kwargs)
 
 
 def propbundle_Contact(uco_object, application_ref=Missing(), contact_id=Missing(), email_address_refs=Missing(),
                        first_name=Missing(), last_name=Missing(), middle_name=Missing(), contact_name=Missing(),
-                       phone_numbers=Missing(), contact_type=Missing(), screen_name=Missing()):
+                       phone_numbers=Missing(), contact_type=Missing(), screen_name=Missing(), **kwargs):
     '''
     :param ApplicationRef: At most one occurrence of type Trace.
     :param ContactID: At most one value of type String.
@@ -1100,13 +1100,13 @@ def propbundle_Contact(uco_object, application_ref=Missing(), contact_id=Missing
                                             EmailAddressRefs=email_address_refs, FirstName=first_name,
                                             LastName=last_name, MiddleName=middle_name, ContactName=contact_name,
                                             PhoneNumbers=phone_numbers, ContactType=contact_type,
-                                            ScreenName=screen_name)
+                                            ScreenName=screen_name, **kwargs)
 
 
 def propbundle_ContentData(uco_object, byte_order=Missing(), mime_class=Missing(), mime_type=Missing(),
                            magic_number=Missing(), size_in_bytes=Missing(), data_payload=Missing(),
                            data_payload_ref_url=Missing(), entropy=Missing(), hashes=Missing(),
-                           is_encrypted=Missing()):
+                           is_encrypted=Missing(), **kwargs):
     '''
     :param ByteOrder: At most one occurrence of type ControlledVocabulary.
     :param MIMEClass: At most one value of type String.
@@ -1157,11 +1157,11 @@ def propbundle_ContentData(uco_object, byte_order=Missing(), mime_class=Missing(
     return uco_object.create_PropertyBundle('ContentData', ByteOrder=byte_order, MIMEClass=mime_class,
                                             MIMEType=mime_type, MagicNumber=magic_number, SizeInBytes=size_in_bytes,
                                             DataPayload=data_payload, DataPayloadRefURL=data_payload_ref_url,
-                                            Entropy=entropy, Hashes=hashes, IsEncrypted=is_encrypted)
+                                            Entropy=entropy, Hashes=hashes, IsEncrypted=is_encrypted, **kwargs)
 
 
 def propbundle_Device(uco_object, device_type=Missing(), manufacturer=Missing(), model=Missing(),
-                      serial_number=Missing()):
+                      serial_number=Missing(), **kwargs):
     '''
     :param DeviceType: At most one occurrence of type ControlledVocabulary.
     :param Manufacturer: At most one value of type String.
@@ -1184,11 +1184,11 @@ def propbundle_Device(uco_object, device_type=Missing(), manufacturer=Missing(),
         "[propbundle_Device] serial_number must be of type String."
 
     return uco_object.create_PropertyBundle('Device', DeviceType=device_type, Manufacturer=manufacturer, Model=model,
-                                            SerialNumber=serial_number)
+                                            SerialNumber=serial_number, **kwargs)
 
 
 def propbundle_DigitalAccount(uco_object, account_login=Missing(), first_login_time=Missing(),
-                              last_login_time=Missing(), is_disabled=Missing(), display_name=Missing()):
+                              last_login_time=Missing(), is_disabled=Missing(), display_name=Missing(), **kwargs):
     '''
     :param AccountLogin: Any number of values of type String.
     :param FirstLoginTime: At most one value of type Datetime.
@@ -1218,12 +1218,12 @@ def propbundle_DigitalAccount(uco_object, account_login=Missing(), first_login_t
 
     return uco_object.create_PropertyBundle('DigitalAccount', AccountLogin=account_login,
                                             FirstLoginTime=first_login_time, LastLoginTime=last_login_time,
-                                            IsDisabled=is_disabled, DisplayName=display_name)
+                                            IsDisabled=is_disabled, DisplayName=display_name, **kwargs)
 
 
 def propbundle_DigitalSignatureInfo(uco_object, signature_exists=Missing(), signature_verified=Missing(),
                                     certificate_issuer=Missing(), certificate_subject=Missing(),
-                                    signature_description=Missing()):
+                                    signature_description=Missing(), **kwargs):
     '''
     :param SignatureExists: Exactly one value of type Bool.
     :param SignatureVerified: Exactly one value of type Bool.
@@ -1255,11 +1255,11 @@ def propbundle_DigitalSignatureInfo(uco_object, signature_exists=Missing(), sign
     return uco_object.create_PropertyBundle('DigitalSignatureInfo', SignatureExists=signature_exists,
                                             SignatureVerified=signature_verified, CertificateIssuer=certificate_issuer,
                                             CertificateSubject=certificate_subject,
-                                            SignatureDescription=signature_description)
+                                            SignatureDescription=signature_description, **kwargs)
 
 
 def propbundle_Disk(uco_object, disk_size=Missing(), disk_type=Missing(), free_space=Missing(),
-                    partition_refs=Missing()):
+                    partition_refs=Missing(), **kwargs):
     '''
     :param DiskSize: At most one value of type Long.
     :param DiskType: At most one occurrence of type ControlledVocabulary.
@@ -1282,12 +1282,12 @@ def propbundle_Disk(uco_object, disk_size=Missing(), disk_type=Missing(), free_s
         "[propbundle_Disk] partition_refs must be of type Trace."
 
     return uco_object.create_PropertyBundle('Disk', DiskSize=disk_size, DiskType=disk_type,
-                                            FreeSpace=free_space, PartitionRefs=partition_refs)
+                                            FreeSpace=free_space, PartitionRefs=partition_refs, **kwargs)
 
 
 def propbundle_DiskPartition(uco_object, mount_point=Missing(), partition_id=Missing(), partition_length=Missing(),
                              partition_offset=Missing(), space_left=Missing(), space_used=Missing(),
-                             total_space=Missing(), disk_partition_type=Missing(), created_time=Missing()):
+                             total_space=Missing(), disk_partition_type=Missing(), created_time=Missing(), **kwargs):
     '''
     :param MountPoint: At most one value of type String.
     :param PartitionID: At most one value of type Integer.
@@ -1333,10 +1333,10 @@ def propbundle_DiskPartition(uco_object, mount_point=Missing(), partition_id=Mis
     return uco_object.create_PropertyBundle('DiskPartition', MountPoint=mount_point, PartitionID=partition_id,
                                             PartitionLength=partition_length, PartitionOffset=partition_offset,
                                             SpaceLeft=space_left, SpaceUsed=space_used, TotalSpace=total_space,
-                                            DiskPartitionType=disk_partition_type, CreatedTime=created_time)
+                                            DiskPartitionType=disk_partition_type, CreatedTime=created_time, **kwargs)
 
 
-def propbundle_DomainName(uco_object, value=Missing(), is_tld=Missing()):
+def propbundle_DomainName(uco_object, value=Missing(), is_tld=Missing(), **kwargs):
     '''
     :param Value: Exactly one value of type String.
     :param IsTLD: At most one value of type Bool.
@@ -1353,10 +1353,10 @@ def propbundle_DomainName(uco_object, value=Missing(), is_tld=Missing()):
         assert isinstance(is_tld, bool),\
         "[propbundle_DomainName] is_tld must be of type Bool."
 
-    return uco_object.create_PropertyBundle('DomainName', Value=value, IsTLD=is_tld)
+    return uco_object.create_PropertyBundle('DomainName', Value=value, IsTLD=is_tld, **kwargs)
 
 
-def propbundle_EmailAccount(uco_object, email_address_ref=Missing()):
+def propbundle_EmailAccount(uco_object, email_address_ref=Missing(), **kwargs):
     '''
     :param EmailAddressRef: Exactly one occurrence of type Trace.
     :return: A PropertyBundle object.
@@ -1368,10 +1368,10 @@ def propbundle_EmailAccount(uco_object, email_address_ref=Missing()):
         assert (isinstance(email_address_ref, case.CoreObject) and (email_address_ref.type=='Trace')),\
         "[propbundle_EmailAccount] email_address_ref must be of type Trace."
 
-    return uco_object.create_PropertyBundle('EmailAccount', EmailAddressRef=email_address_ref)
+    return uco_object.create_PropertyBundle('EmailAccount', EmailAddressRef=email_address_ref, **kwargs)
 
 
-def propbundle_EmailAddress(uco_object, value=Missing(), display_name=Missing()):
+def propbundle_EmailAddress(uco_object, value=Missing(), display_name=Missing(), **kwargs):
     '''
     :param Value: Exactly one value of type String.
     :param DisplayName: At most one value of type String.
@@ -1388,7 +1388,7 @@ def propbundle_EmailAddress(uco_object, value=Missing(), display_name=Missing())
         assert isinstance(display_name, str),\
         "[propbundle_EmailAddress] display_name must be of type String."
 
-    return uco_object.create_PropertyBundle('EmailAddress', Value=value, DisplayName=display_name)
+    return uco_object.create_PropertyBundle('EmailAddress', Value=value, DisplayName=display_name, **kwargs)
 
 
 def propbundle_EmailMessage(uco_object, is_mime_encoded=Missing(), is_multipart=Missing(),
@@ -1399,7 +1399,7 @@ def propbundle_EmailMessage(uco_object, is_mime_encoded=Missing(), is_multipart=
                             labels=Missing(), message_id_ref=Missing(), modified_time=Missing(),
                             other_headers=Missing(), priority=Missing(), received_lines=Missing(),
                             received_time=Missing(), references=Missing(), sender_ref=Missing(),
-                            sent_time=Missing(), subject=Missing(), x_mailer=Missing(), x_originating_ip=Missing()):
+                            sent_time=Missing(), subject=Missing(), x_mailer=Missing(), x_originating_ip=Missing(), **kwargs):
     '''
     :param IsMIMEEncoded: Exactly one value of type Bool.
     :param IsMultipart: Exactly one value of type Bool.
@@ -1553,10 +1553,10 @@ def propbundle_EmailMessage(uco_object, is_mime_encoded=Missing(), is_multipart=
                                             OtherHeaders=other_headers, Priority=priority,
                                             ReceivedLines=received_lines, ReceivedTime=received_time,
                                             References=references, SenderRef=sender_ref, SentTime=sent_time,
-                                            Subject=subject, xMailer=x_mailer, xOriginatingIP=x_originating_ip)
+                                            Subject=subject, xMailer=x_mailer, xOriginatingIP=x_originating_ip, **kwargs)
 
 
-def propbundle_EncodedStream(uco_object, encoding_method=Missing()):
+def propbundle_EncodedStream(uco_object, encoding_method=Missing(), **kwargs):
     '''
     :param EncodingMethod: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -1568,11 +1568,11 @@ def propbundle_EncodedStream(uco_object, encoding_method=Missing()):
         assert isinstance(encoding_method, str),\
         "[propbundle_EncodedStream] encoding_method must be of type String."
 
-    return uco_object.create_PropertyBundle('EncodedStream', EncodingMethod=encoding_method)
+    return uco_object.create_PropertyBundle('EncodedStream', EncodingMethod=encoding_method, **kwargs)
 
 
 def propbundle_EncryptedStream(uco_object, encryption_iv=Missing(), encryption_key=Missing(),
-                               encryption_method=Missing(), encryption_mode=Missing()):
+                               encryption_method=Missing(), encryption_mode=Missing(), **kwargs):
     '''
     :param EncryptionIV: At most one value of type HexBinary.
     :param EncryptionKey: At most one value of type HexBinary.
@@ -1592,10 +1592,10 @@ def propbundle_EncryptedStream(uco_object, encryption_iv=Missing(), encryption_k
 
     return uco_object.create_PropertyBundle('EncryptedStream', EncryptionIV=encryption_iv,
                                             EncryptionKey=encryption_key, EncryptionMethod=encryption_method,
-                                            EncryptionMode=encryption_mode)
+                                            EncryptionMode=encryption_mode, **kwargs)
 
 
-def propbundle_EnvironmentVariable(uco_object, name=Missing(), value=Missing()):
+def propbundle_EnvironmentVariable(uco_object, name=Missing(), value=Missing(), **kwargs):
     '''
     :param Name: Exactly one value of any type.
     :param Value: At most one value of any type.
@@ -1604,12 +1604,12 @@ def propbundle_EnvironmentVariable(uco_object, name=Missing(), value=Missing()):
 
     #TODO:NothingElseToCheck
 
-    return uco_object.create_PropertyBundle('EnvironmentVariable', Name=name, Value=value)
+    return uco_object.create_PropertyBundle('EnvironmentVariable', Name=name, Value=value, **kwargs)
 
 
 def propbundle_Event(uco_object, application_ref=Missing(), cyber_action_ref=Missing(), categories=Missing(),
                      computer_name=Missing(), created_time=Missing(), event_id=Missing(), event_text=Missing(),
-                     event_type=Missing()):
+                     event_type=Missing(), **kwargs):
     '''
     :param ApplicationRef: Exactly one occurrence of type Trace.
     :param CyberActionRef: At most one occurrence of type CyberAction.
@@ -1652,10 +1652,10 @@ def propbundle_Event(uco_object, application_ref=Missing(), cyber_action_ref=Mis
 
     return uco_object.create_PropertyBundle('Event', ApplicationRef=application_ref, CyberActionRef=cyber_action_ref,
                                             Categories=categories, ComputerName=computer_name, CreatedTime=created_time,
-                                            EventID=event_id, EventText=event_text, EventType=event_type)
+                                            EventID=event_id, EventText=event_text, EventType=event_type, **kwargs)
 
 
-def propbundle_EXIF(uco_object, exif_data=Missing()):
+def propbundle_EXIF(uco_object, exif_data=Missing(), **kwargs):
     '''
     :param EXIFData: At least one occurrence of type ControlledDictionary.
     :return: A PropertyBundle object.
@@ -1669,12 +1669,12 @@ def propbundle_EXIF(uco_object, exif_data=Missing()):
         assert all( (isinstance(i, case.DuckObject) and i.type=='ControlledDictionary') for i in exif_data),\
         "[propbundle_EXIF] exif_data must be of type List of ControlledDictionary."
         
-    return uco_object.create_PropertyBundle('EXIF', EXIFData=exif_data)
+    return uco_object.create_PropertyBundle('EXIF', EXIFData=exif_data, **kwargs)
 
 
 def propbundle_ExtInode(uco_object, inode_id=Missing(), file_type=Missing(), deletion_time=Missing(),
                         inode_change_time=Missing(), permissions=Missing(), sgid=Missing(), suid=Missing(),
-                        flags=Missing(), hard_link_count=Missing()):
+                        flags=Missing(), hard_link_count=Missing(), **kwargs):
     '''
     :param InodeID: At most one value of type Integer.
     :param FileType: At most one value of type Integer.
@@ -1719,10 +1719,10 @@ def propbundle_ExtInode(uco_object, inode_id=Missing(), file_type=Missing(), del
     return uco_object.create_PropertyBundle('ExtInode', InodeID=inode_id, FileType=file_type,
                                             DeletionTime=deletion_time, InodeChangeTime=inode_change_time,
                                             Permissions=permissions, SGID=sgid, SUID=suid, Flags=flags,
-                                            HardLinkCount=hard_link_count)
+                                            HardLinkCount=hard_link_count, **kwargs)
 
 
-def propbundle_ExtractedStrings(uco_object, strings=Missing()):
+def propbundle_ExtractedStrings(uco_object, strings=Missing(), **kwargs):
     '''
     :param Strings: At least one occurrence of type String.
     :return: A PropertyBundle object.
@@ -1736,13 +1736,13 @@ def propbundle_ExtractedStrings(uco_object, strings=Missing()):
         assert all(isinstance(i, str) for i in strings),\
         "[propbundle_ExtractedStrings] strings must be of type List of String."
 
-    return uco_object.create_PropertyBundle('ExtInode', Strings=strings)
+    return uco_object.create_PropertyBundle('ExtInode', Strings=strings, **kwargs)
 
 
 def propbundle_File(uco_object, is_directory=Missing(), filename=Missing(), filepath=Missing(),
                     filesystem_type=Missing(), created_time=Missing(), modified_time=Missing(),
                     accessed_time=Missing(), metadata_change_time=Missing(), extension=Missing(),
-                    size_in_bytes=Missing()):
+                    size_in_bytes=Missing(), **kwargs):
     '''
     :param IsDirectory: Any number of values of type Bool.
     :param Filename: Any number of values of type String.
@@ -1793,10 +1793,10 @@ def propbundle_File(uco_object, is_directory=Missing(), filename=Missing(), file
                                             FilesystemType=filesystem_type, CreatedTime=created_time,
                                             ModifiedTime=modified_time, AccessedTime=accessed_time,
                                             MetadataChangeTime=metadata_change_time, Extension=extension,
-                                            SizeInBytes=size_in_bytes)
+                                            SizeInBytes=size_in_bytes, **kwargs)
 
 
-def propbundle_FilePermissions(uco_object, owner_ref=Missing()):
+def propbundle_FilePermissions(uco_object, owner_ref=Missing(), **kwargs):
     '''
     :param OwnerRef: Exactly one occurrence of type Trace.
     :return: A PropertyBundle object.
@@ -1808,10 +1808,10 @@ def propbundle_FilePermissions(uco_object, owner_ref=Missing()):
         assert (isinstance(owner_ref, case.CoreObject) and (owner_ref.type=='Trace')),\
         "[propbundle_FilePermissions] owner_ref must be of type Trace."
 
-    return uco_object.create_PropertyBundle('FilePermissions', OwnerRef=owner_ref)
+    return uco_object.create_PropertyBundle('FilePermissions', OwnerRef=owner_ref, **kwargs)
 
 
-def propbundle_Filesystem(uco_object, filesystem_type=Missing(), cluster_size=Missing()):
+def propbundle_Filesystem(uco_object, filesystem_type=Missing(), cluster_size=Missing(), **kwargs):
     '''
     :param FilesystemType: At most one occurrence of type ControlledVocabulary.
     :param ClusterSize: At most one value of type Integer.
@@ -1825,10 +1825,10 @@ def propbundle_Filesystem(uco_object, filesystem_type=Missing(), cluster_size=Mi
         assert isinstance(cluster_size, int),\
         "[propbundle_Filesystem] cluster_size must be of type Integer."
 
-    return uco_object.create_PropertyBundle('Filesystem', FilesystemType=filesystem_type, ClusterSize=cluster_size)
+    return uco_object.create_PropertyBundle('Filesystem', FilesystemType=filesystem_type, ClusterSize=cluster_size, **kwargs)
 
 
-def propbundle_Fragment(uco_object, fragment_index=Missing(), total_fragments=Missing()):
+def propbundle_Fragment(uco_object, fragment_index=Missing(), total_fragments=Missing(), **kwargs):
     '''
     :param FragmentIndex: Any number of values of type Integer.
     :param TotalFragments: Any number of values of type Integer.
@@ -1846,10 +1846,10 @@ def propbundle_Fragment(uco_object, fragment_index=Missing(), total_fragments=Mi
         assert all(isinstance(i, int) for i in total_fragments),\
         "[propbundle_Fragment] total_fragments must be of type List of Integer."
 
-    return uco_object.create_PropertyBundle('Fragment', FragmentIndex=fragment_index, TotalFragments=total_fragments)
+    return uco_object.create_PropertyBundle('Fragment', FragmentIndex=fragment_index, TotalFragments=total_fragments, **kwargs)
 
 
-def propbundle_GeolocationEntry(uco_object, application_ref=Missing(), created_time=Missing(), location_ref=Missing()):
+def propbundle_GeolocationEntry(uco_object, application_ref=Missing(), created_time=Missing(), location_ref=Missing(), **kwargs):
     '''
     :param ApplicationRef: Exactly one occurrence of type Trace.
     :param CreatedTime: At most one value of type Datetime.
@@ -1870,10 +1870,10 @@ def propbundle_GeolocationEntry(uco_object, application_ref=Missing(), created_t
         "[propbundle_GeolocationLog] location_ref must be of type Location."
 
     return uco_object.create_PropertyBundle('GeolocationEntry', ApplicationRef=application_ref,
-                                            CreatedTime=created_time, LocationRef=location_ref)
+                                            CreatedTime=created_time, LocationRef=location_ref, **kwargs)
 
 
-def propbundle_GeolocationLog(uco_object, application_ref=Missing(), created_time=Missing()):
+def propbundle_GeolocationLog(uco_object, application_ref=Missing(), created_time=Missing(), **kwargs):
     '''
     :param ApplicationRef: Exactly one occurrence of type Trace.
     :param CreatedTime: At most one value of type Datetime.
@@ -1890,11 +1890,11 @@ def propbundle_GeolocationLog(uco_object, application_ref=Missing(), created_tim
         assert isinstance(created_time, datetime.datetime),\
         "[propbundle_GeolocationLog] created_time must be of type Datetime."
 
-    return uco_object.create_PropertyBundle('GeolocationLog', ApplicationRef=application_ref, CreatedTime=created_time)
+    return uco_object.create_PropertyBundle('GeolocationLog', ApplicationRef=application_ref, CreatedTime=created_time, **kwargs)
 
 
 def propbundle_GeolocationTrack(uco_object, application_ref=Missing(), start_time=Missing(),
-                                end_time=Missing(), geolocation_entry_refs=Missing()):
+                                end_time=Missing(), geolocation_entry_refs=Missing(), **kwargs):
     '''
     :param ApplicationRef: Exactly one occurrence of type Trace.
     :param StartTime: At most one value of type Datetime.
@@ -1922,10 +1922,10 @@ def propbundle_GeolocationTrack(uco_object, application_ref=Missing(), start_tim
         "[propbundle_GeolocationTrack] geolocation_entry_refs must be of type List of Trace."
 
     return uco_object.create_PropertyBundle('Geolocation', ApplicationRef=application_ref, EndTime=end_time,
-                                            GeolocationEntryRefs=geolocation_entry_refs, StartTime=start_time)
+                                            GeolocationEntryRefs=geolocation_entry_refs, StartTime=start_time, **kwargs)
 
 
-def propbundle_GPSCoordinates(uco_object, hdop=Missing(), pdop=Missing(), tdop=Missing(), vdop=Missing()):
+def propbundle_GPSCoordinates(uco_object, hdop=Missing(), pdop=Missing(), tdop=Missing(), vdop=Missing(), **kwargs):
     '''
     :param HDOP: At most one value of type Float.
     :param PDOP: At most one value of type Float.
@@ -1947,12 +1947,12 @@ def propbundle_GPSCoordinates(uco_object, hdop=Missing(), pdop=Missing(), tdop=M
         assert isinstance(vdop, float),\
         "[propbundle_GPSCoordinates] vdop must be of type Float."
 
-    return uco_object.create_PropertyBundle('GPSCoordinates', HDOP=hdop, PDOP=pdop, TDOP=tdop, VDOP=vdop)
+    return uco_object.create_PropertyBundle('GPSCoordinates', HDOP=hdop, PDOP=pdop, TDOP=tdop, VDOP=vdop, **kwargs)
 
 
 def propbundle_HTTPConnection(uco_object, request_method=Missing(), request_value=Missing(),
                               http_request_version=Missing(), http_request_header=Missing()
-                              , http_message_body_length=Missing(), http_message_body_data_ref=Missing()):
+                              , http_message_body_length=Missing(), http_message_body_data_ref=Missing(), **kwargs):
     '''
     :param RequestMethod: Exactly one value of type String.
     :param RequestValue: Exactly one value of type String.
@@ -1992,10 +1992,10 @@ def propbundle_HTTPConnection(uco_object, request_method=Missing(), request_valu
                                             RequestValue=request_value, RequestVersion=http_request_version,
                                             HTTPRequestVersion=http_request_version,
                                             HTTPMessageBodyLength=http_message_body_length,
-                                            HTTPMessageBodyDataRef=http_message_body_data_ref)
+                                            HTTPMessageBodyDataRef=http_message_body_data_ref, **kwargs)
 
 
-def propbundle_ICMPConnection(uco_object, icmp_type=Missing(), icmp_code=Missing()):
+def propbundle_ICMPConnection(uco_object, icmp_type=Missing(), icmp_code=Missing(), **kwargs):
     '''
     :param ICMPType: Exactly one value of type HexBinary.
     :param ICMPCode: Exactly one value of tpye HexBinary.
@@ -2005,20 +2005,20 @@ def propbundle_ICMPConnection(uco_object, icmp_type=Missing(), icmp_code=Missing
     #TODO:HexBinary
     #TODO:HexBinary
 
-    return uco_object.create_PropertyBundle('ICMPConnection', ICMPType=icmp_type, ICMPCode=icmp_code)
+    return uco_object.create_PropertyBundle('ICMPConnection', ICMPType=icmp_type, ICMPCode=icmp_code, **kwargs)
 
 
-def propbundle_Identity(uco_object):
+def propbundle_Identity(uco_object, **kwargs):
     '''
     :return: A PropertyBundle object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_object.create_PropertyBundle('Identity')
+    return uco_object.create_PropertyBundle('Identity', **kwargs)
 
 
-def propbundle_Image(uco_object, image_type=Missing()):
+def propbundle_Image(uco_object, image_type=Missing(), **kwargs):
     '''
     :param ImageType: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -2030,10 +2030,10 @@ def propbundle_Image(uco_object, image_type=Missing()):
         assert isinstance(image_type, str),\
         "[propbundle_Image] image_type must be of type String."
 
-    return uco_object.create_PropertyBundle('Image', ImageType=image_type)
+    return uco_object.create_PropertyBundle('Image', ImageType=image_type, **kwargs)
 
 
-def propbundle_IPV4Address(uco_object, value=Missing()):
+def propbundle_IPV4Address(uco_object, value=Missing(), **kwargs):
     '''
     :param Value: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -2045,10 +2045,10 @@ def propbundle_IPV4Address(uco_object, value=Missing()):
         assert isinstance(value, str),\
         "[propbundle_IPV4Address] value must be of type String."
 
-    return uco_object.create_PropertyBundle('IPV4Address', Value=value)
+    return uco_object.create_PropertyBundle('IPV4Address', Value=value, **kwargs)
 
 
-def propbundle_IPV6Address(uco_object, value=Missing()):
+def propbundle_IPV6Address(uco_object, value=Missing(), **kwargs):
     '''
     :param Value: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -2060,10 +2060,10 @@ def propbundle_IPV6Address(uco_object, value=Missing()):
         assert isinstance(value, str),\
         "[propbundle_IPV6Address] value must be of type String."
 
-    return uco_object.create_PropertyBundle('IPV6Address', Value=value)
+    return uco_object.create_PropertyBundle('IPV6Address', Value=value, **kwargs)
 
 
-def propbundle_LatLongCoordinates(uco_object, latitude=Missing(), longitude=Missing(), altitude=Missing()):
+def propbundle_LatLongCoordinates(uco_object, latitude=Missing(), longitude=Missing(), altitude=Missing(), **kwargs):
     '''
     :param Latitude: At most one value of type Float.
     :param Longitude: At most one value of type Float.
@@ -2082,10 +2082,10 @@ def propbundle_LatLongCoordinates(uco_object, latitude=Missing(), longitude=Miss
         "[propbundle_LatLongCoordinates] altitude must be of type Float."
 
     return uco_object.create_PropertyBundle('LatLongCoordinates', Latitude=latitude,
-                                            Longitude=longitude, Altitude=altitude)
+                                            Longitude=longitude, Altitude=altitude, **kwargs)
 
 
-def propbundle_Library(uco_object, library_type=Missing()):
+def propbundle_Library(uco_object, library_type=Missing(), **kwargs):
     '''
     :param LibraryType: Exactly one occurrence of type ControlledVocabulary.
     :return: A PropertyBundle object.
@@ -2097,10 +2097,10 @@ def propbundle_Library(uco_object, library_type=Missing()):
         assert (isinstance(library_type, case.CoreObject) and (library_type.type=='ControlledVocabulary')),\
         "[propbundle_Library] library_type must be of type ControlledVocabulary."
 
-    return uco_object.create_PropertyBundle('Library', LibraryType=library_type)
+    return uco_object.create_PropertyBundle('Library', LibraryType=library_type, **kwargs)
 
 
-def propbundle_MACAddress(uco_object, value=Missing()):
+def propbundle_MACAddress(uco_object, value=Missing(), **kwargs):
     '''
     :param Value: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -2112,12 +2112,12 @@ def propbundle_MACAddress(uco_object, value=Missing()):
         assert isinstance(value, bool),\
         "[propbundle_MACAddress] value must be of type Bool."
 
-    return uco_object.create_PropertyBundle('MACAddress', Value=value)
+    return uco_object.create_PropertyBundle('MACAddress', Value=value, **kwargs)
 
 
 def propbundle_Memory(uco_object, is_injected=Missing(), is_mapped=Missing(), is_protected=Missing(),
                       is_volatile=Missing(), region_size=Missing(), region_start_address=Missing(),
-                      region_end_address=Missing()):
+                      region_end_address=Missing(), **kwargs):
     '''
     :param IsInjected: Exactly one value of type Bool.
     :param IsMapped: Exactly one value of type Bool.
@@ -2157,13 +2157,13 @@ def propbundle_Memory(uco_object, is_injected=Missing(), is_mapped=Missing(), is
     return uco_object.create_PropertyBundle('Memory', IsInjected=is_injected, IsMapped=is_mapped,
                                             IsProtected=is_protected, IsVolatile=is_volatile, RegionSize=region_size,
                                             RegionStartAddress=region_start_address,
-                                            RegionEndAddress=region_end_address)
+                                            RegionEndAddress=region_end_address, **kwargs)
 
 
 def propbundle_Message(uco_object, application_ref=Missing(), from_ref=Missing(),
                        to_refs=Missing(), message_text=Missing(), message_id=Missing(),
                        message_type=Missing(), session_id=Missing(), sent_time=Missing(),
-                       participant_refs=Missing()):
+                       participant_refs=Missing(), **kwargs):
     '''
     :param ApplicationRef: At most one occurrence of type Trace.
     :param FromRef: At most one occurrence of type Trace.
@@ -2212,10 +2212,10 @@ def propbundle_Message(uco_object, application_ref=Missing(), from_ref=Missing()
     return uco_object.create_PropertyBundle('Message', ApplicationRef=application_ref,
                                             FromRef=from_ref, ToRefs=to_refs, MessageText=message_text,
                                             MessageID=message_id, MessageType=message_type, SessionID=session_id,
-                                            SentTime=sent_time, ParticipantRefs=participant_refs)
+                                            SentTime=sent_time, ParticipantRefs=participant_refs, **kwargs)
 
 
-def propbundle_MessageThread(uco_object, message_refs=Missing(), visibility=Missing(), participant_refs=Missing()):
+def propbundle_MessageThread(uco_object, message_refs=Missing(), visibility=Missing(), participant_refs=Missing(), **kwargs):
     '''
     :param MessageRefs: Any number of occurrences of type ArrayOfObject.
     :param Visibility: At most one value of type Bool.
@@ -2237,14 +2237,14 @@ def propbundle_MessageThread(uco_object, message_refs=Missing(), visibility=Miss
         "[propbundle_MessageThread] participant_refs must be of type List of Trace."
 
     return uco_object.create_PropertyBundle('MessageThread', MessageRefs=message_refs, Visibility=visibility,
-                                            ParticipantRefs=participant_refs)
+                                            ParticipantRefs=participant_refs, **kwargs)
 
 
 def propbundle_MFTRecord(uco_object, mft_file_id=Missing(), mft_parent_id=Missing(), ntfs_hard_link_count=Missing(),
                          mft_record_change_time=Missing(), ntfs_owner_sid=Missing(), ntfs_owner_id=Missing(),
                          mft_flags=Missing(), mft_filename_created_time=Missing(), mft_filename_modified_time=Missing(),
                          mft_filename_accessed_time=Missing(), mft_filename_record_change_time=Missing(),
-                         mft_filename_length=Missing()):
+                         mft_filename_length=Missing(), **kwargs):
     '''
     :param MFTFileID: At most one value of type Integer.
     :param MFTParentID: At most one value of type Integer.
@@ -2306,10 +2306,10 @@ def propbundle_MFTRecord(uco_object, mft_file_id=Missing(), mft_parent_id=Missin
                                             MFTFileNameModifiedTime=mft_filename_modified_time,
                                             MFTFileNameAccessedTime=mft_filename_accessed_time,
                                             MFTFileNameRecordChangeTime=mft_filename_record_change_time,
-                                            MFTFileNameLength=mft_filename_length)
+                                            MFTFileNameLength=mft_filename_length, **kwargs)
 
 
-def propbundle_Mutex(uco_object, is_named=Missing()):
+def propbundle_Mutex(uco_object, is_named=Missing(), **kwargs):
     '''
     :param IsNamed: Exactly one value of type Bool.
     :return: A PropertyBundle object.
@@ -2321,12 +2321,12 @@ def propbundle_Mutex(uco_object, is_named=Missing()):
         assert isinstance(is_named, bool),\
         "[propbundle_Mutex] is_named must be of type Bool."
 
-    return uco_object.create_PropertyBundle('Mutex', IsNamed=is_named)
+    return uco_object.create_PropertyBundle('Mutex', IsNamed=is_named, **kwargs)
 
 
 def propbundle_NetworkConnection(uco_object, is_active=Missing(), start_time=Missing(), end_time=Missing(),
                                  source_refs=Missing(), destination_refs=Missing(), source_port=Missing(),
-                                 destination_port=Missing(), protocols=Missing()):
+                                 destination_port=Missing(), protocols=Missing(), **kwargs):
     '''
     :param IsActive: At most one value of type Bool.
     :param StartTime: At most one value of type Datetime.
@@ -2371,13 +2371,13 @@ def propbundle_NetworkConnection(uco_object, is_active=Missing(), start_time=Mis
     return uco_object.create_PropertyBundle('NetworkConnection', IsActive=is_active, StartTime=start_time,
                                             EndTime=end_time, SourceRefs=source_refs,
                                             DestinationRefs=destination_refs, SourcePort=source_port,
-                                            DestinationPort=destination_port, Protocols=protocols)
+                                            DestinationPort=destination_port, Protocols=protocols, **kwargs)
 
     
 def propbundle_NetworkFlow(uco_object, source_bytes=Missing(), destination_bytes=Missing(),
                            source_packets=Missing(), destination_packets=Missing(),
                            source_payload_refs=Missing(), destination_payload_refs=Missing(),
-                           ipfix=Missing()):
+                           ipfix=Missing(), **kwargs):
     '''
     :param SourceBytes: At most one value of type Integer.
     :param DestinationBytes: At most one value of type Integer.
@@ -2417,12 +2417,12 @@ def propbundle_NetworkFlow(uco_object, source_bytes=Missing(), destination_bytes
                                             DestinationPackets=destination_packets,
                                             SourcePayloadRefs=source_payload_refs,
                                             DestinationPayloadRefs=destination_payload_refs,
-                                            IPFIX=ipfix)
+                                            IPFIX=ipfix, **kwargs)
 
 
 def propbundle_NetworkInterface(uco_object, adapter_name=Missing(), dhcp_lease_expires=Missing(),
                                 dhcp_lease_obtained=Missing(), dhcp_server_refs=Missing(),
-                                ip_gateway_refs=Missing(), ip_refs=Missing(), mac_address_ref=Missing()):
+                                ip_gateway_refs=Missing(), ip_refs=Missing(), mac_address_ref=Missing(), **kwargs):
     '''
     :param AdapterName: At most one value of type String.
     :param DHCPLeaseExpires: At most one value of type Datetime.
@@ -2465,11 +2465,11 @@ def propbundle_NetworkInterface(uco_object, adapter_name=Missing(), dhcp_lease_e
     return uco_object.create_PropertyBundle('NetworkInterface', AdapterName=adapter_name,
                                             DHCPLeaseExpires=dhcp_lease_expires, DHCPLeaseObtained=dhcp_lease_obtained,
                                             DHCPServerRefs=dhcp_server_refs, IPGatewayRefs=ip_gateway_refs,
-                                            IPRefs=ip_refs, MACAddressRef=mac_address_ref)
+                                            IPRefs=ip_refs, MACAddressRef=mac_address_ref, **kwargs)
 
 
 def propbundle_Note(uco_object, application_ref=Missing(), categories=Missing(), created_time=Missing(),
-                    modified_time=Missing(), labels=Missing(), text=Missing()):
+                    modified_time=Missing(), labels=Missing(), text=Missing(), **kwargs):
     '''
     :param ApplicationRef: Exactly one occurrence of type Trace.
     :param Categories: Any number of values of type String.
@@ -2508,20 +2508,20 @@ def propbundle_Note(uco_object, application_ref=Missing(), categories=Missing(),
 
     return uco_object.create_PropertyBundle('Note', ApplicationRef=application_ref, Categories=categories,
                                             CreatedTime=created_time, ModifiedTime=modified_time,
-                                            Labels=labels, Text=text)
+                                            Labels=labels, Text=text, **kwargs)
 
 
-def propbundle_NTFSFilePermissions(uco_object):
+def propbundle_NTFSFilePermissions(uco_object, **kwargs):
     '''
     :return: A PropertyBundle object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_object.create_PropertyBundle('NTFSFilePermission')
+    return uco_object.create_PropertyBundle('NTFSFilePermission', **kwargs)
 
 
-def propbundle_NTFSFileSystem(uco_object, sid=Missing(), alternate_data_streams=Missing(), entry_id=Missing()):
+def propbundle_NTFSFileSystem(uco_object, sid=Missing(), alternate_data_streams=Missing(), entry_id=Missing(), **kwargs):
     '''
     :param SID: At most one value of type String.
     :param AlternateDataStreams: Any number of occurrences of type AlternateDataStream.
@@ -2542,11 +2542,11 @@ def propbundle_NTFSFileSystem(uco_object, sid=Missing(), alternate_data_streams=
         "[propbundle_NTFSFileSystem] entry_id must be of type Long."
 
     return uco_object.create_PropertyBundle('NTFSFileSystem', SID=sid, AlternateDataStreams=alternate_data_streams,
-                                            EntryID=entry_id)
+                                            EntryID=entry_id, **kwargs)
 
 
 def propbundle_OperatingSystem(uco_object, manufacturer=Missing(), version=Missing(), bitness=Missing(),
-                               environment_variables=Missing(), install_date=Missing()):
+                               environment_variables=Missing(), install_date=Missing(), **kwargs):
     '''
     :param Manufacturer: At most one value of type String.
     :param Version: At most one value of type String.
@@ -2574,10 +2574,10 @@ def propbundle_OperatingSystem(uco_object, manufacturer=Missing(), version=Missi
 
     return uco_object.create_PropertyBundle('OperatingSystem', Manufacturer=manufacturer, Version=version,
                                             Bitness=bitness, EnvironmentVariables=environment_variables,
-                                            InstallDate=install_date)
+                                            InstallDate=install_date, **kwargs)
 
 
-def propbundle_PathRelation(uco_object, path=Missing()):
+def propbundle_PathRelation(uco_object, path=Missing(), **kwargs):
     '''
     :param Path: At least one value of type String.
     :return: A PropertyBundle object.
@@ -2591,11 +2591,11 @@ def propbundle_PathRelation(uco_object, path=Missing()):
         assert all(isinstance(i, str) for i in path),\
         "[propbundle_PathRelation] path must be of type List of String."
         
-    return uco_object.create_PropertyBundle('PathRelationship', Path=path)
+    return uco_object.create_PropertyBundle('PathRelationship', Path=path, **kwargs)
 
 
 def propbundle_PDFFile(uco_object, version=Missing(), is_optimized=Missing(), document_information_dictionary=Missing(),
-                       pdf_id_zero=Missing(), pdf_id_one=Missing()):
+                       pdf_id_zero=Missing(), pdf_id_one=Missing(), **kwargs):
     '''
     :param Version: At most one value of type String.
     :param IsOptimized: At most one value of type Bool.
@@ -2626,10 +2626,10 @@ def propbundle_PDFFile(uco_object, version=Missing(), is_optimized=Missing(), do
     
     return uco_object.create_PropertyBundle('PDFFile', Version=version, IsOptimized=is_optimized,
                                             DocumentInformationDictionary=document_information_dictionary,
-                                            PDFIDZero=pdf_id_zero, PDFIDOne=pdf_id_one)
+                                            PDFIDZero=pdf_id_zero, PDFIDOne=pdf_id_one, **kwargs)
 
 
-def propbundle_PhoneAccount(uco_object, phone_number=Missing()):
+def propbundle_PhoneAccount(uco_object, phone_number=Missing(), **kwargs):
     '''
     :param PhoneNumber: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -2641,12 +2641,12 @@ def propbundle_PhoneAccount(uco_object, phone_number=Missing()):
         assert isinstance(phone_number, str),\
         "[propbundle_PhoneAccount] phone_number must be of type String."
 
-    return uco_object.create_PropertyBundle('PhoneAccount', PhoneNumber=phone_number)
+    return uco_object.create_PropertyBundle('PhoneAccount', PhoneNumber=phone_number, **kwargs)
 
 
 def propbundle_PhoneCall(uco_object, application_ref=Missing(), call_type=Missing(), duration=Missing(),
                          start_time=Missing(), end_time=Missing(), from_ref=Missing(), to_ref=Missing(),
-                         participant_refs=Missing()):
+                         participant_refs=Missing(), **kwargs):
     '''
     :param ApplicationRef: Exactly one occurrence of type Trace.
     :param CallType: At most one value of type String.
@@ -2691,13 +2691,13 @@ def propbundle_PhoneCall(uco_object, application_ref=Missing(), call_type=Missin
 
     return uco_object.create_PropertyBundle('PhoneCall', ApplicationRef=application_ref, CallType=call_type,
                                             Duration=duration, StartTime=start_time, EndTime=end_time,
-                                            FromRef=from_ref, ToRef=to_ref, ParticipantRef=participant_refs)
+                                            FromRef=from_ref, ToRef=to_ref, ParticipantRef=participant_refs, **kwargs)
 
 
 def propbundle_Process(uco_object, arguments=Missing(), binary_ref=Missing(), created_time=Missing(),
                        creator_user_ref=Missing(), current_working_directory=Missing(),
                        environment_variables=Missing(), exit_status=Missing(), exit_time=Missing(),
-                       is_hidden=Missing(), parent_ref=Missing(), pid=Missing(), status=Missing()):
+                       is_hidden=Missing(), parent_ref=Missing(), pid=Missing(), status=Missing(), **kwargs):
     '''
     :param Arguments: Any number of values of type String.
     :param BinaryRef: At most one occurrence of type Trace.
@@ -2758,11 +2758,11 @@ def propbundle_Process(uco_object, arguments=Missing(), binary_ref=Missing(), cr
                                             CurrentWorkingDirectory=current_working_directory,
                                             EnvironmentVariables=environment_variables,
                                             ExitStatus=exit_status, ExitTime=exit_time, IsHidden=is_hidden,
-                                            ParentRef=parent_ref, PID=pid, Status=status)
+                                            ParentRef=parent_ref, PID=pid, Status=status, **kwargs)
 
 
 def propbundle_RasterPicture(uco_object, picture_height=Missing(), picture_width=Missing(), bits_per_pixel=Missing(),
-                             image_compression_method=Missing(), camera_ref=Missing(), picture_type=Missing()):
+                             image_compression_method=Missing(), camera_ref=Missing(), picture_type=Missing(), **kwargs):
     '''
     :param PictureHeight: At most one value of type Integer.
     :param PictureWidth: At most one value of type Integer.
@@ -2795,11 +2795,11 @@ def propbundle_RasterPicture(uco_object, picture_height=Missing(), picture_width
     return uco_object.create_PropertyBundle('RasterPicture', PictureHeight=picture_height, PictureWidth=picture_width,
                                             BitsPerPixel=bits_per_pixel,
                                             ImageCompressionMethod=image_compression_method,
-                                            CameraRef=camera_ref, PictureType=picture_type)
+                                            CameraRef=camera_ref, PictureType=picture_type, **kwargs)
 
 
 def propbundle_SimpleAddress(uco_object, street=Missing(), locality=Missing(), region=Missing(),
-                             postal_code=Missing(), country=Missing(), address_type=Missing()):
+                             postal_code=Missing(), country=Missing(), address_type=Missing(), **kwargs):
     '''
     :param Street: At most one value of type String.
     :param Locality: At most one value of type String.
@@ -2831,10 +2831,10 @@ def propbundle_SimpleAddress(uco_object, street=Missing(), locality=Missing(), r
 
     return uco_object.create_PropertyBundle('SimpleAddress', Street=street, Locality=locality,
                                             Region=region, PostalCode=postal_code, Country=country,
-                                            AddressType=address_type)
+                                            AddressType=address_type, **kwargs)
 
 
-def propbundle_SMSMessage(uco_object, is_read=Missing()):
+def propbundle_SMSMessage(uco_object, is_read=Missing(), **kwargs):
     '''
     :param IsRead: Exactly one value of type Bool.
     :return: A PropertyBundle object.
@@ -2846,11 +2846,11 @@ def propbundle_SMSMessage(uco_object, is_read=Missing()):
         assert isinstance(is_read, bool),\
         "[propbundle_SMSMessage] is_read must be of type Bool."
 
-    return uco_object.create_PropertyBundle('SMSMessage', IsRead=is_read)
+    return uco_object.create_PropertyBundle('SMSMessage', IsRead=is_read, **kwargs)
 
 
 def propbundle_Software(uco_object, version=Missing(), language=Missing(), manufacturer=Missing(), swid=Missing(),
-                        cpeid=Missing()):
+                        cpeid=Missing(), **kwargs):
     '''
     :param Version: At most one value of type String.
     :param Language: At most one value of type String.
@@ -2877,11 +2877,11 @@ def propbundle_Software(uco_object, version=Missing(), language=Missing(), manuf
         "[propbundle_Software] cpeid must be of type String."
 
     return uco_object.create_PropertyBundle('Software', Version=version, Language=language,
-                                            Manufacturer=manufacturer, SWID=swid, CPEID=cpeid)
+                                            Manufacturer=manufacturer, SWID=swid, CPEID=cpeid, **kwargs)
 
 
 def propbundle_SQLiteBlob(uco_object, column_name=Missing(), row_condition=Missing(), row_index=Missing(),
-                          table_name=Missing()):
+                          table_name=Missing(), **kwargs):
     '''
     :param ColumnName: At most one value of type String.
     :param RowCondition: At most one value of type String.
@@ -2904,10 +2904,10 @@ def propbundle_SQLiteBlob(uco_object, column_name=Missing(), row_condition=Missi
         "[propbundle_SQLiteBlob] table_name must be of type String."
 
     return uco_object.create_PropertyBundle('SQLiteBlob', ColumnName=column_name,
-                                            RowCondition=row_condition, RowIndex=row_index, TableName=table_name)
+                                            RowCondition=row_condition, RowIndex=row_index, TableName=table_name, **kwargs)
 
 
-def propbundle_SymbolicLink(uco_object, target_file_ref=Missing()):
+def propbundle_SymbolicLink(uco_object, target_file_ref=Missing(), **kwargs):
     '''
     :param TargetFileRef: Exactly one occurrence of type Trace.
     :return: A PropertyBundle object.
@@ -2919,10 +2919,10 @@ def propbundle_SymbolicLink(uco_object, target_file_ref=Missing()):
         assert (isinstance(target_file_ref, case.CoreObject) and (target_file_ref.type=='Trace')),\
         "[propbundle_SymbolicLink] target_file_ref must be of type Trace."
 
-    return uco_object.create_PropertyBundle('SymbolicLink', TargetFileRef=target_file_ref)
+    return uco_object.create_PropertyBundle('SymbolicLink', TargetFileRef=target_file_ref, **kwargs)
 
 
-def propbundle_TCPConnection(uco_object, source_flags=Missing(), destination_flags=Missing()):
+def propbundle_TCPConnection(uco_object, source_flags=Missing(), destination_flags=Missing(), **kwargs):
     '''
     :param SourceFlags: At most one value of type HexBinary.
     :param DestinationFlags: At most one value of type HexBinary.
@@ -2933,11 +2933,11 @@ def propbundle_TCPConnection(uco_object, source_flags=Missing(), destination_fla
     #TODO:HexBinary
 
     return uco_object.create_PropertyBundle('TCPConnection', SourceFlags=source_flags,
-                                            DestinationFlags=destination_flags)
+                                            DestinationFlags=destination_flags, **kwargs)
 
 
 def propbundle_ToolConfigurationType(uco_object, configuration_settings=Missing(), dependencies=Missing(),
-                                     usage_context_assumptions=Missing()):
+                                     usage_context_assumptions=Missing(), **kwargs):
     '''
     :param ConfigurationSettings: Any number of occurrences of type ConfigurationSettingType.
     :param Dependencies: Any number of occurrences of type DependencyType.
@@ -2960,10 +2960,10 @@ def propbundle_ToolConfigurationType(uco_object, configuration_settings=Missing(
 
     return uco_object.create_PropertyBundle('ToolConfigurationType', ConfigurationSettings=configuration_settings,
                                             Dependencies=dependencies,
-                                            UsageContextAssumptions=usage_context_assumptions)
+                                            UsageContextAssumptions=usage_context_assumptions, **kwargs)
 
 
-def propbundle_UNIXAccount(uco_object, gid=Missing(), groups=Missing(), shell=Missing()):
+def propbundle_UNIXAccount(uco_object, gid=Missing(), groups=Missing(), shell=Missing(), **kwargs):
     '''
     :param GID: At most one value of type Integer.
     :param Groups: Any number of values of type String.
@@ -2983,21 +2983,21 @@ def propbundle_UNIXAccount(uco_object, gid=Missing(), groups=Missing(), shell=Mi
         assert isinstance(shell, str),\
         "[propbundle_UNIXAccount] shell must be of type String."
 
-    return uco_object.create_PropertyBundle('UNIXAccount', GID=gid, Groups=groups, Shell=shell)
+    return uco_object.create_PropertyBundle('UNIXAccount', GID=gid, Groups=groups, Shell=shell, **kwargs)
 
 
-def propbundle_UNIXFilePermissions(uco_object):
+def propbundle_UNIXFilePermissions(uco_object, **kwargs):
     '''
     :return: A PropertyBundle object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_object.create_PropertyBundle('UNIXFilePermissions')
+    return uco_object.create_PropertyBundle('UNIXFilePermissions', **kwargs)
 
 
 def propbundle_UNIXProcess(uco_object, open_file_descriptor_refs=Missing(), priority=Missing(), ruid=Missing(),
-                           session_id=Missing()):
+                           session_id=Missing(), **kwargs):
     '''
     :param OpenFileDescriptorRefs: Any number of value of type Integer.
     :param Priority: At most one value of type PositiveInteger.
@@ -3022,10 +3022,10 @@ def propbundle_UNIXProcess(uco_object, open_file_descriptor_refs=Missing(), prio
         "[propbundle_UNIXProcess] session_id must be of type PositiveInteger."
 
     return uco_object.create_PropertyBundle('UNIXProcess', OpenFileDescriptorRefs=open_file_descriptor_refs,
-                                            Priority=priority, RUID=ruid, SessionID=session_id)
+                                            Priority=priority, RUID=ruid, SessionID=session_id, **kwargs)
 
 
-def propbundle_UNIXVolume(uco_object, mount_point=Missing(), options=Missing()):
+def propbundle_UNIXVolume(uco_object, mount_point=Missing(), options=Missing(), **kwargs):
     '''
     :param MountPoint: At most one value of type String.
     :param Options: At most one value of type String.
@@ -3039,11 +3039,11 @@ def propbundle_UNIXVolume(uco_object, mount_point=Missing(), options=Missing()):
         assert isinstance(options, str),\
         "[propbundle_UNIXVolume] options must be of type String."
 
-    return uco_object.create_PropertyBundle('UNIXVolume', MountPoint=mount_point, Options=options)
+    return uco_object.create_PropertyBundle('UNIXVolume', MountPoint=mount_point, Options=options, **kwargs)
 
 
 def propbundle_URL(uco_object, full_value=Missing(), scheme=Missing(), user_name_ref=Missing(), password_ref=Missing(),
-                   host_ref=Missing(), port=Missing(), path=Missing(), query=Missing(), fragment=Missing()):
+                   host_ref=Missing(), port=Missing(), path=Missing(), query=Missing(), fragment=Missing(), **kwargs):
     '''
     :param FullValue: Exactly one value of type String.
     :param Scheme: At most one value of type String.
@@ -3090,11 +3090,11 @@ def propbundle_URL(uco_object, full_value=Missing(), scheme=Missing(), user_name
 
     return uco_object.create_PropertyBundle('URL', FullValue=full_value, Scheme=scheme, UserNameRef=user_name_ref,
                                             PasswordRef=password_ref, HostRef=host_ref, Port=port, Path=path,
-                                            Query=query, Fragment=fragment)
+                                            Query=query, Fragment=fragment, **kwargs)
 
 
 def propbundle_UserAccount(uco_object, home_directory=Missing(), is_service_account=Missing(), is_privileged=Missing(),
-                           can_escalate_privileges=Missing()):
+                           can_escalate_privileges=Missing(), **kwargs):
     '''
     :param HomeDirectory: At most one value of type String.
     :param IsServiceAccount: At most one value of type Bool.
@@ -3118,11 +3118,11 @@ def propbundle_UserAccount(uco_object, home_directory=Missing(), is_service_acco
 
     return uco_object.create_PropertyBundle('UserAccount', HomeDirectory=home_directory,
                                             IsServiceAccount=is_service_account, IsPrivileged=is_privileged,
-                                            CanEscalatePrivileges=can_escalate_privileges)
+                                            CanEscalatePrivileges=can_escalate_privileges, **kwargs)
 
 
 def propbundle_UserSession(uco_object, effective_group=Missing(), effective_group_id=Missing(),
-                           effective_user_ref=Missing(), login_time=Missing(), logout_time=Missing()):
+                           effective_user_ref=Missing(), login_time=Missing(), logout_time=Missing(), **kwargs):
     '''
     :param EffectiveGroup: At most one value of type String.
     :param EffectiveGroupID: At most one value of type String.
@@ -3150,10 +3150,10 @@ def propbundle_UserSession(uco_object, effective_group=Missing(), effective_grou
 
     return uco_object.create_PropertyBundle('UserSession', EffectiveGroup=effective_group,
                                             EffectiveGroupID=effective_group_id, EffectiveUserRef=effective_user_ref,
-                                            LoginTime=login_time, LogoutTime=logout_time)
+                                            LoginTime=login_time, LogoutTime=logout_time, **kwargs)
 
 
-def propbundle_Volume(uco_object, volume_id=Missing(), sector_size=Missing()):
+def propbundle_Volume(uco_object, volume_id=Missing(), sector_size=Missing(), **kwargs):
     '''
     :param VolumeID: At most one value of type String.
     :param SectorSize: At most one value of type Long.
@@ -3167,14 +3167,14 @@ def propbundle_Volume(uco_object, volume_id=Missing(), sector_size=Missing()):
         assert isinstance(sector_size, str),\
         "[propbundle_Volume] sector_size must be of type String."
 
-    return uco_object.create_PropertyBundle('Volume', VolumeID=volume_id, SectorSize=sector_size)
+    return uco_object.create_PropertyBundle('Volume', VolumeID=volume_id, SectorSize=sector_size, **kwargs)
 
 
 def propbundle_WhoIs(uco_object, lookup_date=Missing(), domain_name_ref=Missing(), domain_id=Missing(),
                      server_name_ref=Missing(), ip_address_ref=Missing(), name_server_refs=Missing(),
                      updated_date=Missing(), creation_date=Missing(), expiration_date=Missing(),
                      sponsoring_registrar=Missing(), registrar_info=Missing(), registrant_ids=Missing(),
-                     contact_info=Missing(), remarks=Missing()):
+                     contact_info=Missing(), remarks=Missing(), **kwargs):
     '''
     :param LookupDate: At most one value of type Datetime.
     :param DomainNameRef: At most one occurrence of type Trace.
@@ -3248,10 +3248,10 @@ def propbundle_WhoIs(uco_object, lookup_date=Missing(), domain_name_ref=Missing(
                                             UpdatedDate=updated_date, CreationDate=creation_date,
                                             ExpirationDate=expiration_date, SponsoringRegistrar=sponsoring_registrar,
                                             RegistrarInfo=registrar_info, RegistrantIDs=registrant_ids,
-                                            ContactInfo=contact_info, Remarks=remarks)
+                                            ContactInfo=contact_info, Remarks=remarks, **kwargs)
 
 
-def propbundle_WindowsAccount(uco_object, groups=Missing()):
+def propbundle_WindowsAccount(uco_object, groups=Missing(), **kwargs):
     '''
     :param Groups: At least one value of type String.
     :return: A PropertyBundle object.
@@ -3265,10 +3265,10 @@ def propbundle_WindowsAccount(uco_object, groups=Missing()):
         assert all(isinstance(i, str) for i in groups),\
         "[propbundle_WindowsAccount] groups must be of type List of String."
 
-    return uco_object.create_PropertyBundle('WindowsAccount', Groups=groups)
+    return uco_object.create_PropertyBundle('WindowsAccount', Groups=groups, **kwargs)
 
 
-def propbundle_WindowsActiveDirectoryAccount(uco_object, object_guid=Missing(), active_directory_groups=Missing()):
+def propbundle_WindowsActiveDirectoryAccount(uco_object, object_guid=Missing(), active_directory_groups=Missing(), **kwargs):
     '''
     :param ObjectGUID: Exactly one value of type String.
     :param ActiveDirectoryGroups: Any number of values of type String.
@@ -3288,7 +3288,7 @@ def propbundle_WindowsActiveDirectoryAccount(uco_object, object_guid=Missing(), 
         "[propbundle_WindowsActiveDirectoryAccount] active_directory_groups must be of type List of String."
 
     return uco_object.create_PropertyBundle('WindowsActiveDirectoryAccount', ObjectGUID=object_guid,
-                                            ActiveDirectoryGroups=active_directory_groups)
+                                            ActiveDirectoryGroups=active_directory_groups, **kwargs)
 
 
 def propbundle_WindowsComputerSpecification(uco_object, domain=Missing(), global_flag_list=Missing(),
@@ -3296,7 +3296,7 @@ def propbundle_WindowsComputerSpecification(uco_object, domain=Missing(), global
                                             ms_product_name=Missing(), registered_organization_ref=Missing(),
                                             registered_owner_ref=Missing(), windows_directory_ref=Missing(),
                                             windows_system_directory_ref=Missing(),
-                                            windows_temp_directory_ref=Missing()):
+                                            windows_temp_directory_ref=Missing(), **kwargs):
     '''
     :param Domain: Any number of values of type String.
     :param GlobalFlagList: Any number of occurrences of type GlobalFlagType.
@@ -3350,14 +3350,14 @@ def propbundle_WindowsComputerSpecification(uco_object, domain=Missing(), global
                                             RegisteredOwnerRef=registered_owner_ref,
                                             WindowsDirectoryRef=windows_directory_ref,
                                             WindowsSystemDirectoryRef=windows_system_directory_ref,
-                                            WindowsTempDirectoryRef=windows_temp_directory_ref)
+                                            WindowsTempDirectoryRef=windows_temp_directory_ref, **kwargs)
 
 
 def propbundle_WindowsPEBinaryFile(uco_object, machine=Missing(), pe_type=Missing(), imp_hash=Missing(),
                                    number_of_sections=Missing(), datetime_stamp=Missing(),
                                    pointer_to_symbol_table=Missing(), size_of_optional_header=Missing(),
                                    characteristics=Missing(), file_header_hashes=Missing(),
-                                   optional_header=Missing(), sections=Missing()):
+                                   optional_header=Missing(), sections=Missing(), **kwargs):
     '''
     :param Machine: Exactly one value of type HexBinary.
     :param PEType: At most one occurrence of type Controlled Vocabulary.
@@ -3419,13 +3419,13 @@ def propbundle_WindowsPEBinaryFile(uco_object, machine=Missing(), pe_type=Missin
                                             SizeOfOptionalHeader=size_of_optional_header,
                                             Characteristics=characteristics,
                                             FileHeaderHashes=file_header_hashes, OptionalHeader=optional_header,
-                                            Sections=sections)
+                                            Sections=sections, **kwargs)
 
 
 def propbundle_WindowsPrefetch(uco_object, application_file_name=Missing(), prefetch_hash=Missing(),
                                times_executed=Missing(), first_run=Missing(), last_run=Missing(),
                                volume_ref=Missing(), accessed_file_refs=Missing(),
-                               accessed_directory_refs=Missing()):
+                               accessed_directory_refs=Missing(), **kwargs):
     '''
     :param ApplicationFileName: At most one value of type String.
     :param PrefetchHash: At most one value of type String.
@@ -3471,11 +3471,11 @@ def propbundle_WindowsPrefetch(uco_object, application_file_name=Missing(), pref
                                             PrefetchHash=prefetch_hash, TimesExecuted=times_executed,
                                             FirstRun=first_run, LastRun=last_run,
                                             VolumeRef=volume_ref, AccessedFileRefs=accessed_file_refs,
-                                            AccessedDirectoryRefs=accessed_directory_refs)
+                                            AccessedDirectoryRefs=accessed_directory_refs, **kwargs)
 
 
 def propbundle_WindowsProcess(uco_object, aslr_enabled=Missing(), dep_enabled=Missing(), priority=Missing(),
-                              owner_sid=Missing(), window_title=Missing(), startup_info=Missing()):
+                              owner_sid=Missing(), window_title=Missing(), startup_info=Missing(), **kwargs):
     '''
     :param ASLREnabled: At most one value of type Bool.
     :param DEPEnabled: At most one value of type Bool.
@@ -3507,10 +3507,10 @@ def propbundle_WindowsProcess(uco_object, aslr_enabled=Missing(), dep_enabled=Mi
 
     return uco_object.create_PropertyBundle('WindowsProcess', ASLREnabled=aslr_enabled, DEPEnabled=dep_enabled,
                                             Priority=priority, OwnerSID=owner_sid, WindowTitle=window_title,
-                                            StartupInfo=startup_info)
+                                            StartupInfo=startup_info, **kwargs)
 
 
-def propbundle_WindowsRegistryHive(uco_object, hive_type=Missing()):
+def propbundle_WindowsRegistryHive(uco_object, hive_type=Missing(), **kwargs):
     '''
     :param HiveType: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -3522,11 +3522,11 @@ def propbundle_WindowsRegistryHive(uco_object, hive_type=Missing()):
         assert isinstance(hive_type, str),\
         "[propbundle_WindowsRegistryHive] hive_type must be of type String."
 
-    return uco_object.create_PropertyBundle('WindowsRegistryHive', HiveType=hive_type)
+    return uco_object.create_PropertyBundle('WindowsRegistryHive', HiveType=hive_type, **kwargs)
 
 
 def propbundle_WindowsRegistryKey(uco_object, key=Missing(), values=Missing(), modified_time=Missing(),
-                                  creator_ref=Missing(), number_of_subkeys=Missing()):
+                                  creator_ref=Missing(), number_of_subkeys=Missing(), **kwargs):
     '''
     :param Key: Exactly one value of type String.
     :param Values: Any number of occurrences of type WindowsRegistryHive.
@@ -3558,12 +3558,12 @@ def propbundle_WindowsRegistryKey(uco_object, key=Missing(), values=Missing(), m
         "[propbundle_WindowsRegistryKey] number_of_subkeys must be of type Integer."
 
     return uco_object.create_PropertyBundle('WindowsRegistryKey', Key=key, Values=values, ModifiedTime=modified_time,
-                                            CreatorRef=creator_ref, NumberOfSubkeys=number_of_subkeys)
+                                            CreatorRef=creator_ref, NumberOfSubkeys=number_of_subkeys, **kwargs)
 
 
 def propbundle_WindowsService(uco_object, service_name=Missing(), descriptions=Missing(), display_name=Missing(),
                               group_name=Missing(), start_command_line=Missing(), start_type=Missing(),
-                              service_type=Missing(), service_status=Missing()):
+                              service_type=Missing(), service_status=Missing(), **kwargs):
     '''
     :param ServiceName: Exactly one value of type String.
     :param Descriptions: Any number of values of type String.
@@ -3609,7 +3609,7 @@ def propbundle_WindowsService(uco_object, service_name=Missing(), descriptions=M
     return uco_object.create_PropertyBundle('WindowsService', ServiceName=service_name, Descriptions=descriptions,
                                             DisplayName=display_name, GroupName=group_name,
                                             StartCommandLine=start_command_line, StartType=start_type,
-                                            ServiceType=service_type, ServiceStatus=service_status)
+                                            ServiceType=service_type, ServiceStatus=service_status, **kwargs)
 
 
 def propbundle_WindowsTask(uco_object, image_name=Missing(), application_ref=Missing(), parameters=Missing(),
@@ -3617,7 +3617,7 @@ def propbundle_WindowsTask(uco_object, image_name=Missing(), application_ref=Mis
                            creator=Missing(), created_time=Missing(), most_recent_run_time=Missing(),
                            exit_code=Missing(), max_run_time=Missing(), next_run_time=Missing(),
                            action_list=Missing(), trigger_list=Missing(), comment=Missing(),
-                           working_directory=Missing(), work_item_data_ref=Missing()):
+                           working_directory=Missing(), work_item_data_ref=Missing(), **kwargs):
     '''
     :param ImageName: At most one value of type String.
     :param ApplicationRef: At most one occurrence of type Trace.
@@ -3702,13 +3702,13 @@ def propbundle_WindowsTask(uco_object, image_name=Missing(), application_ref=Mis
                                             CreatedTime=created_time, MostRecentRunTime=most_recent_run_time,
                                             ExitCode=exit_code, MaxRunTime=max_run_time, NextRunTime=next_run_time,
                                             ActionList=action_list, TriggerList=trigger_list, Comment=comment,
-                                            WorkingDirectory=working_directory, WorkItemDataRef=work_item_data_ref)
+                                            WorkingDirectory=working_directory, WorkItemDataRef=work_item_data_ref, **kwargs)
 
 
 def propbundle_WindowsThread(uco_object, thread_id=Missing(), running_status=Missing(), context=Missing(),
                              priority=Missing(), creation_flags=Missing(), creation_time=Missing(),
                              start_address=Missing(), parameter_address=Missing(), security_attributes=Missing(),
-                             stack_size=Missing()):
+                             stack_size=Missing(), **kwargs):
     '''
     :param ThreadID: At most one value of type PositiveInteger.
     :param RunningStatus: At most one occurence of type ControlledVocabulary.
@@ -3752,10 +3752,10 @@ def propbundle_WindowsThread(uco_object, thread_id=Missing(), running_status=Mis
                                             Context=context, Priority=priority, CreationFlags=creation_flags,
                                             CreationTime=creation_time, StartAddress=start_address,
                                             ParameterAddress=parameter_address, SecurityAttributes=security_attributes,
-                                            StackSize=stack_size)
+                                            StackSize=stack_size, **kwargs)
 
 
-def propbundle_WindowsVolume(uco_object, drive_letter=Missing()):
+def propbundle_WindowsVolume(uco_object, drive_letter=Missing(), **kwargs):
     '''
     :param DriveLetter: Exactly one value of type String.
     :return: A PropertyBundle object.
@@ -3767,10 +3767,10 @@ def propbundle_WindowsVolume(uco_object, drive_letter=Missing()):
         assert isinstance(drive_letter, str),\
         "[propbundle_WindowsVolume] drive_letter must be of type String."
 
-    return uco_object.create_PropertyBundle('WindowsVolume', DriveLetter=drive_letter)
+    return uco_object.create_PropertyBundle('WindowsVolume', DriveLetter=drive_letter, **kwargs)
 
 
-def propbundle_WirelessNetworkConnection(uco_object, base_station=Missing(), ssid=Missing()):
+def propbundle_WirelessNetworkConnection(uco_object, base_station=Missing(), ssid=Missing(), **kwargs):
     '''
     :param BaseStation: At most one value of type String.
     :param SSID: At most one value of type String.
@@ -3784,7 +3784,7 @@ def propbundle_WirelessNetworkConnection(uco_object, base_station=Missing(), ssi
         assert isinstance(ssid, str),\
         "[propbundle_WirelessNetworkConnection] ssid must be of type String."
 
-    return uco_object.create_PropertyBundle('WirelessNetworkConnection', BaseStation=base_station, SSID=ssid)
+    return uco_object.create_PropertyBundle('WirelessNetworkConnection', BaseStation=base_station, SSID=ssid, **kwargs)
 
 
 def propbundle_X509Certificate(uco_object, is_self_signed=Missing(), version=Missing(), serial_number=Missing(),
@@ -3792,7 +3792,7 @@ def propbundle_X509Certificate(uco_object, is_self_signed=Missing(), version=Mis
                                issuer_hash=Missing(), validity_not_before=Missing(), validity_not_after=Missing(),
                                subject=Missing(), subject_hash=Missing(), subject_public_key_algorithm=Missing(),
                                subject_public_key_modulus=Missing(), subject_public_key_exponent=Missing(),
-                               x509V3Extensions=Missing(), thumbprint_hash=Missing()):
+                               x509V3Extensions=Missing(), thumbprint_hash=Missing(), **kwargs):
     '''
     :param IsSelfSigned: At most one value of type Bool.
     :param Version: At most one value of type String.
@@ -3870,13 +3870,13 @@ def propbundle_X509Certificate(uco_object, is_self_signed=Missing(), version=Mis
                                             SubjectPublicKeyAlgorithm=subject_public_key_algorithm,
                                             SubjectPublicKeyModulus=subject_public_key_modulus,
                                             SubjectPublicKeyExponent=subject_public_key_exponent,
-                                            Extensions=x509V3Extensions, ThumbprintHash=thumbprint_hash)
+                                            Extensions=x509V3Extensions, ThumbprintHash=thumbprint_hash, **kwargs)
 
 
 #====================================================
 #-- PROPERTYBUNDLE CHILDREN IN ALPHABETICAL ORDER
 
-def propbundle_sub_Address(uco_document, uco_object_propbundle, address_ref=Missing()):
+def propbundle_sub_Address(uco_document, uco_object_propbundle, address_ref=Missing(), **kwargs):
     '''
     :param AddressRef: Exactly one occurrence of type Location.
     :return: A SubObject object.
@@ -3891,10 +3891,10 @@ def propbundle_sub_Address(uco_document, uco_object_propbundle, address_ref=Miss
         assert (isinstance(address_ref, case.CoreObject) and (address_ref.type=='Location')),\
         "[propbundle_sub_Address] address_ref must be of type Location."
 
-    return uco_document.create_SubObject('Address')
+    return uco_document.create_SubObject('Address', **kwargs)
 
 
-def propbundle_sub_Affiliation(uco_document, uco_object_propbundle):
+def propbundle_sub_Affiliation(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -3904,10 +3904,10 @@ def propbundle_sub_Affiliation(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Affiliation')
+    return uco_document.create_SubObject('Affiliation', **kwargs)
 
 
-def propbundle_sub_BirthInformation(uco_document, uco_object_propbundle, birth_date=Missing()):
+def propbundle_sub_BirthInformation(uco_document, uco_object_propbundle, birth_date=Missing(), **kwargs):
     '''
     :param BirthDate: Exactly one value of type Datetime.
     :return: A SubObject object.
@@ -3922,10 +3922,10 @@ def propbundle_sub_BirthInformation(uco_document, uco_object_propbundle, birth_d
         assert isinstance(birth_date, datetime.datetime),\
         "[propbundle_sub_BirthInformation] birth_date must be of type Datetime."
 
-    return uco_document.create_SubObject('BirthInformation')
+    return uco_document.create_SubObject('BirthInformation', **kwargs)
 
 
-def propbundle_sub_CountriesOfResidence(uco_document, uco_object_propbundle):
+def propbundle_sub_CountriesOfResidence(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -3935,10 +3935,10 @@ def propbundle_sub_CountriesOfResidence(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('CountriesOfResidence')
+    return uco_document.create_SubObject('CountriesOfResidence', **kwargs)
 
 
-def propbundle_sub_Events(uco_document, uco_object_propbundle):
+def propbundle_sub_Events(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -3948,10 +3948,10 @@ def propbundle_sub_Events(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Events')
+    return uco_document.create_SubObject('Events', **kwargs)
 
 
-def propbundle_sub_Identifier(uco_document, uco_object_propbundle):
+def propbundle_sub_Identifier(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -3961,10 +3961,10 @@ def propbundle_sub_Identifier(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Identifier')
+    return uco_document.create_SubObject('Identifier', **kwargs)
 
 
-def propbundle_sub_Languages(uco_document, uco_object_propbundle):
+def propbundle_sub_Languages(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -3974,10 +3974,10 @@ def propbundle_sub_Languages(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Languages')
+    return uco_document.create_SubObject('Languages', **kwargs)
 
 
-def propbundle_sub_Nationality(uco_document, uco_object_propbundle):
+def propbundle_sub_Nationality(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -3987,10 +3987,10 @@ def propbundle_sub_Nationality(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Nationality')
+    return uco_document.create_SubObject('Nationality', **kwargs)
 
 
-def propbundle_sub_Occupation(uco_document, uco_object_propbundle):
+def propbundle_sub_Occupation(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -4000,10 +4000,10 @@ def propbundle_sub_Occupation(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Occupation')
+    return uco_document.create_SubObject('Occupation', **kwargs)
 
 
-def propbundle_sub_OrganizationDetails(uco_document, uco_object_propbundle):
+def propbundle_sub_OrganizationDetails(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -4013,10 +4013,10 @@ def propbundle_sub_OrganizationDetails(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('OrganizationDetails')
+    return uco_document.create_SubObject('OrganizationDetails', **kwargs)
 
 
-def propbundle_sub_PersonalDetails(uco_document, uco_object_propbundle):
+def propbundle_sub_PersonalDetails(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -4026,10 +4026,10 @@ def propbundle_sub_PersonalDetails(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('PhysicalInfo')
+    return uco_document.create_SubObject('PhysicalInfo', **kwargs)
 
 
-def propbundle_sub_Qualification(uco_document, uco_object_propbundle):
+def propbundle_sub_Qualification(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -4039,10 +4039,10 @@ def propbundle_sub_Qualification(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Qualification')
+    return uco_document.create_SubObject('Qualification', **kwargs)
 
 
-def propbundle_sub_Relationship(uco_document, uco_object_propbundle):
+def propbundle_sub_Relationship(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -4052,11 +4052,11 @@ def propbundle_sub_Relationship(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Relationship')
+    return uco_document.create_SubObject('Relationship', **kwargs)
 
 
 def propbundle_sub_SimpleName(uco_document, uco_object_propbundle, family_name=Missing(), given_name=Missing(),
-                              honorific_prefix=Missing(), honorific_suffix=Missing()):
+                              honorific_prefix=Missing(), honorific_suffix=Missing(), **kwargs):
     '''
     :param FamilyName: Any number of values of any type.
     :param GivenName: Any number of values of any type.
@@ -4071,10 +4071,10 @@ def propbundle_sub_SimpleName(uco_document, uco_object_propbundle, family_name=M
     #TODO:NothingElseToCheck
 
     return uco_document.create_SubObject('ForensicAction', FamilyName=family_name, GivenName=given_name,
-                                         HonorificPrefix=honorific_prefix, HonorificSuffix=honorific_suffix)
+                                         HonorificPrefix=honorific_prefix, HonorificSuffix=honorific_suffix, **kwargs)
 
 
-def propbundle_sub_Visa(uco_document, uco_object_propbundle):
+def propbundle_sub_Visa(uco_document, uco_object_propbundle, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -4084,13 +4084,13 @@ def propbundle_sub_Visa(uco_document, uco_object_propbundle):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('Visa')
+    return uco_document.create_SubObject('Visa', **kwargs)
 
 
 #====================================================
 #-- DUCK IN ALPHABETICAL ORDER
 
-def duck_AlternateDataStream(uco_document, name=Missing(), hashes=Missing(), size=Missing()):
+def duck_AlternateDataStream(uco_document, name=Missing(), hashes=Missing(), size=Missing(), **kwargs):
     '''
     :param Name: Exactly one value of type String.
     :param Hashes: At most one occurrence of type ArrayOfHash.
@@ -4111,10 +4111,10 @@ def duck_AlternateDataStream(uco_document, name=Missing(), hashes=Missing(), siz
         assert isinstance(size, int),\
         "[duck_AlternateDataStream] size must be of type Integer."
 
-    return uco_document.create_DuckObject('AlternateDataStream', Name=name, Hashes=hashes, size=size)
+    return uco_document.create_DuckObject('AlternateDataStream', Name=name, Hashes=hashes, size=size, **kwargs)
 
 
-def duck_ArrayOfHash(uco_document, hashes=Missing()):
+def duck_ArrayOfHash(uco_document, hashes=Missing(), **kwargs):
     '''
     :param Hashes: At least one occurrence of type Hash.
     :return: A DuckObject object.
@@ -4128,10 +4128,10 @@ def duck_ArrayOfHash(uco_document, hashes=Missing()):
         assert all( (isinstance(i, case.DuckObject) and i.type=='Hash') for i in hashes),\
         "[duck_ArrayOfHash] hashes must be of type List of Hash."
 
-    return uco_document.create_DuckObject('ArrayOfHash', Hashes=hashes)
+    return uco_document.create_DuckObject('ArrayOfHash', Hashes=hashes, **kwargs)
 
 
-def duck_ArrayOfObject(uco_document, objects=Missing()):
+def duck_ArrayOfObject(uco_document, objects=Missing(), **kwargs):
     '''
     :param Objects: At least one occurrence of type CoreObject.
     :return: A DuckObject object.
@@ -4145,10 +4145,10 @@ def duck_ArrayOfObject(uco_document, objects=Missing()):
         assert all(isinstance(i, case.CoreObject) for i in objects),\
         "[duck_ArrayOfObject] objects must be of type List of CoreObject."
 
-    return uco_document.create_DuckObject('ArrayOfObject', Objects=objects)
+    return uco_document.create_DuckObject('ArrayOfObject', Objects=objects, **kwargs)
 
 
-def duck_ArrayOfString(uco_document, strings=Missing()):
+def duck_ArrayOfString(uco_document, strings=Missing(), **kwargs):
     '''
     :param strings: At least one value of type String.
     :return: A DuckObject object.
@@ -4162,11 +4162,11 @@ def duck_ArrayOfString(uco_document, strings=Missing()):
         assert all(isinstance(i, str) for i in strings),\
         "[duck_ArrayOfString] strings must be of type List of String."
 
-    return uco_document.create_DuckObject('ArrayOfString', Strings=strings)
+    return uco_document.create_DuckObject('ArrayOfString', Strings=strings, **kwargs)
 
 
 def duck_BuildConfigurationType(uco_document, configuration_setting_description=Missing(),
-                                configuration_settings=Missing()):
+                                configuration_settings=Missing(), **kwargs):
     '''
     :param ConfigurationSettingDescription: At most one value of type String.
     :param ConfigurationSettings: Any number of occurrences of type ConfigurationSettingType.
@@ -4185,13 +4185,13 @@ def duck_BuildConfigurationType(uco_document, configuration_setting_description=
 
     return uco_document.create_DuckObject('BuildConfigurationType',
                                           ConfigurationSettingDescription=configuration_setting_description,
-                                          ConfigurationSettings=configuration_settings)
+                                          ConfigurationSettings=configuration_settings, **kwargs)
 
 
 def duck_BuildInformationType(uco_document, build_id=Missing(), build_project=Missing(), build_utility=Missing(),
                               build_version=Missing(), build_label=Missing(), compilers=Missing(),
                               compilation_date=Missing(), build_configuration=Missing(), build_script=Missing(),
-                              libraries=Missing(), build_output_log=Missing()):
+                              libraries=Missing(), build_output_log=Missing(), **kwargs):
     '''
     :param BuildID: At most one value of type String.
     :param BuildProject: At most one value of type String.
@@ -4252,10 +4252,10 @@ def duck_BuildInformationType(uco_document, build_id=Missing(), build_project=Mi
                                           BuildLabel=build_label, Compilers=compilers,
                                           CompilationDate=compilation_date, BuildConfiguration=build_configuration,
                                           BuildScript=build_script, Libraries=libraries,
-                                          BuildOutputLog=build_output_log)
+                                          BuildOutputLog=build_output_log, **kwargs)
 
 
-def duck_BuildUtilityType(uco_document, build_utility_name=Missing(), swid=Missing(), cpeid=Missing()):
+def duck_BuildUtilityType(uco_document, build_utility_name=Missing(), swid=Missing(), cpeid=Missing(), **kwargs):
     '''
     :param BuildUtilityName: Exactly one value of type String.
     :param SWID: At most one value of type String.
@@ -4277,10 +4277,10 @@ def duck_BuildUtilityType(uco_document, build_utility_name=Missing(), swid=Missi
         "[duck_BuildUtility] cpeid must be of type String."
     
     return uco_document.create_DuckObject('BuildUtilityType', BuildUtilityName=build_utility_name, SWID=swid,
-                                          CPEID=cpeid)
+                                          CPEID=cpeid, **kwargs)
 
 
-def duck_CompilerType(uco_document, compiler_informal_description=Missing(), swid=Missing(), cpeid=Missing()):
+def duck_CompilerType(uco_document, compiler_informal_description=Missing(), swid=Missing(), cpeid=Missing(), **kwargs):
     '''
     :param CompilerInformalDescription: At most one value of any type.
     :param SWID: At most one value of type String.
@@ -4297,11 +4297,11 @@ def duck_CompilerType(uco_document, compiler_informal_description=Missing(), swi
         "[duck_CompilerType] cpeid must be of type String."
     
     return uco_document.create_DuckObject('CompilerType', CompilerInformalDescription=compiler_informal_description,
-                                          SWID=swid, CPEID=cpeid)
+                                          SWID=swid, CPEID=cpeid, **kwargs)
 
 
 def duck_ConfigurationSettingType(uco_document, item_name=Missing(), item_value=Missing(), item_type=Missing(),
-                                  item_description=Missing()):
+                                  item_description=Missing(), **kwargs):
     '''
     :param ItemName: Exactly one value of type String.
     :param ItemValue: Exactly one value of type String.
@@ -4329,10 +4329,10 @@ def duck_ConfigurationSettingType(uco_document, item_name=Missing(), item_value=
         "[duck_ConfigurationSettingType] item_description must be of type String."
 
     return uco_document.create_DuckObject('ConfigurationSettingType', ItemName=item_name, ItemValue=item_value,
-                                          ItemType=item_type, ItemDescription=item_description)
+                                          ItemType=item_type, ItemDescription=item_description, **kwargs)
 
 
-def duck_ControlledDictionary(uco_document, entry=Missing()):
+def duck_ControlledDictionary(uco_document, entry=Missing(), **kwargs):
     '''
     :param Entry: At least one occurrence of type ControlledDictionaryEntry.
     :return: A DuckObject object.
@@ -4346,10 +4346,10 @@ def duck_ControlledDictionary(uco_document, entry=Missing()):
         assert all( (isinstance(i, case.DuckObject) and i.type=='ControlledDictionaryEntry') for i in entry),\
         "[duck_ControlledDictionary] entry must be of type List of ControlledDictionaryEntry."
 
-    return uco_document.create_DuckObject('ControlledDictionary', Entry=entry)
+    return uco_document.create_DuckObject('ControlledDictionary', Entry=entry, **kwargs)
 
 
-def duck_ControlledDictionaryEntry(uco_document, key=Missing(), value=Missing()):
+def duck_ControlledDictionaryEntry(uco_document, key=Missing(), value=Missing(), **kwargs):
     '''
     :param Key: Exactly one occurrence of type ControlledVocabulary.
     :param Value: Exactly one value of type String.
@@ -4367,10 +4367,10 @@ def duck_ControlledDictionaryEntry(uco_document, key=Missing(), value=Missing())
         assert isinstance(value, str),\
         "[duck_ControlledDictionaryEntry] value must be of type String."
 
-    return uco_document.create_DuckObject('ControlledDictionaryEntry', Key=key, Value=value)
+    return uco_document.create_DuckObject('ControlledDictionaryEntry', Key=key, Value=value, **kwargs)
 
 
-def duck_DataRange(uco_document, range_offset_type=Missing(), range_offset=Missing(), range_size=Missing()):
+def duck_DataRange(uco_document, range_offset_type=Missing(), range_offset=Missing(), range_size=Missing(), **kwargs):
     '''
     :param RangeOffsetType: At most one value of type String.
     :param RangeOffset: At most one value of type Integer.
@@ -4389,10 +4389,10 @@ def duck_DataRange(uco_document, range_offset_type=Missing(), range_offset=Missi
         "[duck_DataRange] range_size must be of type Long."
     
     return uco_document.create_DuckObject('DataRange', RangeOffsetType=range_offset_type, RangeOffset=range_offset,
-                                          RangeSize=range_size)
+                                          RangeSize=range_size, **kwargs)
 
 
-def duck_DependencyType(uco_document, dependency_description=Missing(), dependency_type=Missing()):
+def duck_DependencyType(uco_document, dependency_description=Missing(), dependency_type=Missing(), **kwargs):
     '''
     :param DependencyDescription: Exactly one value of any type.
     :param DependencyType: At most one value of type String.
@@ -4405,10 +4405,10 @@ def duck_DependencyType(uco_document, dependency_description=Missing(), dependen
         "[duck_DependencyType] dependency_type must be of type String."
     
     return uco_document.create_DuckObject('DependencyType', DependencyDescription=dependency_description,
-                                          DependencyType=dependency_type)
+                                          DependencyType=dependency_type, **kwargs)
 
 
-def duck_Dictionary(uco_document, entry=Missing()):
+def duck_Dictionary(uco_document, entry=Missing(), **kwargs):
     '''
     :param Entry: At least one occurrence of type DictionaryEntry.
     :return: A DuckObject object.
@@ -4420,10 +4420,10 @@ def duck_Dictionary(uco_document, entry=Missing()):
         assert (isinstance(entry, case.DuckObject) and (entry.type=='DictionaryEntry')),\
         "[duck_Dictionary] entry must be of type DictionaryEntry."
 
-    return uco_document.create_DuckObject('Dictionary', Entry=entry)
+    return uco_document.create_DuckObject('Dictionary', Entry=entry, **kwargs)
 
 
-def duck_DictionaryEntry(uco_document, key=Missing(), value=Missing()):
+def duck_DictionaryEntry(uco_document, key=Missing(), value=Missing(), **kwargs):
     '''
     :param Key: Exactly one value of type String.
     :param Value: Exactly one value of type String.
@@ -4441,11 +4441,11 @@ def duck_DictionaryEntry(uco_document, key=Missing(), value=Missing()):
         assert isinstance(value, str),\
         "[duck_DictionaryEntry] value must be of type String."
 
-    return uco_document.create_DuckObject('DictionaryEntry', Key=key, Value=value)
+    return uco_document.create_DuckObject('DictionaryEntry', Key=key, Value=value, **kwargs)
 
 
 def duck_GlobalFlagType(uco_document, abbreviation=Missing(), destination=Missing(), hexadecimal_value=Missing(),
-                        symbolic_name=Missing()):
+                        symbolic_name=Missing(), **kwargs):
     '''
     :param Abbrevation: At most one value of type String.
     :param Destination: At most one value of type String.
@@ -4466,10 +4466,10 @@ def duck_GlobalFlagType(uco_document, abbreviation=Missing(), destination=Missin
         "[duck_GlobalFlagType] symbolic_name must be of type String."
 
     return uco_document.create_DuckObject('GlobalFlagType', Abbreviation=abbreviation, Destination=destination,
-                                          HexadecimalValue=hexadecimal_value, SymbolicName=symbolic_name)
+                                          HexadecimalValue=hexadecimal_value, SymbolicName=symbolic_name, **kwargs)
 
 
-def duck_GranularMarking(uco_document, content_selectors=Missing(), marking_references=Missing()):
+def duck_GranularMarking(uco_document, content_selectors=Missing(), marking_references=Missing(), **kwargs):
     '''
     :param ContentSelectors: Any number of values of type String.
     :param MarkingReferences: Any number of occurrences of type MarkingDefinition.
@@ -4488,10 +4488,10 @@ def duck_GranularMarking(uco_document, content_selectors=Missing(), marking_refe
         "[duck_GranularMarking] marking_references must be of type List of MarkingDefinition."
 
     return uco_document.create_DuckObject('GranularMarking', ContentSelectors=content_selectors,
-                                          MarkingReferences=marking_references)
+                                          MarkingReferences=marking_references, **kwargs)
 
 
-def duck_Hash(uco_document, hash_method=Missing(), hash_value=Missing()):
+def duck_Hash(uco_document, hash_method=Missing(), hash_value=Missing(), **kwargs):
     '''
     :param HashMethod: Exactly one occurrence of type ControlledVocabulary.
     :param HashValue: Exactly one value of type HexBinary.
@@ -4505,10 +4505,10 @@ def duck_Hash(uco_document, hash_method=Missing(), hash_value=Missing()):
         "[duck_Hash] hash_method must be of type ControlledVocabulary."
     #TODO:HexBinary
 
-    return uco_document.create_DuckObject('Hash', HashMethod=hash_method, HashValue=hash_value)
+    return uco_document.create_DuckObject('Hash', HashMethod=hash_method, HashValue=hash_value, **kwargs)
 
 
-def duck_IComHandlerActionType(uco_document, com_data=Missing(), com_class_id=Missing()):
+def duck_IComHandlerActionType(uco_document, com_data=Missing(), com_class_id=Missing(), **kwargs):
     '''
     :param ComData: At most one value of type String.
     :param ComClassID: At most one value of type String.
@@ -4522,10 +4522,10 @@ def duck_IComHandlerActionType(uco_document, com_data=Missing(), com_class_id=Mi
         assert isinstance(com_class_id, str),\
         "[duck_IComHandlerActionType] com_class_id must be of type String."
     
-    return uco_document.create_DuckObject('IComHandlerActionType', ComData=com_data, ComClassID=com_class_id)
+    return uco_document.create_DuckObject('IComHandlerActionType', ComData=com_data, ComClassID=com_class_id, **kwargs)
 
 
-def duck_LibraryType(uco_document, library_name=Missing(), library_version=Missing()):
+def duck_LibraryType(uco_document, library_name=Missing(), library_version=Missing(), **kwargs):
     '''
     :param LibraryName: Exactly one value of type String.
     :param LibraryVersion: Exactly one value of type String.
@@ -4543,21 +4543,21 @@ def duck_LibraryType(uco_document, library_name=Missing(), library_version=Missi
         assert isinstance(library_version, str),\
         "[duck_LibraryType] library_version must be of type String."
 
-    return uco_document.create_DuckObject('LibraryType', LibraryName=library_name, LibraryVersion=library_version)
+    return uco_document.create_DuckObject('LibraryType', LibraryName=library_name, LibraryVersion=library_version, **kwargs)
 
 
-def duck_MarkingModel(uco_document):
+def duck_MarkingModel(uco_document, **kwargs):
     '''
     :return: A DuckObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_DuckObject('MarkingModel')
+    return uco_document.create_DuckObject('MarkingModel', **kwargs)
 
 
 def duck_MIMEPartType(uco_document, body=Missing(), content_type=Missing(), body_raw_ref=Missing(),
-                      content_disposition=Missing()):
+                      content_disposition=Missing(), **kwargs):
     '''
     :param Body: At most one value of type String.
     :param ContentType: At most one value of type String.
@@ -4580,11 +4580,11 @@ def duck_MIMEPartType(uco_document, body=Missing(), content_type=Missing(), body
         "[duck_MIMEPartType] content_disposition must be of type String."
 
     return uco_document.create_DuckObject('MIMEPartType', Body=body, ContentType=content_type, BodyRawRef=body_raw_ref,
-                                          ContentDisposition=content_disposition)
+                                          ContentDisposition=content_disposition, **kwargs)
 
 
 def duck_TaskActionType(uco_document, action_id=Missing(), iemail_action_ref=Missing(), icom_handler_action=Missing(),
-                        iexec_action=Missing(), ishow_message_action=Missing()):
+                        iexec_action=Missing(), ishow_message_action=Missing(), **kwargs):
     '''
     :param ActionID: At most one value of type String.
     :param iEmailActionRef: At most one occurrence of type Trace.
@@ -4612,12 +4612,12 @@ def duck_TaskActionType(uco_document, action_id=Missing(), iemail_action_ref=Mis
 
     return uco_document.create_DuckObject('TaskActionType', ActionID=action_id, iEmailActionRef=iemail_action_ref,
                                           iComHandlerAction=icom_handler_action, iExecAction=iexec_action,
-                                          iShowMessageAction=ishow_message_action)
+                                          iShowMessageAction=ishow_message_action, **kwargs)
 
 
 def duck_TriggerType(uco_document, is_enabled=Missing(), trigger_begin_time=Missing(), trigger_delay=Missing(),
                      trigger_end_time=Missing(), trigger_max_run_time=Missing(),
-                     trigger_session_change_type=Missing()):
+                     trigger_session_change_type=Missing(), **kwargs):
     '''
     :param IsEnabled: At most one value of type Bool.
     :param TriggerBeginTime: At most one value of type Datetime.
@@ -4650,12 +4650,12 @@ def duck_TriggerType(uco_document, is_enabled=Missing(), trigger_begin_time=Miss
     return uco_document.create_DuckObject('TriggerType', IsEnabled=is_enabled, TriggerBeginTime=trigger_begin_time,
                                           TriggerDelay=trigger_delay, TriggerEndTime=trigger_end_time,
                                           TriggerMaxRunTime=trigger_max_run_time,
-                                          TriggerSessionChangedTime=trigger_session_change_type)
+                                          TriggerSessionChangedTime=trigger_session_change_type, **kwargs)
 
 
 def duck_WhoIsContactType(uco_document, contact_id=Missing(), contact_name=Missing(), email_address_ref=Missing(),
                           phone_number_ref=Missing(), fax_number_ref=Missing(), address_ref=Missing(),
-                          contact_organization=Missing()):
+                          contact_organization=Missing(), **kwargs):
     '''
     :param ContactID: At most one value of type String.
     :param ContactName: At most one value of type String.
@@ -4691,13 +4691,13 @@ def duck_WhoIsContactType(uco_document, contact_id=Missing(), contact_name=Missi
 
     return uco_document.create_DuckObject('WhoIsContactType', ContactID=contact_id, ContactName=contact_name,
                                           EmailAddressRef=email_address_ref, PhoneNumberRef=phone_number_ref,
-                                          FaxNumberRef=fax_number_ref, ContactOrganization=contact_organization)
+                                          FaxNumberRef=fax_number_ref, ContactOrganization=contact_organization, **kwargs)
 
 
 def duck_WhoIsRegistrarInfoType(uco_document, registrar_id=Missing(), registrar_guid=Missing(),
                                 who_is_server_ref=Missing(), referral_url_ref=Missing(),
                                 registrar_name=Missing(), email_address_ref=Missing(), phone_number_ref=Missing(),
-                                address_ref=Missing(), contact_info_refs=Missing()):
+                                address_ref=Missing(), contact_info_refs=Missing(), **kwargs):
     '''
     :param RegistrarID: At most one value of type String.
     :param RegistrarGUID: At most one value of type String.
@@ -4745,13 +4745,13 @@ def duck_WhoIsRegistrarInfoType(uco_document, registrar_id=Missing(), registrar_
                                           RegistrarGUID=registrar_guid, WhoIsServerRef=who_is_server_ref,
                                           ReferralURLRef=referral_url_ref, RegistrarName=registrar_name,
                                           EmailAddress=email_address_ref, PhoneNumberRef=phone_number_ref,
-                                          AddressRef=address_ref, ContactInfoRefs=contact_info_refs)
+                                          AddressRef=address_ref, ContactInfoRefs=contact_info_refs, **kwargs)
 
 
 def duck_WindowsPEFileHeader(uco_document, machine=Missing(), number_of_sections=Missing(), time_date_stamp=Missing(),
                              pointer_to_symbol_table=Missing(), number_of_symbols=Missing(),
                              size_of_optional_header=Missing(), characteristics=Missing(),
-                             hashes=Missing()):
+                             hashes=Missing(), **kwargs):
     '''
     :param Machine: Exactly one value of type HexBinary.
     :param NumberOfSections: At most one value of type HexBinary.
@@ -4782,7 +4782,7 @@ def duck_WindowsPEFileHeader(uco_document, machine=Missing(), number_of_sections
                                           TimeDateStamp=time_date_stamp, PointerToSymbolTable=pointer_to_symbol_table,
                                           NumberOfSymbols=number_of_symbols,
                                           SizeOfOptionalHeader=size_of_optional_header,
-                                          Characteristics=characteristics, Hashes=hashes)
+                                          Characteristics=characteristics, Hashes=hashes, **kwargs)
 
 
 def duck_WindowsPEOptionalHeader(uco_document, magic=Missing(), major_linker_version=Missing(),
@@ -4797,7 +4797,7 @@ def duck_WindowsPEOptionalHeader(uco_document, magic=Missing(), major_linker_ver
                                  subsystem=Missing(), dll_characteristics=Missing(), size_of_stack_reserve=Missing(),
                                  size_of_stack_commit=Missing(), size_of_heap_reserve=Missing(),
                                  size_of_heap_commit=Missing(), loader_flags=Missing(),
-                                 number_of_rva_and_sizes=Missing(), hashes=Missing()):
+                                 number_of_rva_and_sizes=Missing(), hashes=Missing(), **kwargs):
     '''
     :param Magic: At most one value of type HexBinary.
     :param MajorLinkerVersion: At most one value of type HexBinary.
@@ -4860,10 +4860,10 @@ def duck_WindowsPEOptionalHeader(uco_document, magic=Missing(), major_linker_ver
                                           SizeOfStackCommit=size_of_stack_commit,
                                           SizeOfHeapReserve=size_of_heap_reserve,
                                           SizeOfHeapCommit=size_of_heap_commit, LoaderFlags=loader_flags,
-                                          NumberOfRVAAndSizes=number_of_rva_and_sizes, Hashes=hashes)
+                                          NumberOfRVAAndSizes=number_of_rva_and_sizes, Hashes=hashes, **kwargs)
 
 
-def duck_WindowsPESection(uco_document, name=Missing(), size=Missing(), entropy=Missing(), hashes=Missing()):
+def duck_WindowsPESection(uco_document, name=Missing(), size=Missing(), entropy=Missing(), hashes=Missing(), **kwargs):
     '''
     :param Name: Exactly one value of type String.
     :param Size: At most one value of type Integer.
@@ -4890,10 +4890,10 @@ def duck_WindowsPESection(uco_document, name=Missing(), size=Missing(), entropy=
         assert all( (isinstance(i, case.DuckObject) and i.type=='Hash') for i in hashes),\
         "[duck_WindowsPESection] hashes must be of type List of Hash."
 
-    return uco_document.create_DuckObject('WindowsPESection', Name=name, Size=size, Entropy=entropy, Hashes=hashes)
+    return uco_document.create_DuckObject('WindowsPESection', Name=name, Size=size, Entropy=entropy, Hashes=hashes, **kwargs)
 
 
-def duck_WindowsRegistryValue(uco_document, name=Missing(), data=Missing(), data_type=Missing()):
+def duck_WindowsRegistryValue(uco_document, name=Missing(), data=Missing(), data_type=Missing(), **kwargs):
     '''
     :param Name: Exactly one value of type String.
     :param Data: At most one value of type String.
@@ -4914,7 +4914,7 @@ def duck_WindowsRegistryValue(uco_document, name=Missing(), data=Missing(), data
         assert (isinstance(data_type, case.CoreObject) and (data_type.type=='ControlledVocabulary')),\
         "[duck_WindowsRegistryValue] data_type must be of type ControlledVocabulary."
 
-    return uco_document.create_DuckObject('WindowsRegistryValue', Name=name, Data=data, DataType=data_type)
+    return uco_document.create_DuckObject('WindowsRegistryValue', Name=name, Data=data, DataType=data_type, **kwargs)
 
 
 def duck_X509V3Extensions(uco_document, basic_constraints=Missing(), name_constraints=Missing(),
@@ -4924,7 +4924,7 @@ def duck_X509V3Extensions(uco_document, basic_constraints=Missing(), name_constr
                           subject_directory_attributes=Missing(), crl_distribution_points=Missing(),
                           inhibit_any_policy=Missing(), private_key_usage_period_not_before=Missing(),
                           private_key_usage_period_not_after=Missing(), certificate_policies=Missing(),
-                          policy_mappings=Missing()):
+                          policy_mappings=Missing(), **kwargs):
     '''
     :param BasicConstraints: At most one value of type String.
     :param NameConstraints: At most one value of type String.
@@ -5007,13 +5007,13 @@ def duck_X509V3Extensions(uco_document, basic_constraints=Missing(), name_constr
                                           PrivateKeyUsagePeriodNotBefore=private_key_usage_period_not_before,
                                           PrivateKeyUsagePeriodNotAfter=private_key_usage_period_not_after,
                                           CertificatePolicies=certificate_policies,
-                                          PolicyMappings=policy_mappings)
+                                          PolicyMappings=policy_mappings, **kwargs)
 
 
 #====================================================
 #-- DUCK CHILDREN IN ALPHABETICAL ORDER
 
-def duck_sub_ArrayOfAction(uco_document, duck_object):
+def duck_sub_ArrayOfAction(uco_document, duck_object, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -5023,7 +5023,7 @@ def duck_sub_ArrayOfAction(uco_document, duck_object):
     
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('ArrayOfAction')
+    return uco_document.create_SubObject('ArrayOfAction', **kwargs)
 
 
 #====================================================

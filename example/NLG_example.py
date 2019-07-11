@@ -65,7 +65,7 @@ class Missing(object):
 #-- CORE IN ALPHABETICAL ORDER
 
 def core_Action(uco_document, action_status=Missing(), start_time=Missing(), end_time=Missing(), errors=Missing(),
-                action_count=Missing(), subaction_refs=Missing()):
+                action_count=Missing(), subaction_refs=Missing(), **kwargs):
     '''
     :param ActionStatus: At most one occurrence of type ControlledVocabulary.
     :param StartTime: At most one value of type Timestamp.
@@ -95,10 +95,10 @@ def core_Action(uco_document, action_status=Missing(), start_time=Missing(), end
         assert all( (isinstance(i, case_example.CoreObject) and i.type=='Action') for i in subaction_refs),\
         "[core_Action] subaction_refs must be of type List of Action."
 
-    return uco_document.create_CoreObject('Action', ActionStatus=action_status, StartTime=start_time, EndTime=end_time, Errors=errors, ActionCount=action_count, SubactionRefs=subaction_refs)
+    return uco_document.create_CoreObject('Action', ActionStatus=action_status, StartTime=start_time, EndTime=end_time, Errors=errors, ActionCount=action_count, SubactionRefs=subaction_refs, **kwargs)
 
 
-def core_ControlledVocabulary(uco_document, value=Missing(), constraining_vocabulary_name=Missing(), constraining_vocabulary_ref=Missing()):
+def core_ControlledVocabulary(uco_document, value=Missing(), constraining_vocabulary_name=Missing(), constraining_vocabulary_ref=Missing(), **kwargs):
     '''
     :param Value: Exactly one value of type String.
     :param ConstrainingVocabularyName: At most one value of type String.
@@ -117,20 +117,20 @@ def core_ControlledVocabulary(uco_document, value=Missing(), constraining_vocabu
         "[core_ControlledVocabulary] constraining_vocabulary_name must be of type URI."
     #TODO:URI
 
-    return uco_document.create_CoreObject('ControlledVocabulary', Value=value, ConstrainingVocabularyName=constraining_vocabulary_name, ConstrainingVocabularyRef=constraining_vocabulary_ref)
+    return uco_document.create_CoreObject('ControlledVocabulary', Value=value, ConstrainingVocabularyName=constraining_vocabulary_name, ConstrainingVocabularyRef=constraining_vocabulary_ref, **kwargs)
 
 
-def core_Identity(uco_document):
+def core_Identity(uco_document, **kwargs):
     '''
     :return: A CoreObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_CoreObject('Identity')
+    return uco_document.create_CoreObject('Identity', **kwargs)
 
 
-def core_MarkingDefinition(uco_document, definition_type=Missing(), definition=Missing()):
+def core_MarkingDefinition(uco_document, definition_type=Missing(), definition=Missing(), **kwargs):
     '''
     :param DefinitionType: Exactly one value of type String.
     :param Definition: Any number of occurrences of MarkingModel.
@@ -149,10 +149,10 @@ def core_MarkingDefinition(uco_document, definition_type=Missing(), definition=M
         assert all( (isinstance(i, case_example.DuckObject) and i.type=='MarkingModel') for i in definition),\
         "[core_MarkingDefinition] definition must be of type List of MarkingModel."
 
-    return uco_document.create_CoreObject('MarkingDefinition', DefinitionType=definition_type, Definition=definition)
+    return uco_document.create_CoreObject('MarkingDefinition', DefinitionType=definition_type, Definition=definition, **kwargs)
 
 
-def core_Tool(uco_document, name=Missing(), version=Missing(), tool_type=Missing(), service_pack=Missing(), creator=Missing(), references=Missing()):
+def core_Tool(uco_document, name=Missing(), version=Missing(), tool_type=Missing(), service_pack=Missing(), creator=Missing(), references=Missing(), **kwargs):
     '''
     :param Name: At most one value of type String.
     :param Version: At most one value of type String.
@@ -181,13 +181,13 @@ def core_Tool(uco_document, name=Missing(), version=Missing(), tool_type=Missing
     #TODO:URI
     #check for list and then URI type
 
-    return uco_document.create_CoreObject('Tool', Name=name, Version=version, ToolType=tool_type, ServicePack=service_pack, Creator=creator, References=references)
+    return uco_document.create_CoreObject('Tool', Name=name, Version=version, ToolType=tool_type, ServicePack=service_pack, Creator=creator, References=references, **kwargs)
 
 
 #====================================================
 #-- CORE CHILDREN IN ALPHABETICAL ORDER
 
-def core_sub_ForensicAction(uco_document, uco_object):
+def core_sub_ForensicAction(uco_document, uco_object, **kwargs):
     '''
     :return: A SubObject object.
     '''
@@ -197,13 +197,13 @@ def core_sub_ForensicAction(uco_document, uco_object):
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('ForensicAction')
+    return uco_document.create_SubObject('ForensicAction', **kwargs)
 
 
 #====================================================
 #-- CONTEXT IN ALPHABETICAL ORDER
 
-def context_Grouping(uco_document, context_strings=Missing()):
+def context_Grouping(uco_document, context_strings=Missing(), **kwargs):
     '''
     :param Context: Any number of values of type String.
     :return: A ContextObject object.
@@ -215,7 +215,7 @@ def context_Grouping(uco_document, context_strings=Missing()):
         assert all(isinstance(i, str) for i in context_strings),\
         "[context_Grouping] context_strings must be of type List of String."
 
-    return uco_document.create_ContextObject('Grouping', ContextStrings=context_strings)
+    return uco_document.create_ContextObject('Grouping', ContextStrings=context_strings, **kwargs)
 
 
 #====================================================
@@ -228,7 +228,7 @@ def context_Grouping(uco_document, context_strings=Missing()):
 #-- PROPERTYBUNDLES IN ALPHABETICAL ORDER
 
 def propbundle_Account(uco_object, account_id=Missing(), expiration_time=Missing(), created_time=Missing(), account_type=Missing(),
-                account_issuer_ref=Missing(), is_active=Missing(), modified_time=Missing(), owner_ref=Missing()):
+                account_issuer_ref=Missing(), is_active=Missing(), modified_time=Missing(), owner_ref=Missing(), **kwargs):
     '''
     :param AccoundID: Exactly one value of type String.
     :param ExprationTime: At most one value of type Timestamp.
@@ -269,23 +269,23 @@ def propbundle_Account(uco_object, account_id=Missing(), expiration_time=Missing
         assert isinstance(owner_ref, case_example.CoreObject),\
         "[propbundle_Account] owner_ref must be of type CoreObject."
 
-    return uco_object.create_PropertyBundle('Account', AccoundID=account_id, ExpirationTime=expiration_time, CreatedTime=created_time,  AccountType=account_type, AccountIssuerRef=account_issuer_ref, IsActive=is_active, ModifiedTime=modified_time, OwnerRef=owner_ref)
+    return uco_object.create_PropertyBundle('Account', AccoundID=account_id, ExpirationTime=expiration_time, CreatedTime=created_time,  AccountType=account_type, AccountIssuerRef=account_issuer_ref, IsActive=is_active, ModifiedTime=modified_time, OwnerRef=owner_ref, **kwargs)
 
 
-def propbundle_Identity(uco_object):
+def propbundle_Identity(uco_object, **kwargs):
     '''
     :return: A PropertyBundle object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_object.create_PropertyBundle('Identity')
+    return uco_object.create_PropertyBundle('Identity', **kwargs)
 
 
 #====================================================
 #-- PROPERTYBUNDLE CHILDREN IN ALPHABETICAL ORDER
 
-def propbundle_sub_SimpleName(uco_document, uco_object_propbundle, family_name=Missing(), given_name=Missing(), honorific_prefix=Missing(), honorific_suffix=Missing()):
+def propbundle_sub_SimpleName(uco_document, uco_object_propbundle, family_name=Missing(), given_name=Missing(), honorific_prefix=Missing(), honorific_suffix=Missing(), **kwargs):
     '''
     :param FamilyName: Any number of values of any type.
     :param GivenName: Any number of values of any type.
@@ -299,20 +299,20 @@ def propbundle_sub_SimpleName(uco_document, uco_object_propbundle, family_name=M
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_SubObject('ForensicAction', FamilyName=family_name, GivenName=given_name, HonorificPrefix=honorific_prefix, HonorificSuffix=honorific_suffix)
+    return uco_document.create_SubObject('ForensicAction', FamilyName=family_name, GivenName=given_name, HonorificPrefix=honorific_prefix, HonorificSuffix=honorific_suffix, **kwargs)
 
 
 #====================================================
 #-- DUCK IN ALPHABETICAL ORDER
 
-def duck_MarkingModel(uco_document):
+def duck_MarkingModel(uco_document, **kwargs):
     '''
     :return: A DuckObject object.
     '''
 
     #TODO:NothingElseToCheck
 
-    return uco_document.create_DuckObject('MarkingModel')
+    return uco_document.create_DuckObject('MarkingModel', **kwargs)
 
 
 #====================================================
