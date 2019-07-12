@@ -43,9 +43,9 @@ class Restrictions(object):
                 # Currently it handles v0.1.0 and v0.2.0 .
                 begin_entry = 0
                 for ns in self.namespaces:
-                    if (ns in line) and ('###' in line) :
+                    if (ns in line) and ('###' in line) :    #v0.1.0
                         begin_entry = 1
-                    elif (ns in line) and (' ' not in line):
+                    elif (ns in line) and (' ' not in line): #v0.2.0
                         begin_entry = 1
 
                 # Grab NLG type.
@@ -68,6 +68,7 @@ class Restrictions(object):
 #                        print 'PROPERTY\t', prop
 
                     elif cardinality == True:
+                        # If cardinality in line.
                         if ('cardinality' in line.lower()) and (len(line) - len(line.lstrip()) != 0):
                             spltz = line.strip().strip(';').strip().split(' ')
                             for part in spltz:
@@ -80,13 +81,18 @@ class Restrictions(object):
 #                                    print 'CARD_VALUE\t', card_value
 #                                    print 'CARD_TYPE\t', card_type
 
+#                        # Assume cardinality of 0-N if cardinality not present in line.
+#                        else:
+#                            card_field = 'noCardinality'
+#                            card_value = 'any'
+#                            card_type  = 'string' # IS THIS CORRECT? What if it is 0-N of an int?
+
                             if nlg_type not in self.card_dict.keys():
                                 self.card_dict[nlg_type] = {}
                             self.card_dict[nlg_type][prop] = {}
                             self.card_dict[nlg_type][prop]['card-field'] = card_field
                             self.card_dict[nlg_type][prop]['card-value'] = card_value
                             self.card_dict[nlg_type][prop]['card-type']  = card_type
-#                            print '\n'
 
 #            self.pp.pprint(self.card_dict)
         return self.card_dict

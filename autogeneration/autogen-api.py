@@ -93,6 +93,13 @@ def write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_t
 
         nlg.write(tab + 'if not isinstance(' + prop + ', Missing):' + '\n')
 
+
+        if (is_list_type == False) and (card_field == 'noCardinality'):
+            # DO IS INSTANCE CHECK WHICH CALLS XSD VALIDATOR HERE.
+            pass
+
+
+
         if is_list_type == False:
             if check_type == 'CASE-Object':
                 nlg.write(tab + tab + 'assert isinstance(' + prop + ', case.' + fc_object + '),\\' + '\n')
@@ -476,34 +483,42 @@ for func_category in sorted(dict_dict):
                     card_field = card_stuff['card-field']
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
-
-                    if card_field == 'minQualifiedCardinality':
-                        card_phrase = 'At least '
-                        card_phrase += card_value + ' '
-                        card_phrase += 'of type '
-                    elif card_field == 'qualifiedCardinality':
-                        card_phrase = 'Exactly '
-                        card_phrase += card_value + ' '
-                        card_phrase += 'of type '
-                    elif card_field == 'maxQualifiedCardinality':
-                        card_phrase = 'At most '
-                        card_phrase += card_value + ' '
-                        card_phrase += 'of type '
-                    else:
-                        card_phrase = 'Any number of type '
-
-                    prop_types = prop_dict[prop]
-                    if len(prop_types) > 1:
-                        debug_print("Property ({}) has multiple types specified:\n{}\n".format(prop, prop_types))
-                        continue
-                    else:
-                        p_type = prop_types[0]
-                        card_phrase += p_type + '.\n'
-                        nlg.write(tab + ':param ' + prop + ': ')
-                        nlg.write(card_phrase)
                 else:
-                    debug_print("Property does not have cardinality specified:\n{}\n".format(prop))
+                    card_field = 'noCardinality'
+                    card_type  = 'string'
+                    card_value = 'any'
+
+                if card_field == 'minQualifiedCardinality':
+                    card_phrase = 'At least '
+                    card_phrase += card_value + ' '
+                    card_phrase += 'of type '
+                elif card_field == 'qualifiedCardinality':
+                    card_phrase = 'Exactly '
+                    card_phrase += card_value + ' '
+                    card_phrase += 'of type '
+                elif card_field == 'maxQualifiedCardinality':
+                    card_phrase = 'At most '
+                    card_phrase += card_value + ' '
+                    card_phrase += 'of type '
+                elif card_field == 'noCardinality'
+                    card_phrase = 'Any number of type '
+                else:
+                    debug_print("Cardinality issue with property{}\n".format(prop))
+
+                prop_types = prop_dict[prop]
+                if len(prop_types) > 1:
+                    debug_print("Property ({}) has multiple types specified:\n{}\n".format(prop, prop_types))
                     continue
+                else:
+                    p_type = prop_types[0]
+                    card_phrase += p_type + '.\n'
+                    nlg.write(tab + ':param ' + prop + ': ')
+                    nlg.write(card_phrase)
+
+###                else:
+###                    debug_print("Property does not have cardinality specified:\n{}\n".format(prop))
+###                    continue
+
             else:
                 debug_print("No cardinality specified for any properties!\n\n")
 
@@ -538,7 +553,7 @@ for func_category in sorted(dict_dict):
         #=====================================================
         # BODY ASSERTS FOR REQUIRED PARAMETERS
 
-        # The following is assumed: a cardinality field exists for any type of restriction. Otherwise, 'any number of' is assumed.
+        # The following is assumed: a cardinality field exists for any type of restriction. Otherwise, 'any number of' is assumed (0-N).
         # It is also assumed that only one cardinality field can exist per property.
         # minQualifiedCardinality   = at least X    = 1/N to M      = REQUIRED
         # qualifiedCardinality      = exactly X     = 1/N           = REQUIRED
@@ -557,6 +572,7 @@ for func_category in sorted(dict_dict):
                     card_field = card_stuff['card-field']
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
+
                     if card_field == 'minQualifiedCardinality':
                         p_required = True
                         is_list_type = True
@@ -568,11 +584,12 @@ for func_category in sorted(dict_dict):
                         is_list_type = True
                     else:
                         p_required = False
-                        is_list_type = None
+                        is_list_type = True
                 else:
                     debug_print("Property does not have cardinality specified:\n{}\n".format(prop))
                     card_miss.append(prop)
                     continue
+
                 if p_required == True:
                     nlg.write(tab + 'assert not isinstance(' + prop + ', Missing),\\' + '\n')
                     nlg.write(tab + '"[' + f_name + '] ' + prop + ' is required."' + '\n')
@@ -602,22 +619,32 @@ for func_category in sorted(dict_dict):
                     card_field = card_stuff['card-field']
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
-                    if card_field == 'minQualifiedCardinality':
-                        p_required = True
-                        is_list_type = True
-                    elif ((card_field == 'qualifiedCardinality') and (int(card_value) != 0)):
-                        p_required = True
-                        is_list_type = False
-                    elif ((card_field == 'qualifiedCardinality') and (int(card_value) > 1 )):
-                        p_required = True
-                        is_list_type = True
-                    else:
-                        p_required = False
-                        is_list_type = None
                 else:
-                    debug_print("Property does not have cardinality specified:\n{}\n".format(prop))
-                    card_miss.append(prop)
-                    continue
+                    card_field = 'noCardinality'
+                    card_type  = 'string'
+                    card_value = 'any'
+
+                if card_field == 'minQualifiedCardinality':
+                    p_required = True
+                    is_list_type = True
+                elif ((card_field == 'qualifiedCardinality') and (int(card_value) != 0)):
+                    p_required = True
+                    is_list_type = False
+                elif ((card_field == 'qualifiedCardinality') and (int(card_value) > 1 )):
+                    p_required = True
+                    is_list_type = True
+                elif card_field == 'noCardinality':
+                    p_required = False
+                    is_list_type = None
+                else:
+                    debug_print("Error with cardinality for property:\n{}\n".format(prop))
+
+
+###                else:
+###                    debug_print("Property does not have cardinality specified:\n{}\n".format(prop))
+###                    card_miss.append(prop)
+###                    continue
+
                 if p_required == False:
                     bat = write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_type, card_value, is_list_type, tab, f_name,  body_assert_types)
                     body_assert_types += bat
