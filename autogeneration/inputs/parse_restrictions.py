@@ -48,8 +48,11 @@ class Restrictions(object):
                     elif (ns in line) and (' ' not in line): #v0.2.0
                         begin_entry = 1
 
+                if begin_entry == 0:
+                    continue
+
                 # Grab NLG type.
-                if begin_entry == 1:
+                elif begin_entry == 1:
                     if '#' not in line:
                         continue
                     spltz = line.split('#')
