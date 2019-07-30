@@ -10,14 +10,21 @@
 #=====================================================
 # Autogeneration currently only supports v0.1.0 and v0.2.0 for CASE/UCO.
 
+import argparse
 import sys
 from cStringIO import StringIO
 import pprint
 import rdflib
 from ontospy import *
 from inputs import parse_restrictions
+from inputs.xsd_validation import XSDValidator
 
-input_file = sys.argv[1]        #Convert this to ArgParse if we decide to have flags, etc.
+parser = argparse.ArgumentParser(description='Autogeneration of the python classes')
+parser.add_argument('ttl_file', help='turtle file that defines the case ontology (.ttl file)')
+args = parser.parse_args()
+
+input_file = args.ttl_file
+
 
 #=====================================================
 #TODO
@@ -53,88 +60,6 @@ def debug_print(text):
         debug_txt.write(text)
         debug_txt.write("\n\n")
 pp = pprint.PrettyPrinter(indent=4)
-
-
-#=====================================================
-# WRITE BODY ASSERTS (MINUS PARENT OBJECTS)
-
-def write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_type, card_value, is_list_type, tab, f_name,  body_assert_types):
-
-    prop_types = prop_dict[prop]
-    if len(prop_types) > 1:
-        debug_print("Property ({}) has multiple types specified:\n{}\n".format(prop, prop_types))
-        return ""
-    else:
-        p_type = prop_types[0]
-        p_type_found = False
-        fc_where_found = None
-        fc_object = None
-        check_type = None
-        if p_type == 'UcoObject':
-           check_type = 'CASE-Object' 
-        else:
-            for fc in dict_dict.keys():
-                fc_keys = dict_dict[fc].keys()
-                for k in fc_keys:
-                    if p_type == k:
-                        p_type_found = True
-                        fc_where_found = fc.upper()
-                        if 'CORE' in fc_where_found:
-                            fc_object = 'CoreCategory'
-                        elif 'DUCK' in fc_where_found:
-                            fc_object = 'DuckCategory'
-                        elif 'PROP' in fc_where_found:
-                            fc_object = 'PropertyBundle'
-                        else:
-                            debug_print("Unknown class!\n")
-                        check_type = 'NLG-Type'
-        if p_type_found == False:
-            check_type = 'Simple-Type'
-
-        nlg.write(tab + 'if not isinstance(' + prop + ', Missing):' + '\n')
-
-
-        if (is_list_type == False) and (card_field == 'noCardinality'):
-            # DO IS INSTANCE CHECK WHICH CALLS XSD VALIDATOR HERE.
-            pass
-
-
-
-        if is_list_type == False:
-            if check_type == 'CASE-Object':
-                nlg.write(tab + tab + 'assert isinstance(' + prop + ', case.' + fc_object + '),\\' + '\n')
-                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type ' + fc_object + '."' + '\n')
-                body_assert_types += 'REQUIRED    CASE    SINGLE    ' + prop + '\n'
-            elif check_type == 'NLG-Type':
-                nlg.write(tab + tab + 'assert (isinstance(' + prop + ', case.' + fc_object + ') and (' + prop + '.type=="' + p_type + '")),\\' + '\n')
-                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type ' + p_type + '."' + '\n')
-                body_assert_types += 'REQUIRED    NLG     SINGLE    ' + prop + '\n'
-            else:
-                nlg.write(tab + tab + 'assert isinstance(' + prop + ', ' + p_type + '),\\' + '\n')
-                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type ' + p_type + '."' + '\n')
-                body_assert_types += 'REQUIRED    NATIVE  SINGLE    ' + prop + '\n'
-
-        else:
-            nlg.write(tab + tab + 'assert isinstance(' + prop + ', list),\\' + '\n')
-            nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + p_type + '."' + '\n')
-            if check_type == 'CASE-Object':
-                nlg.write(tab + tab + 'assert all(isinstance(i, case.' + fc_object + ') for i in ' + prop + '),\\' + '\n')
-                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + fc_object + '."' + '\n')
-                body_assert_types += 'REQUIRED    CASE      LIST    ' + prop + '\n'
-            elif check_type == 'NLG-Type':
-                nlg.write(tab + tab + 'assert all(isinstance(i, case.' + fc_object + ')) and (i.type=="' + p_type + '") for i in ' + prop + '),\\' + '\n')
-                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + p_type + '."' + '\n')
-                body_assert_types += 'REQUIRED    NLG       LIST    ' + prop + '\n'
-            else:
-                nlg.write(tab + tab + 'assert all(isinstance(i, ' + p_type + ') for i in ' + prop + '),\\' + '\n')
-                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + p_type + '."' + '\n')
-                body_assert_types += 'REQUIRED    NATIVE    LIST    ' + prop + '\n'
-
-
-
-        nlg.write(tab + 'else:\n')
-        nlg.write(tab + tab + 'miss_prop_list.append(' + prop + ')' + '\n')
-    return body_assert_types
 
 
 #=====================================================
@@ -342,6 +267,10 @@ for ontoprop_obj in properties:
             continue
         prop_dict[prop] = prop_types
 
+xsd_output_file = 'outputs/xsd-prop-types.xsd'
+validator = XSDValidator(xsd_output_file, prop_dict=prop_dict)
+validator.generate_xsd_file()
+validator.remove_non_xsd_types()
 
 
 #=====================================================
@@ -496,9 +425,7 @@ for func_category in sorted(dict_dict):
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
                 else:
-                    card_field = 'noCardinality'
-                    card_type  = 'string'
-                    card_value = 'any'
+                    debug_print("ERROR (something wrong with parse_restrictions):\n{}".format(prop))
 
                 if card_field == 'minQualifiedCardinality':
                     card_phrase = 'At least '
@@ -592,11 +519,13 @@ for func_category in sorted(dict_dict):
                     else:
                         p_required = False
                         is_list_type = True
+                else:
+                    debug_print("ERROR (something wrong with parse_restrictions):\n{}".format(prop))
 
             if p_required == True:
                 nlg.write(tab + 'assert not isinstance(' + prop + ', Missing),\\' + '\n')
                 nlg.write(tab + '"[' + f_name + '] ' + prop + ' is required."' + '\n')
-                bat = write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_type, card_value, is_list_type, tab, f_name,  body_assert_types)
+                bat = write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_type, card_value, is_list_type, tab, f_name,  body_assert_types, xsd_output_file)
                 body_assert_types += bat
             else:
                 # Skip optional parameters.
@@ -623,9 +552,7 @@ for func_category in sorted(dict_dict):
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
                 else:
-                    card_field = 'noCardinality'
-                    card_type  = 'string'
-                    card_value = 'any'
+                    debug_print("ERROR (something wrong with parse_restrictions):\n{}".format(prop))
 
             if card_field == 'minQualifiedCardinality':
                 p_required = True
@@ -643,7 +570,7 @@ for func_category in sorted(dict_dict):
                 debug_print("Error with cardinality for property:\n{}\n".format(prop))
 
                 if p_required == False:
-                    bat = write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_type, card_value, is_list_type, tab, f_name,  body_assert_types)
+                    bat = write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_type, card_value, is_list_type, tab, f_name,  body_assert_types, xsd_output_file)
                     body_assert_types += bat
                 else:
                     # Skip required parameters.
@@ -704,3 +631,85 @@ debug_print("Unknown namespaces:\n{}".format(unknown_ns))
 
 debug_txt.close()
 print "~~~ END"
+
+
+#=====================================================
+# WRITE BODY ASSERTS (MINUS PARENT OBJECTS)
+
+def write_body_assert(prop, p_required, prop_dict, dict_dict, card_field, card_type, card_value, is_list_type, tab, f_name,  body_assert_types, xsd_output_file):
+
+    prop_types = prop_dict[prop]
+    if len(prop_types) > 1:
+        debug_print("Property ({}) has multiple types specified:\n{}\n".format(prop, prop_types))
+        return ""
+    else:
+        p_type = prop_types[0]
+        p_type_found = False
+        fc_where_found = None
+        fc_object = None
+        check_type = None
+        if p_type == 'UcoObject':
+           check_type = 'CASE-Object' 
+        else:
+            for fc in dict_dict.keys():
+                fc_keys = dict_dict[fc].keys()
+                for k in fc_keys:
+                    if p_type == k:
+                        p_type_found = True
+                        fc_where_found = fc.upper()
+                        if 'CORE' in fc_where_found:
+                            fc_object = 'CoreCategory'
+                        elif 'DUCK' in fc_where_found:
+                            fc_object = 'DuckCategory'
+                        elif 'PROP' in fc_where_found:
+                            fc_object = 'PropertyBundle'
+                        else:
+                            debug_print("Unknown class!\n")
+                        check_type = 'NLG-Type'
+        if p_type_found == False:
+            check_type = 'Simple-Type'
+
+        nlg.write(tab + 'if not isinstance(' + prop + ', Missing):' + '\n')
+
+
+        if (is_list_type == False) and (card_field == 'noCardinality'):
+            # DO IS INSTANCE CHECK WHICH CALLS XSD VALIDATOR HERE.
+            pass
+
+
+
+        if is_list_type == False:
+            if check_type == 'CASE-Object':
+                nlg.write(tab + tab + 'assert isinstance(' + prop + ', case.' + fc_object + '),\\' + '\n')
+                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type ' + fc_object + '."' + '\n')
+                body_assert_types += 'REQUIRED    CASE    SINGLE    ' + prop + '\n'
+            elif check_type == 'NLG-Type':
+                nlg.write(tab + tab + 'assert (isinstance(' + prop + ', case.' + fc_object + ') and (' + prop + '.type=="' + p_type + '")),\\' + '\n')
+                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type ' + p_type + '."' + '\n')
+                body_assert_types += 'REQUIRED    NLG     SINGLE    ' + prop + '\n'
+            else:
+                nlg.write(tab + tab + 'assert XSDValidator.validateXSD(' + prop + ', "' + p_type + '", autogenerated_xsd),\\' + '\n')
+                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type ' + p_type + '."' + '\n')
+                body_assert_types += 'REQUIRED    NATIVE  SINGLE    ' + prop + '\n'
+
+        else:
+            nlg.write(tab + tab + 'assert isinstance(' + prop + ', list),\\' + '\n')
+            nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + p_type + '."' + '\n')
+            if check_type == 'CASE-Object':
+                nlg.write(tab + tab + 'assert all(isinstance(i, case.' + fc_object + ') for i in ' + prop + '),\\' + '\n')
+                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + fc_object + '."' + '\n')
+                body_assert_types += 'REQUIRED    CASE      LIST    ' + prop + '\n'
+            elif check_type == 'NLG-Type':
+                nlg.write(tab + tab + 'assert all(isinstance(i, case.' + fc_object + ')) and (i.type=="' + p_type + '") for i in ' + prop + '),\\' + '\n')
+                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + p_type + '."' + '\n')
+                body_assert_types += 'REQUIRED    NLG       LIST    ' + prop + '\n'
+            else:
+                nlg.write(tab + tab + 'assert XSDValidator.validateXSD(' + prop + ', "' + p_type + '", autogenerated_xsd),\\' + '\n')
+                nlg.write(tab + tab + '"[' + f_name + '] ' + prop + ' must be of type List of ' + p_type + '."' + '\n')
+                body_assert_types += 'REQUIRED    NATIVE    LIST    ' + prop + '\n'
+
+
+
+        nlg.write(tab + 'else:\n')
+        nlg.write(tab + tab + 'miss_prop_list.append(' + prop + ')' + '\n')
+    return body_assert_types
