@@ -80,19 +80,20 @@ class Restrictions(object):
                                     card_type  = part.split('^^xsd:')[1]
 #                                    print 'CARD_VALUE\t', card_value
 #                                    print 'CARD_TYPE\t', card_type
+                                    #ADD XSDVALIDATOR HERE
 
-#                        # Assume cardinality of 0-N if cardinality not present in line.
-#                        else:
-#                            card_field = 'noCardinality'
-#                            card_value = 'any'
-#                            card_type  = 'string' # IS THIS CORRECT? What if it is 0-N of an int?
+                        # Assume cardinality of 0-N if cardinality not present in line.
+                        else:
+                            card_field = 'noCardinality'
+                            card_value = 'any'
+                            card_type  = 'string' # IS THIS CORRECT? What if it is 0-N of an int?
 
-                            if nlg_type not in self.card_dict.keys():
-                                self.card_dict[nlg_type] = {}
-                            self.card_dict[nlg_type][prop] = {}
-                            self.card_dict[nlg_type][prop]['card-field'] = card_field
-                            self.card_dict[nlg_type][prop]['card-value'] = card_value
-                            self.card_dict[nlg_type][prop]['card-type']  = card_type
+                        if nlg_type not in self.card_dict.keys():
+                            self.card_dict[nlg_type] = {}
+                        self.card_dict[nlg_type][prop] = {}
+                        self.card_dict[nlg_type][prop]['card-field'] = card_field
+                        self.card_dict[nlg_type][prop]['card-value'] = card_value
+                        self.card_dict[nlg_type][prop]['card-type']  = card_type
 
 #            self.pp.pprint(self.card_dict)
         return self.card_dict
