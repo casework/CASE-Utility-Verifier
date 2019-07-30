@@ -487,32 +487,35 @@ for func_category in sorted(dict_dict):
         for prop in p_list:
             card_stuff = None
             card_phrase = None
-            if prop in prop_card_dict.keys():
-                card_stuff = prop_card_dict[prop]
-                card_field = card_stuff['card-field']
-                card_type  = card_stuff['card-type']
-                card_value = card_stuff['card-value']
+            if prop_card_dict == None:    #Skips GENERAL AXIOMS at bottom of Turtle file (v0.1.0); workaround.
+                continue
             else:
-                card_field = 'noCardinality'
-                card_type  = 'string'
-                card_value = 'any'
+                if prop in prop_card_dict.keys():
+                    card_stuff = prop_card_dict[prop]
+                    card_field = card_stuff['card-field']
+                    card_type  = card_stuff['card-type']
+                    card_value = card_stuff['card-value']
+                else:
+                    card_field = 'noCardinality'
+                    card_type  = 'string'
+                    card_value = 'any'
 
-            if card_field == 'minQualifiedCardinality':
-                card_phrase = 'At least '
-                card_phrase += card_value + ' '
-                card_phrase += 'of type '
-            elif card_field == 'qualifiedCardinality':
-                card_phrase = 'Exactly '
-                card_phrase += card_value + ' '
-                card_phrase += 'of type '
-            elif card_field == 'maxQualifiedCardinality':
-                card_phrase = 'At most '
-                card_phrase += card_value + ' '
-                card_phrase += 'of type '
-            elif card_field == 'noCardinality':
-                card_phrase = 'Any number of type '
-            else:
-                debug_print("Cardinality issue with property{}\n".format(prop))
+                if card_field == 'minQualifiedCardinality':
+                    card_phrase = 'At least '
+                    card_phrase += card_value + ' '
+                    card_phrase += 'of type '
+                elif card_field == 'qualifiedCardinality':
+                    card_phrase = 'Exactly '
+                    card_phrase += card_value + ' '
+                    card_phrase += 'of type '
+                elif card_field == 'maxQualifiedCardinality':
+                    card_phrase = 'At most '
+                    card_phrase += card_value + ' '
+                    card_phrase += 'of type '
+                elif card_field == 'noCardinality':
+                    card_phrase = 'Any number of type '
+                else:
+                    debug_print("Cardinality issue with property{}\n".format(prop))
 
             prop_types = prop_dict[prop]
             if len(prop_types) > 1:
@@ -568,24 +571,27 @@ for func_category in sorted(dict_dict):
             card_stuff = None
             is_list_type = None
             is_meta_type = None
-            if prop in prop_card_dict.keys():
-                card_stuff = prop_card_dict[prop]
-                card_field = card_stuff['card-field']
-                card_type  = card_stuff['card-type']
-                card_value = card_stuff['card-value']
+            if prop_card_dict == None:    #Skips GENERAL AXIOMS at bottom of Turtle file (v0.1.0); workaround.
+                continue
+            else:
+                if prop in prop_card_dict.keys():
+                    card_stuff = prop_card_dict[prop]
+                    card_field = card_stuff['card-field']
+                    card_type  = card_stuff['card-type']
+                    card_value = card_stuff['card-value']
 
-                if card_field == 'minQualifiedCardinality':
-                    p_required = True
-                    is_list_type = True
-                elif ((card_field == 'qualifiedCardinality') and (int(card_value) != 0)):
-                    p_required = True
-                    is_list_type = False
-                elif ((card_field == 'qualifiedCardinality') and (int(card_value) > 1 )):
-                    p_required = True
-                    is_list_type = True
-                else:
-                    p_required = False
-                    is_list_type = True
+                    if card_field == 'minQualifiedCardinality':
+                        p_required = True
+                        is_list_type = True
+                    elif ((card_field == 'qualifiedCardinality') and (int(card_value) != 0)):
+                        p_required = True
+                        is_list_type = False
+                    elif ((card_field == 'qualifiedCardinality') and (int(card_value) > 1 )):
+                        p_required = True
+                        is_list_type = True
+                    else:
+                        p_required = False
+                        is_list_type = True
 
             if p_required == True:
                 nlg.write(tab + 'assert not isinstance(' + prop + ', Missing),\\' + '\n')
@@ -608,15 +614,18 @@ for func_category in sorted(dict_dict):
             card_stuff = None
             is_list_type = None
             is_meta_type = None
-            if prop in prop_card_dict.keys():
-                card_stuff = prop_card_dict[prop]
-                card_field = card_stuff['card-field']
-                card_type  = card_stuff['card-type']
-                card_value = card_stuff['card-value']
+            if prop_card_dict == None:    #Skips GENERAL AXIOMS at bottom of Turtle file (v0.1.0); workaround.
+                continue
             else:
-                card_field = 'noCardinality'
-                card_type  = 'string'
-                card_value = 'any'
+                if prop in prop_card_dict.keys():
+                    card_stuff = prop_card_dict[prop]
+                    card_field = card_stuff['card-field']
+                    card_type  = card_stuff['card-type']
+                    card_value = card_stuff['card-value']
+                else:
+                    card_field = 'noCardinality'
+                    card_type  = 'string'
+                    card_value = 'any'
 
             if card_field == 'minQualifiedCardinality':
                 p_required = True
