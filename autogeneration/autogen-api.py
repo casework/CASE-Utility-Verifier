@@ -371,6 +371,7 @@ for func_category in sorted(dict_dict):
         continue
 
     for nlg_type in sorted(dict_dict[func_category]):
+#        print nlg_type
         c_list     = dict_dict[func_category].keys()
         f_name     = dict_dict[func_category][nlg_type]['func_name'] + nlg_type
         parent     = dict_dict[func_category][nlg_type]['parent']

@@ -4,9 +4,11 @@ from lxml import etree
 from StringIO import StringIO
 
 class XSDValidator():
+
     def __init__(self, xsd_file, prop_dict=None):
         self.xsd_file = xsd_file
         self.prop_dict = prop_dict
+
 
     def generate_xsd_file(self):
         xsd_restrictions = []
@@ -20,6 +22,7 @@ class XSDValidator():
 
         with open(self.xsd_file, 'w') as f:
             f.write(string.getvalue())
+
 
     def remove_non_xsd_types(self):
         """
@@ -40,6 +43,7 @@ class XSDValidator():
                     xs.write(i)
                 xs.truncate()
 
+
     def find_xsd_errs(self):
         # print(os.getcwd())
         args = ['java', '-jar', os.getcwd() + '/inputs/xsd11-validator.jar',
@@ -50,12 +54,14 @@ class XSDValidator():
         # print(data)
         if '[Error]' in data:
             line_num = data.split(':')[2]
-            print('removing line: {0} from {1}'.format(
-                line_num, self.xsd_file))
+            # See which types are not supported by XSD v1.1 (CASE, etc.).
+#            print('removing line: {0} from {1}'.format(    
+#                line_num, self.xsd_file))
             return int(line_num)
         else:
-            print('valid format')
+            print('VALID XSD FORMAT')
         return -1
+
 
     def validateXSD(cls, element_value, element_name, xsd_file):
         element = etree.Element(element_name)
@@ -75,6 +81,9 @@ class XSDValidator():
             print(stderr)
             return False
         return True
+
+
+#---------------------------------------------------------------
 
 
 def get_proc(args):
