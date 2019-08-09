@@ -94,11 +94,11 @@ class Restrictions(object):
                     self.card_dict[nlg_type][prop]['card-type']  = card_type
 
 
-                # Assume cardinality of 0-N if cardinality not present in line.
+                # Assume cardinality of 0-N if cardinality not present.
                 elif line.strip() and nlg_type != None:
                     card_field = 'noCardinality'
                     card_value = 'any'
-                    card_type  = 'string' # IS THIS CORRECT? What if it is 0-N of an int?
+                    card_type  = 'string'
 
                     if nlg_type not in self.card_dict.keys():
                         self.card_dict[nlg_type] = {}

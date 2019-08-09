@@ -60,7 +60,7 @@ class XSDValidator():
                 line_num, self.xsd_file))
             return int(line_num)
         else:
-            print('VALID XSD FORMAT')
+            print('VALID XSD FORMAT\n')
         return -1
 
 

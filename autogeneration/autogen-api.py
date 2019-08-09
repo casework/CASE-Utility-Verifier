@@ -418,7 +418,7 @@ for func_category in sorted(dict_dict):
 # USE DEBUG_PRINT STATEMENTS HERE RATHER THAN BODY ASSERTS (for same block of code).
         for prop in p_list:
             card_stuff = None
-            card_phrase = None
+            card_phrase = ''
             if prop_card_dict == None:    #Skips GENERAL AXIOMS at bottom of Turtle file (v0.1.0); workaround.
                 continue
             else:
@@ -428,7 +428,10 @@ for func_category in sorted(dict_dict):
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
                 else:
-                    debug_print("ERROR (something wrong with parse_restrictions):\n{}".format(prop))
+                    # Assume cardinality of 0-N if cardinality not present.
+                    card_field = 'noCardinality'
+                    card_value = 'any'
+                    card_type  = 'string'
 
                 if card_field == 'minQualifiedCardinality':
                     card_phrase = 'At least '
@@ -447,13 +450,19 @@ for func_category in sorted(dict_dict):
                 else:
                     debug_print("Cardinality issue with property{}\n".format(prop))
 
-            prop_types = prop_dict[prop]
-            if len(prop_types) > 1:
-                debug_print("Property ({}) has multiple types specified:\n{}\n".format(prop, prop_types))
-                continue
+            if prop in prop_dict.keys():
+                prop_types = prop_dict[prop]
+                if len(prop_types) > 1:
+                    debug_print("Property ({}) has multiple types specified:\n{}\n".format(prop, prop_types))
+                    continue
+                else:
+                    p_type = prop_types[0]
+                    card_phrase += p_type + '.\n'
+                    nlg.write(tab + ':param ' + prop + ': ')
+                    nlg.write(card_phrase)
             else:
-                p_type = prop_types[0]
-                card_phrase += p_type + '.\n'
+                debug_print("Property ({}) has no type specified:\n".format(prop))
+                card_phrase += 'string' + '.\n'
                 nlg.write(tab + ':param ' + prop + ': ')
                 nlg.write(card_phrase)
 
@@ -509,6 +518,11 @@ for func_category in sorted(dict_dict):
                     card_field = card_stuff['card-field']
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
+                else:
+                    # Assume cardinality of 0-N if cardinality not present.
+                    card_field = 'noCardinality'
+                    card_value = 'any'
+                    card_type  = 'string'
 
                     if card_field == 'minQualifiedCardinality':
                         p_required = True
@@ -522,8 +536,6 @@ for func_category in sorted(dict_dict):
                     else:
                         p_required = False
                         is_list_type = True
-                else:
-                    debug_print("ERROR (something wrong with parse_restrictions):\n{}".format(prop))
 
             if p_required == True:
                 nlg.write(tab + 'assert not isinstance(' + prop + ', Missing),\\' + '\n')
@@ -555,7 +567,10 @@ for func_category in sorted(dict_dict):
                     card_type  = card_stuff['card-type']
                     card_value = card_stuff['card-value']
                 else:
-                    debug_print("ERROR (something wrong with parse_restrictions):\n{}".format(prop))
+                    # Assume cardinality of 0-N if cardinality not present.
+                    card_field = 'noCardinality'
+                    card_value = 'any'
+                    card_type  = 'string'
 
             if card_field == 'minQualifiedCardinality':
                 p_required = True
