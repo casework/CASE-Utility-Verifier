@@ -47,7 +47,7 @@ input_file = args.ttl_file
 # ALTERNATIVELY PUT PRINT STATEMENTS IN FUNCTION AND HAVE FUNCTION CALL
 # INDICATE WHICH STRING TO PRINT.
 
-debugging   = False
+debugging   = True
 debug_out   = False
 debug_txt   = open('outputs/debug.txt','w')
 debug_txt.truncate()
@@ -381,7 +381,9 @@ for func_category in sorted(dict_dict):
 
         if nlg_type in card_dict.keys():
             prop_card_dict = card_dict[nlg_type]
+#            print'card_dict found ',nlg_type
         else:
+#            print'card_dict NOT found ',nlg_type
             prop_card_dict = None
 
 

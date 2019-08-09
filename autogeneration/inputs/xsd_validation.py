@@ -30,6 +30,7 @@ class XSDValidator():
         Removes CASE types.
         """
         is_valid = False
+        print('REMOVE NON-XSD (v1.1) TYPES')
         while not is_valid:
             err_line = self.find_xsd_errs()
             if err_line == -1:
@@ -55,8 +56,8 @@ class XSDValidator():
         if '[Error]' in data:
             line_num = data.split(':')[2]
             # See which types are not supported by XSD v1.1 (CASE, etc.).
-#            print('removing line: {0} from {1}'.format(    
-#                line_num, self.xsd_file))
+            print('removing line {0} from {1}'.format(    
+                line_num, self.xsd_file))
             return int(line_num)
         else:
             print('VALID XSD FORMAT')
