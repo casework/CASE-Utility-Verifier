@@ -5,6 +5,12 @@ _For learning about the Unified Cyber Ontology, CASE's parent, see [UCO](https:/
 
 # CASE Python API
 
+### Development Status: Alpha
+
+Alpha status implies:
+- Designation of versions of CASE and UCO the project supports.
+- Follow Semantic Versioning (SEMVER).
+
 ### Quickstart
 
 1. ``` python setup.py install```
